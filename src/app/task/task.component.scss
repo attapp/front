@@ -1,0 +1,60 @@
+.legend-primary {
+    color: #b8daff;
+}
+
+.legend-default {
+    color: #ffffff;
+}
+
+.legend-secondary {
+    color: #d6d8db;
+}
+
+.legend-danger {
+    color: #f5c6cb;
+}
+
+.legend-warning {
+    color: #ffeeba;
+}
+
+.legend-success {
+    color: #c3e6cb;
+}
+
+.border-black {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #0000006e;
+}
+
+.border-box {
+    -webkit-animation-fill-mode: none;
+    animation-fill-mode: none;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-size {
+    max-width: 28em;
+    min-width: 18em;
+}
+
+
+.cdk-viewport {
+    height: 400px;
+    width: 100%;
+    border: 1px solid black;
+
+}
+
+cdk-virtual-scroll-viewport {
+    background-color: black;
+
+    .cdk-virtual-scroll-content-wrapper {
+
+        width: 100% !important;
+    }
+}

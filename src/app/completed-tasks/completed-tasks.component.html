@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="tasks?.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"
+        [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="50">50 items por pagina</option>
+        <option [ngValue]="75">75 items por pagina</option>
+        <option [ngValue]="100">100 items por pagina</option>
+    </select>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-sm  table-striped ">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center align-middle" scope="col" *ngFor="let tableName of tableNames">{{tableName}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="animated fadeIn faster border-box"
+                *ngFor="let task of tasks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                <th class="text-center align-middle" scope="row">{{task.id}}</th>
+                <td class="text-nowrap align-middle">
+                    <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
+                        {{task.description  | truncate:[60, '...'] }}
+                    </div>
+                    <div *ngIf="!(task.description.length >= 60)">
+                        {{task.description}}
+                    </div>
+                </td>
+                <td class="text-center align-middle">{{task.realStartDate  | date:'short'}}</td>
+                <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
+                <td class="text-center align-middle">{{task.realEndDate    | date:'short'}}</td>
+                <td class="text-center align-middle">{{getNameResponsible(task.responsible) }}</td>
+                <td class="text-center align-middle">{{task.area.description       }}</td>
+                <td class="text-center align-middle">
+                    <em class="fas" [ngClass]=getClassVariance(task)> </em>
+                    {{getVariance(task)}}</td>
+            </tr>
+            <tr *ngIf="tasks?.length == 0">
+                <td attr.colspan="{{tableNames.length}}">
+                    <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="tasks?.length" [(page)]="page" [maxSize]="5" [rotate]="true"
+            [ellipses]="false" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+</div>

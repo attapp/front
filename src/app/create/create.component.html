@@ -1,0 +1,52 @@
+<div class="container-fluid m-5 py-5 px-5">
+
+    <form class="" [formGroup]="createProjectForm" (ngSubmit)="submit()" novalidate>
+        <div class="form-group row ">
+            <label class="col-2 col-form-label">Cliente:</label>
+            <div class="col-4">
+                <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': (createProjectForm.controls['client'].status == 'INVALID' &&  createProjectForm.controls['client'].touched )}"
+                    formControlName="client" placeholder="" required>
+                <div class="invalid-feedback">
+                    Nombre de cliente requerido
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Proyecto:</label>
+            <div class="col-4">
+                <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': createProjectForm.controls['project'].status == 'INVALID' &&  createProjectForm.controls['project'].touched}"
+                    placeholder="" formControlName="project">
+                <div class="invalid-feedback">Nombre de proyecto requerido</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">
+                Cargar Runbook:
+            </label>
+            <div class="col-4">
+                <div class="input-group">
+                    <input type="text" class="form-control-sm form-control" value={{selectedFile?.name}} readonly>
+                    <span class="input-group-btn">
+                        <span class="btn btn-secondary btn-file btn-sm">
+                            Browse&hellip; <input type="file" (change)="onFileChanged($event)" class="form-control-file"
+                                [ngClass]="{'is-invalid': createProjectForm.controls['file'].status == 'INVALID' &&  createProjectForm.controls['file'].touched}"
+                                accept=".xls,.xlsx" id="exampleFormControlFile1" formControlName="file" single>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" [disabled]="createProjectForm.status == 'INVALID'" class="btn btn-blue float-right">Crear
+                    Proyecto</button>
+            </div>
+        </div>
+
+    </form>
+</div>

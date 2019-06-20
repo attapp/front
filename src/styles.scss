@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn-blue {
+    color: #fff;
+    background-color: #0070c0;
+    border-color: #0070c0;
+}
+
+.btn-blue.disabled,
+.btn-blue:disabled {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-blue:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+li.nav-item:hover {
+    background-color: #383d411a;
+}
+
+.navbar {
+    padding: 0 1rem;
+}
+
+li.nav-item.active {
+    background-color: #80808042;
+}
+
+body{
+    font-size: 0.875em;
+}
