@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -20,7 +23,9 @@ export class ProjectComponent implements OnInit {
      * @param projectService servicio que sirve para interactuar con los proyectos en el back
      * @param router genera la ruta para modificar las pantallas
      */
-    constructor(private projectService: ProjectService, private router: Router) {
+    constructor(private projectService: ProjectService, 
+                private router: Router, 
+                public activatedRoute: ActivatedRoute) {
     }
 
     private projects: Project[];
