@@ -22,7 +22,7 @@ import { ModalConfirmComponent } from './utils/modal-confirm/modal-confirm.compo
 import { LoaderComponent } from './utils/loader/loader.component';
 import { CompletedTasksComponent } from './completed-tasks/completed-tasks.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from "./login/LoginComponent";
 
 registerLocaleData(localeCL);
 const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };

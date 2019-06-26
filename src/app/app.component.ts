@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+/*import { HttpHeaders } from '@angular/common/http';
+import { httpOptions } from '';
+
+
+
 
 
 /**
@@ -10,22 +16,41 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
     title = 'ATT';
 
+    /*const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+     
+
     /*variable login*/
     public islogin=false;
-    /*variables de login*/
     public correo;
     public password;
 
-    constructor (public router: Router) {
+    constructor (public router: Router, private http: HttpClient, /*private headers :HttpHeaders */) {
     
       }
     /*metodo login*/  
     public login () {
+        this.http.post('http://localhost:3000/login',{user: this.correo, password: this.password}/*, this.*/)
+        .subscribe(
+            data => { 
+                console.log(data);
+            },
+            error => console.log(error))
+          }
+         }
+
+        /*.toPromise().then((resp) => {
+            console.log(resp)
+        });
         console.log(this.correo, this.password);
         //si retorna true, pasa a project
         if (this.correo==="a@a") {
@@ -33,15 +58,25 @@ export class AppComponent {
         }
         //si retorna false, se mantiene en el login
         else {
+            
             this.islogin=false;
 
-        loginAuth () {
-            return this.authService.setUser(data.user)
-            
         }
-        }     
-    }
+/* metodo login
+ authLogin () {
+   return this.nombredelservicio.//no se que ingresa aqui (this.user.email, this.user.pass)
+   .subscribe(
+     data => {
+        console.log(data); //se alamcena en la consola
+   },
+   error => console.log(error))
+ }
 }
+
+*/
+
+    
+
 
 
         //llamar a project.ts con un parametro extra (localhost/projects)
@@ -49,5 +84,3 @@ export class AppComponent {
         // si retorna false permanecer en login mostrar popup con la accionerronea
     
     
- 
-

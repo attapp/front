@@ -1,5 +1,5 @@
-<div *ngIf=!islogin>
-        <h3>LOGIN</h3>
+<div id="contentLogin" *ngIf=!islogin>
+        <h3 id="tittle">LOGIN</h3>
 
         <div id="login">
             <div class="form-group" >
@@ -12,13 +12,14 @@
           <label for="password">Ingresar Contraseña:</label>
         
           <input id="pass" type="password" class="form-control"  [(ngModel)]="password"  placeholder="pass"  required>
+
           <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
        
             </div>
         </div>
         
        
-        <button type="button" id= "Volver" class="btn btn-secondary">Volver</button>
+        <button type="button" id= "salir" class="btn btn-secondary">Salir</button>
         
 </div>
 
