@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 /*import { HttpHeaders } from '@angular/common/http';
 import { httpOptions } from '';
 
@@ -21,59 +22,57 @@ import { httpOptions } from '';
 export class AppComponent {
     title = 'ATT';
 
-    /*const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token'
-        })
-      };
-     
-
-    /*variable login*/
+    /*variables login*/
     public islogin=false;
     public correo;
     public password;
+   
 
-    constructor (public router: Router, private http: HttpClient, /*private headers :HttpHeaders */) {
-    
-      }
+    constructor (public router: Router, private http: HttpClient) {}
+
     /*metodo login*/  
-    public login () {
-        this.http.post('http://localhost:3000/login',{user: this.correo, password: this.password}/*, this.*/)
-        .subscribe(
-            data => { 
-                console.log(data);
-            },
-            error => console.log(error))
-          }
-         }
+    public login() {
+      this.http.post('http://localhost:3000/login',{user: this.correo, password: this.password})
+    .subscribe
+    (data => { console.log(data);
+    }, 
+    error => console.log(error))
+    }
 
-        /*.toPromise().then((resp) => {
-            console.log(resp)
-        });
-        console.log(this.correo, this.password);
-        //si retorna true, pasa a project
-        if (this.correo==="a@a") {
+    if (this.data.validacion) {
+    this.islogin=true;
+}
+else {
+    this.islogin=false;
+}
+  
+  }
+
+  
+  
+
+
+    /**
+     * metodo redireccionar
+     * redirecciona a los usuarios a sus respectivas paginas  
+     * 
+     * public redireccionar() {user: this.correo;
+      pasword: this.password;
+      
+      if (this.correo===true) {
             this.islogin=true;
         }
-        //si retorna false, se mantiene en el login
-        else {
-            
+      else {
             this.islogin=false;
-
         }
-/* metodo login
- authLogin () {
-   return this.nombredelservicio.//no se que ingresa aqui (this.user.email, this.user.pass)
-   .subscribe(
-     data => {
-        console.log(data); //se alamcena en la consola
-   },
-   error => console.log(error))
- }
-}
+      } 
+  }
+     */
+  
 
-*/
+  
+        
+    
 
     
 
@@ -83,4 +82,4 @@ export class AppComponent {
    
         // si retorna false permanecer en login mostrar popup con la accionerronea
     
-    
+
