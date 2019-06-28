@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
     (data => {
       console.log(data);
       if (data['validacion']===true){
-        console.log(12345)
-        this.router.navigateByUrl('/tasks');
+        this.router.navigateByUrl('/project');
+        /* if (data[''])*/
 
       }
       else {
