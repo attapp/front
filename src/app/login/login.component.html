@@ -13,17 +13,16 @@
           <input id="user" type="text" class="form-control" [(ngModel)]="correo" placeholder="user" required>
       </div>
   
-          <div class="form-group" >
-    <label for="password">Ingresar Contraseña:</label>
-  
-    <input id="pass" type="password" class="form-control"  [(ngModel)]="password"  placeholder="pass"  required>
-    <div (click)="login()"
-          class="alert alert-danger" >
-        <strong> ERROR! Usuario y/o contrasña inválido</strong> 
+      <div class="form-group" >
+        <label for="password">Ingresar Contraseña:</label>
+        <input id="pass" type="password" class="form-control"  [(ngModel)]="password"  placeholder="pass"  required>
+
+        <div *ngIf=errores class="alert alert-danger" >
+          <strong> ERROR! Usuario y/o contrasña inválido</strong> 
+        </div>
+          <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
       </div>
-    <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
-  </div>
-  </div>
-      <button type="button" id= "salir" class="btn btn-secondary">Salir</button>
+    </div>
+    <!-- <button type="button" id= "salir" class="btn btn-secondary">Salir</button> -->
 
 </div>

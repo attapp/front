@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-login',
@@ -14,26 +15,24 @@ export class LoginComponent implements OnInit {
     //public islogin=false;
     private correo;
     private password;
+    public errores=false;
 
     constructor (public router: Router, private http: HttpClient) {}
 
     /*metodo login*/  
     public login() {
       this.http.post<any>('http://localhost:3000/login',{user: this.correo, password: this.password})
-    .subscribe
-    (data => {
-      console.log(data);
-      if (data['validacion']===true){
-        this.router.navigateByUrl('/project');
-        /* if (data[''])*/
-
+      .subscribe
+      (data => {
+        console.log(data);
+        if (data['perfil'] === 4 || data['perfil'] === 2){
+          this.router.navigateByUrl('/project');
+        } //else if ()
+      }, (err) => {
+        this.errores=true;
       }
-      else {
-        error => console.log(error);
-        
-      }
-    })
-  }  
+      )
+    }
       /*console.log(data);*/
   ngOnInit() {
   }
