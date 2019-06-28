@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 /*import { HttpHeaders } from '@angular/common/http';
 import { httpOptions } from '';
@@ -20,66 +18,39 @@ import { httpOptions } from '';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'ATT';
+   /* title = 'ATT';
 
-    /*variables login*/
+    //variables login
     public islogin=false;
     public correo;
     public password;
+    
+
    
 
     constructor (public router: Router, private http: HttpClient) {}
 
-    /*metodo login*/  
+    //metodo login 
     public login() {
-      this.http.post('http://localhost:3000/login',{user: this.correo, password: this.password})
+      this.http.post<VariableAst>('http://localhost:3000/login',{user: this.correo, password: this.password})
     .subscribe
-    (data => { console.log(data);
-    }, 
-    error => console.log(error))
+    (data => {
+      console.log(data);
+      if (data['validacion']===true){
+        console.log(12345)
+        this.router.navigateByUrl('/tasks');
+
+      }
+      else {
+        error => console.log(error);
+        
+      }
+       }
+       )
+      }
     }
 
-    if (this.data.validacion) {
-    this.islogin=true;
-}
-else {
-    this.islogin=false;
-}
-  
+      //console.log(data);
+    
+*/
   }
-
-  
-  
-
-
-    /**
-     * metodo redireccionar
-     * redirecciona a los usuarios a sus respectivas paginas  
-     * 
-     * public redireccionar() {user: this.correo;
-      pasword: this.password;
-      
-      if (this.correo===true) {
-            this.islogin=true;
-        }
-      else {
-            this.islogin=false;
-        }
-      } 
-  }
-     */
-  
-
-  
-        
-    
-
-    
-
-
-
-        //llamar a project.ts con un parametro extra (localhost/projects)
-   
-        // si retorna false permanecer en login mostrar popup con la accionerronea
-    
-

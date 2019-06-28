@@ -1,41 +1,41 @@
- import { Component, OnInit } from '@angular/core';
- /*importar { servicio } from ruta carperta servicios
- /*import { Router } from '@angular/router';*/
-
- 
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent { 
-  
-  
-  
+export class LoginComponent implements OnInit {
+  title = 'ATT';
 
-  /* consturctor ( //iyectar servicio// 
-                    private nombre del servicio: tipo) {
-                      //objeto tipo userInterface
-                      private user: UserIterface = {
-                        //propiedades
-                        email:''.
-                        pass:'' };
-                    }
- 
+    /*variables login*/
+    //public islogin=false;
+    private correo;
+    private password;
 
- // metodo login
- authLogin () {
-   return this.nombredelservicio.//no se que ingresa aqui (this.user.email, this.user.pass)
-   .subscribe(
-     data => {
-        console.log(data); //se alamcena en la consola
-   },
-   error => console.log(error))
- }
+    constructor (public router: Router, private http: HttpClient) {}
+
+    /*metodo login*/  
+    public login() {
+      this.http.post<any>('http://localhost:3000/login',{user: this.correo, password: this.password})
+    .subscribe
+    (data => {
+      console.log(data);
+      if (data['validacion']===true){
+        console.log(12345)
+        this.router.navigateByUrl('/tasks');
+
+      }
+      else {
+        error => console.log(error);
+        
+      }
+    })
+  }  
+      /*console.log(data);*/
+  ngOnInit() {
+  }
+
 }
-
-*/
-}
-
-
