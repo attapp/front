@@ -25,6 +25,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ChartsModule } from 'ng2-charts'
 
 registerLocaleData(localeCL);
 const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
@@ -44,6 +45,7 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         ToolbarComponent
     ],
     imports: [
+        ChartsModule,
         BrowserModule,
         AppRoutingModule,
         NgbModule,

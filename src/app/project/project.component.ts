@@ -31,6 +31,11 @@ export class ProjectComponent implements OnInit {
     private projects: Project[];
     private projectId = '';
 
+    logOut() {
+        this.router.navigateByUrl('/login');
+
+    }
+
 
     /**
      * al iniciar llama a showproject para mostrar los proyectos

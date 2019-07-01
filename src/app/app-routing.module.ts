@@ -5,6 +5,7 @@ import { TaskComponent } from './task/task.component';
 import { CreateComponent } from './create/create.component';
 import { ProjectComponent } from './project/project.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 /**
  * Modulo que exporta las rutas del sistema
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'project/:idProject', component: ProjectComponent},
     { path: 'tasks', component: TaskComponent },
+    { path: 'dashboard', component: DashboardComponent},
         
     { path: 'create', component: CreateComponent },
     { path: 'project', component: ProjectComponent },

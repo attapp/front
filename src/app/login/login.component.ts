@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       (data => {
         console.log(data);
         if (data['perfil'] === 4 || data['perfil'] === 2){
-          this.router.navigateByUrl('/project');
+          this.router.navigateByUrl('/dashboard');
         } //else if ()
       }, (err) => {
         this.errores=true;
