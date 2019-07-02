@@ -8,22 +8,23 @@
           <input id="name" type="text" class="form-control" [(ngModel)]="nomre" placeholder="name" required>
       </div>-->
 
-      <div class="form-group" >
-          <label for="usuario">ID Usuario:</label>
-          <input id="user" type="text" class="form-control" [(ngModel)]="correo" placeholder="user" required>
-      </div>
+    <div class="form-group" >
+      <label for="usuario">Correo de usuario:</label>
+      <input id="user" type="text" class="form-control" [(ngModel)]="user" placeholder="username" required>
+    </div>
   
-          <div class="form-group" >
-    <label for="password">Ingresar Contraseña:</label>
-  
-    <input id="pass" type="password" class="form-control"  [(ngModel)]="password"  placeholder="pass"  required>
-    <div (click)="login()"
-          class="alert alert-danger" >
+    <div class="form-group" >
+      <label for="password">Ingresar Contraseña:</label>
+      <input id="password" type="password" class="form-control"  [(ngModel)]="password"  placeholder="*****"  required>
+
+      <div *ngIf=error class="alert alert-danger" >
         <strong> ERROR! Usuario y/o contrasña inválido</strong> 
       </div>
+    </div>
     <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
+
   </div>
-  </div>
-      <button type="button" id= "salir" class="btn btn-secondary">Salir</button>
+    <!-- <button type="button" id= "salir" class="btn btn-secondary">Salir</button> -->
 
 </div>
+

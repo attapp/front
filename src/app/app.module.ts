@@ -24,6 +24,9 @@ import { CompletedTasksComponent } from './completed-tasks/completed-tasks.compo
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from "./services/auth.service";
+import { GuardService } from "./services/guard.service";
+import { BtnLogoutComponent } from './btn-logout/btn-logout.component';
 
 registerLocaleData(localeCL);
 const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
@@ -39,7 +42,8 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         LoaderComponent,
         CompletedTasksComponent,
         LoginComponent,
-        DashboardComponent
+        DashboardComponent,
+        BtnLogoutComponent
     ],
     imports: [
         BrowserModule,
@@ -52,7 +56,7 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         ScrollingModule
 
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true,  },
+    providers: [GuardService, AuthService, {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true,  },
     TitleCasePipe,
     { provide: LOCALE_ID, useValue: 'es-CL' }],
     bootstrap: [AppComponent],
