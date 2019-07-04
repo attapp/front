@@ -21,20 +21,29 @@ export class LoginComponent implements OnInit {
     constructor (private authService: AuthService, private http: HttpClient, private router: Router) {}
 
     // metodo login
-    login() {  
-      event.preventDefault(); 
 
+    login() {  
+      //event.preventDefault(); 
+      
       this.http.post<any>('http://localhost:3000/login', {user: this.user, pass: this.password})
         .subscribe
         ((data) => {
             let perfil = data['perfil'];
             let u: User = {username: this.user, perfil: perfil};        
             this.authService.setUserLoggedIn(u);
-            if (perfil === 4) {
+          switch (perfil) {
+            case 4: 
+              // Redirigir vista LIDER
+              // DASHBOARD
+
+            case 3:  
+              // Vista Orquestador (ADM)
               this.router.navigateByUrl('/project');
-            }
-            
-            //if (data[''])
+
+            case 2:
+              // Redirigir vista RESPONSABLE
+          }
+           
         }
         , (err) => {
             console.log("ERROR: " + err);
@@ -45,7 +54,6 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit() {   
-    this.authService.getUserLoggedIn();
   }
 }
 
