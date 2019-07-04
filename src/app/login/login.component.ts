@@ -31,19 +31,7 @@ export class LoginComponent implements OnInit {
             let perfil = data['perfil'];
             let u: User = {username: this.user, perfil: perfil};        
             this.authService.setUserLoggedIn(u);
-          switch (perfil) {
-            case 4: 
-              // Redirigir vista LIDER
-              // DASHBOARD
-
-            case 3:  
-              // Vista Orquestador (ADM)
-              this.router.navigateByUrl('/project');
-
-            case 2:
-              // Redirigir vista RESPONSABLE
-          }
-           
+            this.authService.redByUrlPerfiles(perfil);
         }
         , (err) => {
             console.log("ERROR: " + err);
@@ -53,7 +41,10 @@ export class LoginComponent implements OnInit {
         )
     }
 
+
   ngOnInit() {   
+    this.authService.setUserLoggedOut;
+
   }
 }
 

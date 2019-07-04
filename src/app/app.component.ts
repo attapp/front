@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 /**
  * Componente que muestra el footer ( se debería mover a un componente llamado footer)
@@ -10,8 +12,17 @@ import { Component } from '@angular/core';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-       
-    
+export class AppComponent implements OnInit {
+
+       constructor (private authService: AuthService, private router: Router) {}
+        
+       ngOnInit(){
+           if (!this.authService.isLoggedIn) {
+               this.router.navigate(['/login']);
+           } 
+           else {
+               this.authService.redByUrlPerfiles(this.authService.usserLogged.perfil);
+           }
+       }
   
 }

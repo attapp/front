@@ -7,7 +7,7 @@ import { CanActivate } from '@angular/router';
 
 
 @Injectable()
-export class AuthService implements CanActivate{
+export class AuthService {
 
   public isLoggedIn: boolean;
   public usserLogged: User;
@@ -24,7 +24,7 @@ export class AuthService implements CanActivate{
   }
 
   getUserLoggedIn() {
-  	return JSON.parse(localStorage.getItem('currentUser'));
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   setUserLoggedOut() {
@@ -33,12 +33,19 @@ export class AuthService implements CanActivate{
   	return localStorage.removeItem('currentUser');
   }
 
-  canActivate() {
-    // Si el usuario está logeado redirecciono a la pág inicio
-    if (this.getUserLoggedIn()) {
-        this.router.navigateByUrl('/');
-        return false;
-    } 
-    return true;
-}
+  redByUrlPerfiles(perfil: any) {
+    switch (perfil) {
+      case 4: 
+        // Redirigir vista LIDER
+        this.router.navigate(['/dashboard']);
+        break;
+      case 3:  
+        // Vista Orquestador (ADM)
+        this.router.navigate(['/project']);
+        break;
+      case 2:
+        // Redirigir vista RESPONSABLE
+        break;
+    }
+  }
 }
