@@ -1,4 +1,53 @@
 <app-btn-logout> </app-btn-logout>
-<p>
-  dashboard works!
-</p>
+<!--Datos variables-->
+<div id="contenedor" >
+  <!--selector de html por referencia-->
+  <h6>REAL:</h6>
+  <span #real>/</span>
+  <br>
+  <h6>IDEAL:</h6>
+  <span #ideal>/</span>
+</div>
+
+<!--botones-->
+<div id="contenedor" >
+  <!--total de tareas-->
+    <button id="btn-uno" type="button" class="btn btn-info btn-responsive btninter" > 
+      100
+    </button>
+    <!--tareas atrasadas-->
+    <button id="btn-dos" type="button" class="btn btn-info btn-responsive btninter" > 
+      30
+    </button>
+    <!--tareas en ejecucion-->
+    <button id="btn-tres" type="button" class="btn btn-info btn-responsive btninter"> 
+      5 
+    </button>
+    <!--proximas tareas en ejecutarse -->
+    <button id="btn-cuatro" type="button" class="btn btn-info btn-responsive btninter"> 
+      tareas a ejecutarse
+    </button>
+
+</div>
+
+<!--tabla con datos -->
+<div id="contenedorTablas" >
+  <div id="tabla2" class="container" *ngIf="tabla2">
+      <table class="table table-responsive-xl">
+          <thead>
+            <tr id="cabecera">
+              <th>N°</th>
+              <th>Tarea</th>
+              <th>Hora Programada</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo">
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+</div>

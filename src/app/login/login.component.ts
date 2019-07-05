@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   title = 'ATT';
 
     // variables login
-    public error = false; 
+    public error = "hola"; 
     private user;
     private password;
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     login() {  
       //event.preventDefault(); 
       
-      this.http.post<any>('http://localhost:3000/login', {user: this.user, pass: this.password})
+      this.http.post<any>('http://localhost:3000/login', {user: this.user, password: this.password})
         .subscribe
         ((data) => {
             let perfil = data['perfil'];
@@ -39,12 +39,11 @@ export class LoginComponent implements OnInit {
         }, 
         
         )
+      }
+  ngOnInit() {  
+    if (this.authService.getUserLoggedIn()) {
+      this.authService.setUserLoggedOut();
     }
-
-
-  ngOnInit() {   
-    this.authService.setUserLoggedOut;
-
   }
 }
 

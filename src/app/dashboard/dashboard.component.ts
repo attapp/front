@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
+import { element } from '@angular/core/src/render3';
+
 
 
 @Component({
@@ -10,6 +12,10 @@ import { TASK_STATE } from 'src/environments/environment';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  //hacer referencia a una etiqueta de html
+  @ViewChild('real') element: ElementRef;
+   
 
     tasks: Task[];    
     @Input() idProject: number;

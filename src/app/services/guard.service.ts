@@ -12,7 +12,7 @@ export class GuardService implements CanActivate {
         // If the user is not logged in we'll send them back to the home page
         if (!this.authService.getUserLoggedIn()) {
             console.log('No estás logueado');
-            this.router.navigateByUrl('/login');
+            this.router.navigate(['/login']);
             return false;
         } 
         return true;
@@ -21,7 +21,7 @@ export class GuardService implements CanActivate {
         // If the user is not logged in we'll send them back to the home page
         if (!this.authService.getUserLoggedIn()) {
             console.log('No estás logueado');
-            this.router.navigateByUrl('/login');
+            this.router.navigate(['/login']);
             return false;
         } 
         return true;

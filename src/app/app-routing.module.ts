@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
     
-    { path: '', component: AppComponent, pathMatch: 'full' },    
+    { path: '',  redirectTo: 'dashboard', pathMatch: 'full' },    
     { path: 'login', component: LoginComponent },
 
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
@@ -23,7 +23,7 @@ const routes: Routes = [
     // routes for Lider
 
     // routes for Adm (FALTAN)
-    { path: 'project/:idProject', component: ProjectComponent, canActivate: [GuardService], 
+    { path: 'project/:idProject', component: ProjectComponent, canActivateChild: [GuardService], 
         children: [
             { path: 'create', component: CreateComponent },
             { path: 'tasks', component: TaskComponent },
