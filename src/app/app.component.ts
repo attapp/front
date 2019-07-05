@@ -17,8 +17,9 @@ export class AppComponent implements OnInit {
        constructor (private authService: AuthService) {}
         
        ngOnInit(){
-           /*if (this.authService.getUserLoggedIn()) {
-            this.authService.redByUrlPerfiles(this.authService.usserLogged.perfil);
+           /*if (this.authService.isLoggedIn) {
+               let profile = this.authService.getProfileLoggedIn;
+               this.authService.redByUrlPerfiles(profile);
            }*/
        }
   

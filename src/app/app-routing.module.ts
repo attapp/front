@@ -18,6 +18,8 @@ const routes: Routes = [
     { path: '',  redirectTo: 'dashboard', pathMatch: 'full' },    
     { path: 'login', component: LoginComponent },
 
+    { path: 'login/:idProfile', component: LoginComponent },
+
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService] },
     // routes for Lider

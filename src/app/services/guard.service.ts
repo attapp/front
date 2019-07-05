@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivate } from '@angular/router';
+import { Router, CanDeactivate } from '@angular/router';
+import { CanActivate, CanActivateChild } from '@angular/router';
 import { AuthService } from './auth.service';
+
 
 @Injectable()
 export class GuardService implements CanActivate {
@@ -10,7 +11,7 @@ export class GuardService implements CanActivate {
 
     canActivate() {
         // If the user is not logged in we'll send them back to the home page
-        if (!this.authService.getUserLoggedIn()) {
+        if (!this.authService.getUserLoggedInLocal()) {
             console.log('No estás logueado');
             this.router.navigate(['/login']);
             return false;
@@ -19,12 +20,14 @@ export class GuardService implements CanActivate {
     }
     CanActivateChild() {
         // If the user is not logged in we'll send them back to the home page
-        if (!this.authService.getUserLoggedIn()) {
+        if (!this.authService.getUserLoggedInLocal()) {
             console.log('No estás logueado');
             this.router.navigate(['/login']);
             return false;
         } 
         return true;
     }
+    
 }
+
 

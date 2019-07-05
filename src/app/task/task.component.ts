@@ -62,8 +62,7 @@ export class TaskComponent implements OnInit {
                 });
             });
     }
-
-    /**
+/**
      * 
      * @param changes los posibles cambios que pueden exisir
      * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
