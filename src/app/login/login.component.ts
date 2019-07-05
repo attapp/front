@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from "../services/auth.service";
-import { User } from './user.model';
+import { User } from '../interfaces/User';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   title = 'ATT';
 
     // variables login
-    public error = false; 
+    // ERROR EN TRUE PORQUE SIIIII
+    public error = true; 
     private user;
     private password;
 

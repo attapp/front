@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from "../login/user.model";
+import { User } from "../interfaces/User";
 import { Router } from '@angular/router';
-import { CanActivate } from '@angular/router';
-
-
 
 
 @Injectable()
@@ -23,8 +20,12 @@ export class AuthService {
   
   }
 
-  getUserLoggedIn() {
+  getUserLoggedInLocal() {
     return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  getProfileLoggedIn() {
+    return this.usserLogged.perfil;
   }
 
   setUserLoggedOut() {

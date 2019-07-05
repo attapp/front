@@ -15,8 +15,10 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
     
-    { path: '', component: AppComponent, pathMatch: 'full' },    
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },    
     { path: 'login', component: LoginComponent },
+
+    { path: 'login/:idProfile', component: LoginComponent },
 
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService] },
