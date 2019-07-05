@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
      */
     ngOnChanges(changes: SimpleChanges): void {
         this.showTasks(this.idProject);
-        this.showTasksFinished
+        this.showTasksFinished(this.idProject);
     }
     
     /**
@@ -75,21 +75,40 @@ export class DashboardComponent implements OnInit {
               this.tasks = resp ? resp : [];
           });
     }
+    
+    /** 
+     * arroja total de tareas que debiesen estar finalizadas por planificacion.
+     */
+    showCantFinishedByPlanif() {
+      console.log('TASKS DEPENDENCY ' + this.tasksDelayedDependFin + ' CONTADOR :' + this.tasksDelayedDependFin.length);
+      console.log('TASKS START ' + this.tasksDelayedStartFin + ' CONTADOR :' + this.tasksDelayedStartFin.length);
+      console.log('TASKS DEPENDENCY ' + this.completedtasksComponent.tasks + ' CONTADOR :' + this.completedtasksComponent.tasks.length);
 
-    showCantFinishedByPlanif(idProject: number) {
-      
       this.contador = this.tasksDelayedDependFin.length + this.tasksDelayedStartFin.length + this.completedtasksComponent.showTasks.length;
     }
 
+    /**
+     * llama a la funcion (showTask) del componente Completed Task, para traer tareas finalizadas
+     */
     showTasksFinished(idProject: number) {
       this.completedtasksComponent.showTasks(idProject);
     }
 
+    /**
+     * obtiene y almacena las tareas atrasadas por dependencia y por inicio
+     * que ya pasaron su fecha de finalización por planificación, y aún se encuentran atrasadas
+     */
     showTasksFinishedByPlanif(idProject: number) {
       this.obtenerTasksByState(idProject, TASK_STATE.DELAYED_BY_DEPENDENCY, this.tasksDelayedDependFin);
       this.obtenerTasksByState(idProject, TASK_STATE.DELAYED_BY_START, this.tasksDelayedStartFin);
     }
 
+    /**
+     * @param idProject 
+     * @param state 
+     * @param tasks 
+     * trae tareas según id de proyecto, estado, y las almacena en un array
+     */
     obtenerTasksByState(idProject: number, state: number, tasks: Task[]) {
       this.taskService.getTasks(idProject, state)
           // resp is of type
@@ -97,7 +116,7 @@ export class DashboardComponent implements OnInit {
             resp.forEach((task: Task) => {
               let endDateP = task.endDatePlanning;
               if (endDateP < new Date) {
-                this.tasks.push(task)
+                tasks.push(task)
               }
             })
            })
