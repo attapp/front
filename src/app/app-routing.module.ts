@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
     
-    { path: '',  redirectTo: 'dashboard', pathMatch: 'full' },    
+    { path: '',  component: AppComponent, pathMatch: 'full' },    
     { path: 'login', component: LoginComponent },
 
     { path: 'login/:idProfile', component: LoginComponent },

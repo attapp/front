@@ -1,7 +1,9 @@
-<!-- <app-btn-logout> </app-btn-logout> -->
+<app-btn-logout> </app-btn-logout>
+
+<!--seleccion de proyecto-->
 
 <!--Datos variables-->
-<div id="contenedor">
+<div id="contenedor" >
   <!--selector de html por referencia-->
   <h6>REAL:</h6>
   <div>{{showReal(contadorFinalizadas, contadorTotal)}}</div>
@@ -28,6 +30,25 @@
     <button id="btn-cuatro" type="button" class="btn btn-info btn-responsive btninter"> 
       tareas a ejecutarse
     </button>
+    
+    <!--Cuadrados de colores-->
+    <div id="contCuadrados"class="d-flex justify-content-around py-1">
+      <div class="p-1">
+          <em class="fas fa-square-full legend-botonuno border-black"></em>
+          Total de tareas
+      </div>
+      <div class="p-1">
+          <em class="fas fa-square-full legend-botondos border-black"></em>
+          Tareas atrasadas
+      </div>
+      <div class="p-1">
+          <em class="fas fa-square-full legend-botontres border-black"></em>
+          Tareas en ejecución
+      </div>
+      <div class="p-1">
+          <em class="fas fa-square-full legend-botoncuatro border-black"></em>
+          Próximas tareas en ejecutarse
+      </div>
 
 </div>
 

@@ -97,40 +97,26 @@ export class DashboardComponent implements OnInit {
             this.tasks = resp ? resp : [];
         });
 }
+showReal(finalizadas, total) {
+    return finalizadas + ' / ' + total;
+  }
+
+showPlanif(finalizadas, total) {
+  return finalizadas + ' / ' + total;
+}
   /**
    * actualiza las tareas, en caso de pasar a un estado no finalizado lo realiza inmediatamente llamando 
    * al método callSetTask, en caso de ser una tarea que va a finalizar, este llama a los dos modal, uno indicando 
    * si realmente desea finalizar la tarea y el siguiente es el que indica que la tarea ha sido finalizada
    */
-  updateTask(task: Task) {
+  /*updateTask(task: Task) {
       // 1 y 4 pasan a 3,
       // 3 y 6 pasan a 7
 
       if (task.state.id === TASK_STATE.NOT_START || task.state.id === TASK_STATE.DELAYED_BY_START) {
           this.callSetTask(this.idProject, task.id, TASK_STATE.IN_PROGRESS);
 
-      } else if (task.state.id === TASK_STATE.IN_PROGRESS || task.state.id === TASK_STATE.DELAYED_BY_FINISH) {
-          // llamar a modal y depende de lo que haga finalizo o no la tarea
-          const modalConfirm = this.modalService.openModalConfirm(
-              { backdrop: 'static', centered: true, keyboard: true },
-              `¿Seguro que deseas finalizar la tarea ${task.externalCode}?`,
-              task.description,
-              'Esta tarea desaparecerá del listado'
-          );
-
-          modalConfirm.result.then((result: boolean) => {
-              if (result) {
-                  const modalInfo = this.modalService.openModalInfo(
-                      { backdrop: 'static', centered: true, keyboard: true },
-                      'Tarea finalizada correctamente'
-                  );
-                  modalInfo.result.then();
-                  this.callSetTask(this.idProject, task.id, TASK_STATE.FINISHED);
-              }
-          }).catch((e) => console.log(e));
-      }
-
-  }
+      }*/
 
   /**
    * 
@@ -143,9 +129,9 @@ export class DashboardComponent implements OnInit {
    * @param idTask el id de la tarea a modificar
    * @param idState el estado por el cual se desea cambiar
    */
-  callSetTask(idProject: number, idTask: number, idState: number) {
+    callSetTask(idProject: number, idTask: number, idState: number) {
       this.taskService.setTask(idProject, idTask, idState).subscribe();
-  }
+    }
 
   /**
    * método que muestra el bótón de iniciar o finalizar como activo o inactivo
@@ -162,32 +148,4 @@ export class DashboardComponent implements OnInit {
               return true;
       }
   }
-
-  /**
-   *  Modifica el nombre del botón con respecto a su estado.
-   * @param state dependiendo del estado cambia el nombre como inicar o finalizar
-   */
-  showReal(finalizadas, total) {
-        return finalizadas + ' / ' + total;
-      }
-
-  showPlanif(finalizadas, total) {
-      return finalizadas + ' / ' + total;
-    }
-   
-  
-
-  /**
-   * Verifica si el responsable tiene nombre, en caso de no tenerlo muestra el email por defecto
-   * en caso de tener el nombre Capitaliza el nombre (juan perez => Juan Perez):
-   * @param responsible el responsable
-   */
-  /*getNameResponsible(responsible: Responsible) {
-      const name = responsible.name || '';
-      if (name.length === 0) {
-          return responsible.email;
-      } else {
-          return this.titleCase.transform(name);
-      }
-  }*/
-}
+  }
