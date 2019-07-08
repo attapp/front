@@ -1,13 +1,13 @@
-<app-btn-logout> </app-btn-logout>
-<!-- CACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-  Datos variables-->
-<div id="contenedor" >
+<!-- <app-btn-logout> </app-btn-logout> -->
+
+<!--Datos variables-->
+<div id="contenedor">
   <!--selector de html por referencia-->
   <h6>REAL:</h6>
-  <span #real>/</span>
+  <div>{{showReal(contadorFinalizadas, contadorTotal)}}</div>
   <br>
   <h6>IDEAL:</h6>
-  <span #ideal>/</span>
+  <div>{{showPlanif(contadorFinalizadas, contadorTotal)}}</div> 
 </div>
 
 <!--botones-->
@@ -33,7 +33,7 @@
 
 <!--tabla con datos -->
 <div id="contenedorTablas" >
-  <div id="tabla2" class="container" *ngIf="tabla2">
+  <div id="tabla2" class="container" *ngIf="projectId">
       <table class="table table-responsive-xl">
           <thead>
             <tr id="cabecera">
@@ -51,4 +51,5 @@
           </tbody>
       </table>
   </div>
+
 </div>

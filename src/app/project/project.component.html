@@ -34,8 +34,10 @@
             </select>
         </div>
     </div>
+    <app-dashboard>
 
-    <ngb-tabset *ngIf="projectId" #t="ngbTabset" >
+    </app-dashboard>
+    <!-- <ngb-tabset *ngIf="projectId" #t="ngbTabset" >
         <ngb-tab id="tab-task" title="Lista de tareas">
             <ng-template  ngbTabContent>
                 <app-task [idProject]="projectId"></app-task>
@@ -48,5 +50,6 @@
                 <app-completed-tasks [idProject]="projectId"></app-completed-tasks>
             </ng-template>
         </ngb-tab>
-    </ngb-tabset>
+    </ngb-tabset> -->
+
 </div>

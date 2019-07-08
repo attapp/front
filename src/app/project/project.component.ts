@@ -3,6 +3,7 @@ import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -22,11 +23,12 @@ export class ProjectComponent implements OnInit {
      */
     constructor(private projectService: ProjectService, 
                 private router: Router, 
-                public activatedRoute: ActivatedRoute) {
+                public activatedRoute: ActivatedRoute,
+                private authService: AuthService) {
     }
 
     private projects: Project[];
-    private projectId = '';
+    public projectId = '';
 
 
     /**
@@ -40,11 +42,13 @@ export class ProjectComponent implements OnInit {
      * muestra los proyectos
      */
     showProjects() {
-        this.projectService.getProjects()
+        let idUser = this.authService.usserLogged.id;
+        this.projectService.getProjects(idUser)
             // resp is of type
             .subscribe((resp: Project[]) => {
                 this.projects = resp;
             });
+
     }
 
     /**

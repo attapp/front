@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'login/:idProfile', component: LoginComponent },
 
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService] },
+    { path: 'dashboard', component: DashboardComponent/*, canActivate: [GuardService] */},
     // routes for Lider
 
     // routes for Adm (FALTAN)
