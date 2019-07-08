@@ -7,10 +7,10 @@
     margin-bottom: 3%; 
 }
 #btn-uno {
+    padding-left: 31%;
+    padding-right: 31%;
     border: 1px;
     background-color: rgb(157, 216, 255);
-    padding-left: 30%;
-    padding-right: 30%;
     margin-top: 3%;
     margin-left: 2%;
 }
@@ -49,3 +49,24 @@
 #cuerpo {
     background-color:rgb(255, 130, 130);
 }
+
+//color cuadraditos
+
+.legend-botonuno {
+    color: rgb(157, 216, 255);
+}
+
+.legend-botondos {
+    color: rgba(255, 0, 0, 0.897);
+}
+
+.legend-botontres {
+    color: rgb(255, 208, 1);
+}
+
+.legend-botoncuatro {
+    color: rgb(0, 194, 48);
+}
+
+
+

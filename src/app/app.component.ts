@@ -17,10 +17,11 @@ export class AppComponent implements OnInit {
        constructor (private authService: AuthService) {}
         
        ngOnInit(){
-           /*if (this.authService.isLoggedIn) {
-               let profile = this.authService.getProfileLoggedIn;
+           if (this.authService.isLoggedIn) {
+               let profile = this.authService.usserLogged.perfil;
+               console.log('USER PERFIL LLEGA? : ' + profile + '|');
                this.authService.redByUrlPerfiles(profile);
-           }*/
+           }
        }
   
 }
