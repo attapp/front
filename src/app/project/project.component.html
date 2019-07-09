@@ -34,22 +34,19 @@
             </select>
         </div>
     </div>
-    <app-dashboard>
+        <ngb-tabset *ngIf="projectId"  #t="ngbTabset" >
+            <ngb-tab id="tab-task" title="Lista de tareas">
+                <ng-template  ngbTabContent>
+                    <app-task [idProject]="projectId"></app-task>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-resume" [disabled]="true" title="Resumen">
+            </ngb-tab>
+            <ngb-tab id="tab-completed-task" title="Finalizadas">
+                <ng-template ngbTabContent>
+                    <app-completed-tasks [idProject]="projectId"></app-completed-tasks>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
 
-    </app-dashboard>
-    <!-- <ngb-tabset *ngIf="projectId" #t="ngbTabset" >
-        <ngb-tab id="tab-task" title="Lista de tareas">
-            <ng-template  ngbTabContent>
-                <app-task [idProject]="projectId"></app-task>
-            </ng-template>
-        </ngb-tab>
-        <ngb-tab id="tab-resume" [disabled]="true" title="Resumen">
-        </ngb-tab>
-        <ngb-tab id="tab-completed-task" title="Finalizadas">
-            <ng-template ngbTabContent>
-                <app-completed-tasks [idProject]="projectId"></app-completed-tasks>
-            </ng-template>
-        </ngb-tab>
-    </ngb-tabset> -->
-
-</div>

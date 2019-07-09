@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
        ngOnInit(){
            if (this.authService.isLoggedIn) {
                let profile = this.authService.usserLogged.perfil;
-               console.log('USER PERFIL LLEGA? : ' + profile + '|');
+               console.log ("LLEGUEEEEE   " + profile);
                this.authService.redByUrlPerfiles(profile);
            }
        }

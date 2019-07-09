@@ -8,6 +8,9 @@ import { Responsible } from '../interfaces/Responsible';
 import { TitleCasePipe } from '@angular/common';
 import { ApplicationStateService } from '../services/application-state.service';
 import { ModalService } from '../services/modal.service';
+import { ProjectService } from '../services/project.service';
+import { Project } from '../interfaces/Project';
+import { AuthService } from '../services/auth.service';
 
 
 /**
@@ -24,26 +27,26 @@ export class DashboardComponent implements OnInit {
     
   tasks: Task[];
   @Input() idProject: number;
-  interval;
-  page = 1;
-  pageSize = 50;
   isMobileResolution: boolean;
   contadorFinalizadas = 70;
   contadorTotal = 100;
+  private projects: Project[];
+  public projectId = '';
+  private idUser = this.authService.usserLogged.id;
+
 
   /**
    * 
    * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
    * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
-   * @param titleCase Pipe que sirve para capitalizar los nombres, ej juan perez lo deja como Juan Perez
    * @param applicationStateService Servicio que obtiene el tamaño de la pantalla y en base a eso modifica la estructura html
    */
   constructor(
       private taskService: TaskService,
       private modalService: ModalService,
-      private titleCase: TitleCasePipe,
-      private applicationStateService: ApplicationStateService
-
+      private applicationStateService: ApplicationStateService,
+      private proyectService: ProjectService,
+      private authService: AuthService
   ) { }
 
   /**
@@ -52,6 +55,8 @@ export class DashboardComponent implements OnInit {
    * tarea no esta finalizada)
    */
   ngOnInit() {
+      console.log("PERFIL " + this.projectId)
+      this.showProjectsByUser(this.idUser);
       this.isMobileResolution = this.applicationStateService.getIsMobileResolution();
       this.taskService.getSocketTask('message').subscribe(
           projectTask => {
@@ -61,9 +66,6 @@ export class DashboardComponent implements OnInit {
               tasks.forEach(newTask => {
                   const index = this.tasks.findIndex((t) => t.id === newTask.id);
                   this.tasks[index] = newTask;
-                  /*if (newTask.state.id === TASK_STATE.FINISHED) {
-                      this.removeFinished(newTask.id);
-                  }*/
               });
           });
   }
@@ -78,6 +80,23 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
+     * 
+     * @param id muestra los cambios en el proyecto
+     */
+    change(id: number) {
+        console.log("projectID change", this.projectId);
+
+    }
+
+  showProjectsByUser(idUser: number) {
+    this.proyectService.getProjectsByUser(idUser)
+        // resp is of type
+        .subscribe((resp: Project[]) => {
+            this.projects = resp;
+        });
+}
+
+  /**
    * solamente llama al servicio que obtiene las tareas menos las tareas finalizadas
    */
   showTasks(idProject: number) {
@@ -85,6 +104,7 @@ export class DashboardComponent implements OnInit {
           // resp is of type
           .subscribe((resp: Task[]) => {
               this.tasks = resp ? resp : [];
+              return resp.length;
           });
   }
   /**
@@ -96,32 +116,29 @@ export class DashboardComponent implements OnInit {
         .subscribe((resp: Task[]) => {
             this.tasks = resp ? resp : [];
         });
-}
-showReal(finalizadas, total) {
-    return finalizadas + ' / ' + total;
+  }
+  
+  showReal(total) {
+    return this.showTasksFinished.length + ' / ' + total;
   }
 
-showPlanif(finalizadas, total) {
-  return finalizadas + ' / ' + total;
-}
+  showPlanif(finalizadas, total) {
+    return finalizadas + ' / ' + total;
+  }
   /**
    * actualiza las tareas, en caso de pasar a un estado no finalizado lo realiza inmediatamente llamando 
    * al método callSetTask, en caso de ser una tarea que va a finalizar, este llama a los dos modal, uno indicando 
    * si realmente desea finalizar la tarea y el siguiente es el que indica que la tarea ha sido finalizada
    */
-  /*updateTask(task: Task) {
+  updateTask(task: Task) {
       // 1 y 4 pasan a 3,
       // 3 y 6 pasan a 7
 
       if (task.state.id === TASK_STATE.NOT_START || task.state.id === TASK_STATE.DELAYED_BY_START) {
           this.callSetTask(this.idProject, task.id, TASK_STATE.IN_PROGRESS);
 
-      }*/
-
-  /**
-   * 
-   * @param removeItem id de tarea finalizada, sirve para quitarla de la lista
-   */
+      }
+  }  
 
   /**
    * Modifica el estado de una tarea, llama al servicio que realiza el cambio
@@ -132,20 +149,4 @@ showPlanif(finalizadas, total) {
     callSetTask(idProject: number, idTask: number, idState: number) {
       this.taskService.setTask(idProject, idTask, idState).subscribe();
     }
-
-  /**
-   * método que muestra el bótón de iniciar o finalizar como activo o inactivo
-   * @param state valida el estado
-   */
-  validateState(state: number): boolean {
-      switch (state) {
-          case TASK_STATE.NOT_START:
-          case TASK_STATE.DELAYED_BY_START:
-          case TASK_STATE.IN_PROGRESS:
-          case TASK_STATE.DELAYED_BY_FINISH:
-              return false;
-          default:
-              return true;
-      }
-  }
   }

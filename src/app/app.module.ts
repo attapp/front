@@ -27,7 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from "./services/auth.service";
 import { GuardService } from "./services/guard.service";
 import { BtnLogoutComponent } from './btn-logout/btn-logout.component';
-import { ChartsModule } from 'ng2-charts';
+//import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -49,7 +49,7 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         BtnLogoutComponent
     ],
     imports: [
-        ChartsModule,
+        //ChartsModule,
         BrowserModule,
         AppRoutingModule,
         NgbModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
@@ -23,8 +23,7 @@ export class ProjectComponent implements OnInit {
      */
     constructor(private projectService: ProjectService, 
                 private router: Router, 
-                public activatedRoute: ActivatedRoute,
-                private authService: AuthService) {
+                public activatedRoute: ActivatedRoute) {
     }
 
     private projects: Project[];
@@ -35,21 +34,19 @@ export class ProjectComponent implements OnInit {
      * al iniciar llama a showproject para mostrar los proyectos
      */
     ngOnInit() {
-        this.showProjects();
+            this.showProjects();
     }
 
     /**
      * muestra los proyectos
      */
     showProjects() {
-        let idUser = this.authService.usserLogged.id;
-        this.projectService.getProjects(idUser)
+        this.projectService.getProjects()
             // resp is of type
             .subscribe((resp: Project[]) => {
                 this.projects = resp;
             });
-
-    }
+    }  
 
     /**
      * 
