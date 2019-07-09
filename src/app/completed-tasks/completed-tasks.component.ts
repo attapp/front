@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class CompletedTasksComponent implements OnInit {
 
-    private tasks: Task[] = [];
+    public tasks: Task[] = [];
     @Input() idProject: number;
     private interval;
     private page = 1;

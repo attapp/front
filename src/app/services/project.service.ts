@@ -16,8 +16,12 @@ export class ProjectService {
     private createProjectsUrl = environment.API_ENDPOINT + `/projects/new`;
 
     getProjects() {
-        // now returns an Observable of Projects
+        // now returns an Observable of Projects            
         return this.http.get(this.getProjectsUrl);
+    }
+
+    getProjectsByUser(idUser: number) {
+        return this.http.get(this.getProjectsUrl + `/${idUser}`);
     }
 
     createProject(data: FormData) {

@@ -22,6 +22,14 @@ import { ModalConfirmComponent } from './utils/modal-confirm/modal-confirm.compo
 import { LoaderComponent } from './utils/loader/loader.component';
 import { CompletedTasksComponent } from './completed-tasks/completed-tasks.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LoginComponent } from "./login/login.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from "./services/auth.service";
+import { GuardService } from "./services/guard.service";
+import { BtnLogoutComponent } from './btn-logout/btn-logout.component';
+//import { ChartsModule } from 'ng2-charts';
+
+
 
 registerLocaleData(localeCL);
 const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
@@ -35,9 +43,13 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         CreateComponent,
         ModalConfirmComponent,
         LoaderComponent,
-        CompletedTasksComponent
+        CompletedTasksComponent,
+        LoginComponent,
+        DashboardComponent,
+        BtnLogoutComponent
     ],
     imports: [
+        //ChartsModule,
         BrowserModule,
         AppRoutingModule,
         NgbModule,
@@ -48,7 +60,7 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         ScrollingModule
 
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true,  },
+    providers: [GuardService, AuthService, {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true,  },
     TitleCasePipe,
     { provide: LOCALE_ID, useValue: 'es-CL' }],
     bootstrap: [AppComponent],

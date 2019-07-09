@@ -1,3 +1,29 @@
+<div>
+        <nav class="navbar fixed-top  navbar-expand-lg navbar-light bg-light" style="  border-bottom: 1px solid #f0f4f2;  ">
+            <a class="navbar-brand">ATT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav nav-pills ml-auto">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['projects']">Panel de Control <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <div>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" [routerLink]="['create']">Proyectos</a>
+                        </li>
+                    </div> 
+                    <app-btn-logout> </app-btn-logout>
+                </ul>
+            </div>
+        </nav>
+        
+    </div>
+
 <div class="container-fluid mt-5 ">
     <div class="form-group row">
         <label for="project" class="col-sm-2 col-md-1 col-form-label">Proyecto</label>
@@ -8,19 +34,19 @@
             </select>
         </div>
     </div>
+        <ngb-tabset *ngIf="projectId"  #t="ngbTabset" >
+            <ngb-tab id="tab-task" title="Lista de tareas">
+                <ng-template  ngbTabContent>
+                    <app-task [idProject]="projectId"></app-task>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-resume" [disabled]="true" title="Resumen">
+            </ngb-tab>
+            <ngb-tab id="tab-completed-task" title="Finalizadas">
+                <ng-template ngbTabContent>
+                    <app-completed-tasks [idProject]="projectId"></app-completed-tasks>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
 
-    <ngb-tabset *ngIf="projectId" #t="ngbTabset" >
-        <ngb-tab id="tab-task" title="Lista de tareas">
-            <ng-template  ngbTabContent>
-                <app-task [idProject]="projectId"></app-task>
-            </ng-template>
-        </ngb-tab>
-        <ngb-tab id="tab-resume" [disabled]="true" title="Resumen">
-        </ngb-tab>
-        <ngb-tab id="tab-completed-task" title="Finalizadas">
-            <ng-template ngbTabContent>
-                <app-completed-tasks [idProject]="projectId"></app-completed-tasks>
-            </ng-template>
-        </ngb-tab>
-    </ngb-tabset>
-</div>

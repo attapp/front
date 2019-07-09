@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -13,25 +15,26 @@ import { Router } from '@angular/router';
     templateUrl: './project.component.html',
     styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit {
-
+export class ProjectComponent implements OnInit {    
     /**
      * 
      * @param projectService servicio que sirve para interactuar con los proyectos en el back
      * @param router genera la ruta para modificar las pantallas
      */
-    constructor(private projectService: ProjectService, private router: Router) {
+    constructor(private projectService: ProjectService, 
+                private router: Router, 
+                public activatedRoute: ActivatedRoute) {
     }
 
     private projects: Project[];
-    private projectId = '';
+    public projectId = '';
 
 
     /**
      * al iniciar llama a showproject para mostrar los proyectos
      */
     ngOnInit() {
-        this.showProjects();
+            this.showProjects();
     }
 
     /**
@@ -43,7 +46,7 @@ export class ProjectComponent implements OnInit {
             .subscribe((resp: Project[]) => {
                 this.projects = resp;
             });
-    }
+    }  
 
     /**
      * 
