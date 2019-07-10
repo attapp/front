@@ -13,6 +13,8 @@ import { Project } from '../interfaces/Project';
 import { AuthService } from '../services/auth.service';
 
 
+
+
 /**
  * Componente que muestra el combobox con los distintos proyectos
  * es el componente padre de los tabs 
@@ -23,6 +25,8 @@ import { AuthService } from '../services/auth.service';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
+
+
 export class DashboardComponent implements OnInit {    
     
   tasks: Task[];
@@ -48,6 +52,31 @@ export class DashboardComponent implements OnInit {
       private proyectService: ProjectService,
       private authService: AuthService
   ) { }
+
+  //variables de prueba
+  botones=true;
+  tabla=false
+   //variables de prueba tablas
+   public numero= 12345;
+   public tarea= "programar";
+   public hora= 1200;
+   public resp= "juanito Perez";
+  
+
+
+//funcion de prueba
+  llamarTabla () {
+    console.log ("tabla llamada");
+    this.botones=false;
+    this.tabla=true;
+  }
+//funcion volver 
+volver() {
+  console.log("vamos de vuelta");
+  this.botones=true;
+  this.tabla=false;
+
+}
 
   /**
    * al iniciar el componente consulta por la resolucion de pantalla y se subscribe al socket

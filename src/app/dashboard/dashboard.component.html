@@ -2,15 +2,16 @@
 
 <!--seleccion de proyecto-->
 <div class="container-fluid mt-5 ">
-    <div class="form-group row">
-        <label for="project" class="col-sm-2 col-md-1 col-form-label">Proyecto</label>
-        <div class="col-sm-4">
-            <select class="form-control" #project [(ngModel)]="projectId" (change)="change(project.value)">
-                <option *ngFor="let project of projects" value={{project.id}}>{{project.name}}</option>
-                <option value="" hidden>Seleccione un proyecto</option>
-            </select>
-        </div>
-    </div> 
+  <div class="form-group row">
+    <label for="project" class="col-sm-2 col-md-1 col-form-label">Proyecto</label>
+    <div class="col-sm-4">
+      <select class="form-control" #project [(ngModel)]="projectId" (change)="change(project.value)">
+        <option *ngFor="let project of projects" value={{project.id}}>{{project.name}}</option>
+        <option value="" hidden>Seleccione un proyecto</option>
+      </select>
+    </div>
+  </div>
+
 <div *ngIf="projectId">
 <!--Datos variables-->
 <div id="contenedor" >
@@ -23,22 +24,25 @@
 </div>
 
 <!--botones-->
+
+
 <div id="contenedor" >
+  <div *ngIf="botones===true">          
   <!--total de tareas-->
-    <button id="btn-uno" type="button" class="btn btn-info btn-responsive btninter" > 
+    <button id="btn-uno" (click)="llamarTabla()"  type="button" class="btn btn-info btn-responsive btninter" > 
       100
     </button>
     <!--tareas atrasadas-->
-    <button id="btn-dos" type="button" class="btn btn-info btn-responsive btninter" > 
+    <button id="btn-dos" (click)="llamarTabla()" type="button" class="btn btn-info btn-responsive btninter" > 
       30
     </button>
     <!--tareas en ejecucion-->
-    <button id="btn-tres" type="button" class="btn btn-info btn-responsive btninter"> 
+    <button id="btn-tres" (click)="llamarTabla()" type="button" class="btn btn-info btn-responsive btninter"> 
       5 
     </button>
     <!--proximas tareas en ejecutarse -->
-    <button id="btn-cuatro" type="button" class="btn btn-info btn-responsive btninter"> 
-      tareas a ejecutarse
+    <button id="btn-cuatro" (click)="llamarTabla()" type="button" class="btn btn-info btn-responsive btninter"> 
+      Tareas a ejecutarse
     </button>
     
     <!--Cuadrados de colores-->
@@ -59,30 +63,31 @@
           <em class="fas fa-square-full legend-botoncuatro border-black"></em>
           Próximas tareas en ejecutarse
       </div>
+    </div>
 
-</div>
-
-<!--tabla con datos -->
-<!-- <div id="contenedorTablas" >
-  <div id="tabla2" class="container" *ngIf="projectId">
+  </div>
+  <div id="tabla2" *ngIf="tabla===true">
       <table class="table table-responsive-xl">
-          <thead>
-            <tr id="cabecera">
-              <th>N°</th>
-              <th>Tarea</th>
-              <th>Hora Programada</th>
-            </tr>
-          </thead>
-          <tbody id="cuerpo">
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-          </tbody>
+        <thead>
+          <tr id="cabecera">
+            <th>ID</th>
+            <th>Tarea</th>
+            <th>Hora Programada</th>
+            <th>Responsable</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo">
+          <tr>
+            <td>{{numero}}</td>
+            <td>{{tarea}}</td>
+            <td>{{hora}}</td>
+            <td>{{resp}}</td>
+          </tr>
+        </tbody>
       </table>
-  </div> -->
+      <button type="button" (click)="volver()" class="btn btn-light">Volver</button>
+    </div>
+    
+ </div> 
 
-</div>
-</div>
-</div>     
+

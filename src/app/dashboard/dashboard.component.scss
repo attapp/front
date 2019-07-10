@@ -10,12 +10,12 @@
     padding-left: 31%;
     padding-right: 31%;
     border: 1px;
-    background-color: rgb(157, 216, 255);
+    background-color: rgb(116, 128, 134);
     margin-top: 3%;
     margin-left: 2%;
 }
 #btn-dos {
-    background-color: rgba(255, 0, 0, 0.897);
+    background-color: rgba(116, 97, 97, 0.897);
     padding-left: 31%;
     padding-right: 31%;
     margin-top: 1%;
@@ -25,7 +25,7 @@
    
 }
 #btn-tres{
-    background-color: rgb(255, 208, 1);
+    background-color: rgb(133, 126, 98);
     padding-left: 31%;
     padding-right: 31%;
     margin-top: 1%;
@@ -33,7 +33,7 @@
 
 }
 #btn-cuatro {
-    background-color: rgb(0, 194, 48);
+    background-color: rgb(82, 99, 86);
     padding-left: 25%;
     padding-right: 25%;
     margin-top: 1%;
@@ -43,29 +43,31 @@
 #tabla2 {
     margin-top: 3%
 }
+
+//colores tabla
 #cabecera {
-    background-color: rgba(255, 0, 0, 0.897)
+    background-color:  rgb(231, 234, 235);
 }
 #cuerpo {
-    background-color:rgb(255, 130, 130);
+    background-color: rgba(240, 240, 240, 0.897);
 }
 
 //color cuadraditos
 
 .legend-botonuno {
-    color: rgb(157, 216, 255);
+    color: rgb(116, 128, 134);
 }
 
 .legend-botondos {
-    color: rgba(255, 0, 0, 0.897);
+    color:  rgba(116, 97, 97, 0.897);
 }
 
 .legend-botontres {
-    color: rgb(255, 208, 1);
+    color: rgb(133, 126, 98);
 }
 
 .legend-botoncuatro {
-    color: rgb(0, 194, 48);
+    color: rgb(82, 99, 86);
 }
 
 
