@@ -29,7 +29,7 @@ import { GuardService } from "./services/guard.service";
 import { BtnLogoutComponent } from './btn-logout/btn-logout.component';
 import { ResponsableTasksComponent } from './responsable-tasks/responsable-tasks.component';
 
-import { GraficoComponent } from './grafico/grafico.component';
+//import { GraficoComponent } from './grafico/grafico.component';
 
 
 
@@ -52,12 +52,11 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         DashboardComponent,
         BtnLogoutComponent,
         ResponsableTasksComponent,
-        GraficoComponent,
+        //GraficoComponent,
         
     ],
     imports: [
 
-        ChartsModule,
         BrowserModule,
         AppRoutingModule,
         NgbModule,
