@@ -23,13 +23,13 @@
   <div>{{showPlanif(contadorFinalizadas, contadorTotal)}}</div> 
 </div>
 
+<app-grafico></app-grafico>
+
 <!--botones-->
-
-
 <div id="contenedor" >
   <div *ngIf="botones===true">          
   <!--total de tareas-->
-    <button id="btn-uno" (click)="llamarTabla()"  type="button" class="btn btn-info btn-responsive btninter" > 
+    <button id="btn-uno" (click)="llamarTabla()"  type="button" class="btn btn-info btn-responsive btninter " > 
       100
     </button>
     <!--tareas atrasadas-->
@@ -67,7 +67,7 @@
 
   </div>
   <div id="tabla2" *ngIf="tabla===true">
-      <table class="table table-responsive-xl">
+      <table class="table table-responsive-xl table table-striped">
         <thead>
           <tr id="cabecera">
             <th>ID</th>
@@ -76,8 +76,8 @@
             <th>Responsable</th>
           </tr>
         </thead>
-        <tbody id="cuerpo">
-          <tr>
+        <tbody >
+          <tr id="cuerpo">
             <td>{{numero}}</td>
             <td>{{tarea}}</td>
             <td>{{hora}}</td>

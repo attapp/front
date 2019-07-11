@@ -42,6 +42,7 @@ export class AuthService {
         break;
       case 2:
         // Redirigir vista RESPONSABLE
+        this.router.navigate(['/responsable-tasks']);
         break;
     }
   }

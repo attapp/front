@@ -11,6 +11,8 @@ import { ModalService } from '../services/modal.service';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { AuthService } from '../services/auth.service';
+import { getClosureSafeProperty } from '@angular/core/src/util/property';
+
 
 
 
@@ -61,6 +63,7 @@ export class DashboardComponent implements OnInit {
    public tarea= "programar";
    public hora= 1200;
    public resp= "juanito Perez";
+   public prueba = [1,2,2,2,3,5,4,6];
   
 
 
@@ -70,13 +73,15 @@ export class DashboardComponent implements OnInit {
     this.botones=false;
     this.tabla=true;
   }
+
+
 //funcion volver 
 volver() {
   console.log("vamos de vuelta");
   this.botones=true;
   this.tabla=false;
-
 }
+
 
   /**
    * al iniciar el componente consulta por la resolucion de pantalla y se subscribe al socket

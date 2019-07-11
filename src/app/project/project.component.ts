@@ -4,6 +4,7 @@ import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -28,7 +29,6 @@ export class ProjectComponent implements OnInit {
 
     private projects: Project[];
     public projectId = '';
-
 
     /**
      * al iniciar llama a showproject para mostrar los proyectos
@@ -57,5 +57,6 @@ export class ProjectComponent implements OnInit {
 
     }
 
+    
 
 }

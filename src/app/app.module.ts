@@ -27,8 +27,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from "./services/auth.service";
 import { GuardService } from "./services/guard.service";
 import { BtnLogoutComponent } from './btn-logout/btn-logout.component';
+import { ResponsableTasksComponent } from './responsable-tasks/responsable-tasks.component';
 
-//import { ChartsModule } from 'ng2-charts';
+import { GraficoComponent } from './grafico/grafico.component';
+
+
 
 
 
@@ -48,10 +51,13 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         LoginComponent,
         DashboardComponent,
         BtnLogoutComponent,
+        ResponsableTasksComponent,
+        GraficoComponent,
         
     ],
     imports: [
-        //ChartsModule,
+
+        ChartsModule,
         BrowserModule,
         AppRoutingModule,
         NgbModule,
@@ -65,6 +71,7 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
     providers: [GuardService, AuthService, {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true,  },
     TitleCasePipe,
     { provide: LOCALE_ID, useValue: 'es-CL' }],
+    
     bootstrap: [AppComponent],
     entryComponents: [ModalComponent, ModalConfirmComponent]
 })
