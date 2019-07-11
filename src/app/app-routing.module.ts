@@ -8,6 +8,7 @@ import { GuardService } from './services/guard.service';
 import { AuthService } from './services/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
+import { ProjectDashComponent } from './project-dash/project-dash.component';
 
 /**
  * Modulo que exporta las rutas del sistema
@@ -19,17 +20,14 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
 
     { path: 'login/:idProfile', component: LoginComponent },
-
+    { path: 'dashboard', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
-    { path: 'dashboard', component: DashboardComponent/*, canActivate: [GuardService] */},
     // routes for Lider
-
     // routes for Adm (FALTAN)
     { path: 'project/:idProject', component: ProjectComponent, canActivateChild: [GuardService], 
         children: [
             { path: 'create', component: CreateComponent },
-            { path: 'tasks', component: TaskComponent },
-            
+            { path: 'tasks', component: TaskComponent }
     ]},  
     // routes for Reponsable
     { path: 'project/:idProject', component: ProjectComponent, 

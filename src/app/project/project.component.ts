@@ -3,7 +3,6 @@ import { ProjectService } from '../services/project.service';
 import { Project } from '../interfaces/Project';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -23,18 +22,18 @@ export class ProjectComponent implements OnInit {
      */
     constructor(private projectService: ProjectService, 
                 private router: Router, 
-                public activatedRoute: ActivatedRoute) {
+                public activatedRoute: ActivatedRoute,
+                ) {
     }
 
     private projects: Project[];
     public projectId = '';
 
-
     /**
      * al iniciar llama a showproject para mostrar los proyectos
      */
     ngOnInit() {
-            this.showProjects();
+        this.showProjects();
     }
 
     /**
@@ -46,8 +45,7 @@ export class ProjectComponent implements OnInit {
             .subscribe((resp: Project[]) => {
                 this.projects = resp;
             });
-    }  
-
+    } 
     /**
      * 
      * @param id muestra los cambios en el proyecto

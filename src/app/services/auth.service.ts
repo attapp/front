@@ -16,8 +16,12 @@ export class AuthService {
   setUserLoggedIn(user: User) {
     this.isLoggedIn = true;
     this.usserLogged = user;
+    localStorage.setItem('currentId', JSON.stringify(this.usserLogged.id));
     localStorage.setItem('currentUser', JSON.stringify(user));
-  
+  }
+
+  setProjectUser(projectId: string) {
+    localStorage.setItem('currentProyect', projectId);
   }
 
   getUserLoggedInLocal() {

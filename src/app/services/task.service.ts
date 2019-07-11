@@ -22,11 +22,12 @@ export class TaskService {
             return this.http.get(getTasksUrl);
         }
         if (idUser) {
-            let getTasksUrlByUser = environment.API_ENDPOINT + `/projects/${idUser}/tasks`;
+            let getTasksUrlByUser = getTasksUrl + `/${idUser}`;
             return this.http.get(getTasksUrlByUser);
         }
+        else 
+        return this.http.get(getTasksUrl);
     }
-
 
 
     setTask(idProject: number, idTask: number, stateTask: number) {

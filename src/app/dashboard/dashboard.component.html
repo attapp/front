@@ -1,25 +1,13 @@
-<app-btn-logout> </app-btn-logout>
-
-<!--seleccion de proyecto-->
-<div class="container-fluid mt-5 ">
-    <div class="form-group row">
-        <label for="project" class="col-sm-2 col-md-1 col-form-label">Proyecto</label>
-        <div class="col-sm-4">
-            <select class="form-control" #project [(ngModel)]="projectId" (change)="change(project.value)">
-                <option *ngFor="let project of projects" value={{project.id}}>{{project.name}}</option>
-                <option value="" hidden>Seleccione un proyecto</option>
-            </select>
-        </div>
-    </div> 
-<div *ngIf="projectId">
+    
 <!--Datos variables-->
 <div id="contenedor" >
   <!--selector de html por referencia-->
   <h6>REAL:</h6>
-  <div>{{showReal(contadorFinalizadas, contadorTotal)}}</div>
-  <br>
+    <div *ngIf="tasksFinished && tasks">{{showReal()}}</div>
+      <br>
+
   <h6>IDEAL:</h6>
-  <div>{{showPlanif(contadorFinalizadas, contadorTotal)}}</div> 
+    <div *ngIf="deberiaDepen && deberiaInicio && deberiaInProgress">{{showPlanif()}}</div> 
 </div>
 
 <!--botones-->
@@ -60,8 +48,8 @@
           Próximas tareas en ejecutarse
       </div>
 
+    </div>
 </div>
-
 <!--tabla con datos -->
 <!-- <div id="contenedorTablas" >
   <div id="tabla2" class="container" *ngIf="projectId">
@@ -80,9 +68,6 @@
               <td>john@example.com</td>
             </tr>
           </tbody>
-      </table>
+1      </table>
   </div> -->
 
-</div>
-</div>
-</div>     
