@@ -18,12 +18,19 @@ import { AuthService } from '../services/auth.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    //variables de prueba
+    botones = true;
+    tabla = false
 
+    pageSize = 5;
+
+    // arrays Tareas
     tasks: Task[];
     tasksFinished: Task[];
     tasksAtraXDepen: Task[];
     tasksAtraXInicio: Task[];
     tasksInProgress: Task[];
+    allTaskDelayed: Task[] = [];
 
     deberiaDepen: Task[] = [];
     deberiaInicio: Task[] = [];
@@ -90,7 +97,19 @@ export class DashboardComponent implements OnInit {
         // console.log('termina onchange');
     }
 
+    //funcion de prueba (CONI)
+    llamarTabla(unArraySegunCaso: Task[]) {
+    
+        this.botones = false;
+        this.tabla = true;
+    } 
 
+    //funcion volver 
+    volver() {
+        console.log("vamos de vuelta");
+        this.botones=true;
+        this.tabla=false;
+    }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
      */
@@ -164,6 +183,7 @@ export class DashboardComponent implements OnInit {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
         // resp is of type
         .subscribe((resp: Task[]) => {
+            console.log('EN CURSO TAREAS : ' + resp);
             this.tasksInProgress = resp ? resp : [];
             for (let task of resp) {
                 if (new Date(task.endDatePlanning) < new Date()) {
@@ -176,9 +196,15 @@ export class DashboardComponent implements OnInit {
         return this.tasksFinished.length + ' / ' + this.tasks.length;
     }
 
-    async showPlanif() {
+    showPlanif() {
         //this.filtroEndPlaning(dependencys, byStart, inProgress)
         let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
         return cont  + ' / ' + this.tasks.length;
+    }
+
+    showDelayed() {
+        this.allTaskDelayed.push(...this.tasksAtraXDepen);
+        this.allTaskDelayed.push(...this.tasksAtraXInicio);
+        this.allTaskDelayed.push(...this.tasksInProgress);
     }
 }

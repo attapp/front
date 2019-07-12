@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { ProjectDashComponent } from './project-dash/project-dash.component';
+import { ProjectResponsableComponent } from './project-responsable/project-responsable.component';
 
 /**
  * Modulo que exporta las rutas del sistema
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'login/:idProfile', component: LoginComponent },
     { path: 'dashboard', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
+    { path: 'projectresp', component: ProjectResponsableComponent, canActivate: [GuardService] },
     // routes for Lider
     // routes for Adm (FALTAN)
     { path: 'project/:idProject', component: ProjectComponent, canActivateChild: [GuardService], 
@@ -30,7 +32,7 @@ const routes: Routes = [
             { path: 'tasks', component: TaskComponent }
     ]},  
     // routes for Reponsable
-    { path: 'project/:idProject', component: ProjectComponent, 
+    { path: 'projectresp/:idProject', component: ProjectComponent, 
         children: [
             { path: 'tasks', component: TaskComponent }
     ]},      

@@ -12,21 +12,22 @@
 
 <!--botones-->
 <div id="contenedor" >
+  <div *ngIf="botones===true">   
   <!--total de tareas-->
-    <button id="btn-uno" type="button" class="btn btn-info btn-responsive btninter" > 
-      100
+    <button id="btn-uno" type="button" class="btn btn-info btn-responsive btninter " > 
+      {{tasks.length}}
     </button>
     <!--tareas atrasadas-->
-    <button id="btn-dos" type="button" class="btn btn-info btn-responsive btninter" > 
-      30
+    <button id="btn-dos" (click)="llamarTabla(allTaskDelayed)" type="button" class="btn btn-info btn-responsive btninter" > 
+      {{allTaskDelayed.length}}
     </button>
     <!--tareas en ejecucion-->
-    <button id="btn-tres" type="button" class="btn btn-info btn-responsive btninter"> 
-      5 
+    <button id="btn-tres" (click)="llamarTabla(tasksInProgress)" type="button" class="btn btn-info btn-responsive btninter"> 
+      {{tasksInProgress.length}} 
     </button>
     <!--proximas tareas en ejecutarse -->
-    <button id="btn-cuatro" type="button" class="btn btn-info btn-responsive btninter"> 
-      tareas a ejecutarse
+    <button id="btn-cuatro" (click)="otrafuncion()" type="button" class="btn btn-info btn-responsive btninter"> 
+        Próxima tarea a ejecutarse
     </button>
     
     <!--Cuadrados de colores-->
@@ -48,26 +49,53 @@
           Próximas tareas en ejecutarse
       </div>
 
+    </div>  
+  </div>
+  <!--tabla con datos -->
+  <div class="table-responsive" id="tabla2" *ngIf="tabla===true">
+
+      <table class="table table-hover table-bordered table-sm ">      
+          <thead > 
+              <tr id="cabecera" >
+                  <th class="text-center align-middle" scope="col">ID</th>
+                  <th class="text-center align-middle" scope="col">Tarea</th>
+                  <th class="text-center align-middle" scope="col">Hora Fin Planificada</th>
+                  <th class="text-center align-middle" scope="col">Responsable</th>
+              </tr>
+          </thead>
+        <tbody>
+            <tr id="cuerpo" *ngFor="let task of tasks " >
+                <th class="text-center align-middle" scope="row">{{task.id}}</th>
+                <td class="text-nowrap align-middle">
+                    <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
+                        {{task.description  | truncate:[60, '...'] }}
+                    </div>
+                    <div *ngIf="!(task.description.length >= 60)">
+                        {{task.description}}
+                    </div>
+                </td>
+                <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
+                <td class="text-center align-middle">{{task.resposible}}</td>
+            </tr>
+            <tr *ngIf="tasks?.length == 0">
+                <td colspan="10">
+                    <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado</div>
+                </td>
+            </tr>
+        </tbody>
+        <!-- <tbody >
+          <tr id="cuerpo" *ngFor="let task of tasks">
+            <td >{{numero}}</td>
+            <td>{{tarea}}</td>
+            <td>{{hora}}</td>
+            <td>{{resp}}</td>
+          </tr>
+        </tbody> -->
+      </table>
+         <button type="button" (click)="volver()" class="btn btn-light">Volver</button>
     </div>
 </div>
-<!--tabla con datos -->
-<!-- <div id="contenedorTablas" >
-  <div id="tabla2" class="container" *ngIf="projectId">
-      <table class="table table-responsive-xl">
-          <thead>
-            <tr id="cabecera">
-              <th>N°</th>
-              <th>Tarea</th>
-              <th>Hora Programada</th>
-            </tr>
-          </thead>
-          <tbody id="cuerpo">
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-          </tbody>
-1      </table>
-  </div> -->
+
+
+  
 
