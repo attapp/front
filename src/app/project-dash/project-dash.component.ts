@@ -24,7 +24,6 @@ export class ProjectDashComponent implements OnInit {
    * al iniciar llama a showprojectbyuser para mostrar los proyectos según usuario
    */
   ngOnInit() {
-    console.log(this.authService.usserLogged);
     this.idUser = localStorage.getItem('currentId');
     this.showProjectsByUser();
   }
@@ -33,7 +32,6 @@ export class ProjectDashComponent implements OnInit {
      * muestra los proyectos según id de Usuario
     */
   showProjectsByUser() {
-    console.log('IDUSER : ' + this.idUser)
     this.projectService.getProjectsByUser(this.idUser)
         // resp is of type
         .subscribe((resp: Project[]) => {
@@ -48,7 +46,6 @@ export class ProjectDashComponent implements OnInit {
     change(id: number) {
       console.log("projectID change", this.projectId);
       this.authService.setProjectUser(this.projectId);
-      console.log
 
 
   }

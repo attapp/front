@@ -17,6 +17,7 @@ export class AuthService {
     this.isLoggedIn = true;
     this.usserLogged = user;
     localStorage.setItem('currentId', JSON.stringify(this.usserLogged.id));
+    localStorage.setItem('currentProfile', JSON.stringify(this.usserLogged.perfil));
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 

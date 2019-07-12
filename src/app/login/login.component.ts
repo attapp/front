@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
       this.http.post<any>('http://localhost:3000/login', {user: this.user, password: this.password})
         .subscribe
         ((data) => {
-            let id = data['idUser'];
-            let perfil = data['perfil'];
+            const id = data['idUser'];
+            const perfil = data['perfil'];
             const u: User = {id: id, username: this.user, perfil: perfil};        
             this.authService.setUserLoggedIn(u);
             this.authService.redByUrlPerfiles(perfil);

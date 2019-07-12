@@ -8,6 +8,7 @@ import { Responsible } from '../interfaces/Responsible';
 import { TitleCasePipe } from '@angular/common';
 import { ApplicationStateService } from '../services/application-state.service';
 import { ModalService } from '../services/modal.service';
+import { AuthService } from '../services/auth.service';
 
 /**
  * Componente que muestra el listado de tareas con sus respectivas funcionalidades,
@@ -22,10 +23,13 @@ export class TaskComponent implements OnInit {
 
     tasks: Task[];
     @Input() idProject: number;
+    @Input() idUser: number;
     interval;
     page = 1;
     pageSize = 50;
     isMobileResolution: boolean;
+
+    profile: string = localStorage.getItem('currentProfile'); 
 
     /**
      * 
@@ -38,7 +42,8 @@ export class TaskComponent implements OnInit {
         private taskService: TaskService,
         private modalService: ModalService,
         private titleCase: TitleCasePipe,
-        private applicationStateService: ApplicationStateService
+        private applicationStateService: ApplicationStateService,
+        private authService: AuthService
     ) { }
 
     /**
@@ -69,7 +74,14 @@ export class TaskComponent implements OnInit {
      * lo que realiza es llamar a servicio que muestra las tareas
      */
     ngOnChanges(changes: SimpleChanges): void {
-        this.showTasks(this.idProject);
+        // para perfil de ADM (orquestador)
+        if (this.profile === '3') {
+            this.showTasks(this.idProject);
+        } 
+        // para perfil de responsable
+        if (this.profile === '2') {
+            this.showTasksByUser(this.idProject, this.idUser);
+        }
     }
 
     /**
@@ -77,6 +89,17 @@ export class TaskComponent implements OnInit {
      */
     showTasks(idProject: number) {
         this.taskService.getTasks(idProject, -TASK_STATE.FINISHED)
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                this.tasks = resp ? resp : [];
+            });
+    }
+
+    /**
+     * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
+     */
+    showTasksByUser(idProject: number, idUser: number) {
+        this.taskService.getTaskByUserAndState(idProject, idUser, -TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasks = resp ? resp : [];

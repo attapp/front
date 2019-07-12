@@ -11,11 +11,6 @@
                     <a class="nav-link" [routerLink]="['projects']">Panel de Control <span
                             class="sr-only">(current)</span></a>
                 </li>
-                <div>
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" [routerLink]="['create']">Proyectos</a>
-                    </li>
-                </div> 
                 <app-btn-logout> </app-btn-logout>
             </ul>
         </div>
@@ -36,7 +31,7 @@
     <ngb-tabset *ngIf="projectId"  #t="ngbTabset" >
         <ngb-tab id="tab-task" title="Lista de tareas">
             <ng-template  ngbTabContent>
-                <app-task [idProject]="projectId"></app-task>
+                <app-task [idUser]="idUser" [idProject]="projectId"></app-task>
             </ng-template>
         </ngb-tab>
         <ngb-tab id="tab-resume" [disabled]="true" title="Resumen">
