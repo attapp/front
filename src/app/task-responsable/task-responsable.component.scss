@@ -1,0 +1,122 @@
+
+.container-fluid {  
+    width: 100%;  
+    padding-right: 0px;  
+    padding-left: 0px;  
+    margin-right: 0px;  
+    margin-left: 0px;  
+}
+body {
+    width: 100%;
+    padding: 20px;
+}
+
+/**
+* Estilos cards 
+*/
+.card {
+    display: block;
+    border-radius: 0;
+    overflow: hidden;
+    min-width: 300px;
+    height: 190px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 2px, 3px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+.card-body {
+    padding: 15px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.card-header {
+    color: white;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    text-align: left, center;
+}
+.card-text {
+    color: white;
+    float: left;
+    margin-bottom: 1px;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+
+/**
+* Estilos botones.
+*/
+a.boton {
+    display: block;
+    width: 110px;
+    float: right ;
+    // margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;   
+    font-size: 13px;
+     
+	font-weight: bold;
+	
+	overflow: hidden;
+	color: white;
+	cursor: pointer;
+	box-shadow:inset 0 0 0 1px rgba(255, 255, 255, 0.103);
+    transition: all ease 0.5s;
+}
+
+a.boton:hover {
+    color: white;
+} 
+
+.tasks-in-progress {
+    background: #32C79A;
+    border: 1px solid rgba(0, 231, 216, 0.808);
+   
+}
+.tasks-delayed {
+    background: #FB3E4C;
+    border: 1px solid rgb(255, 65, 40);
+   
+}
+.tasks-no-init {
+    background-image: linear-gradient(to bottom right, #C2BBBC, rgb(228, 228, 228));
+    border: 1px solid #C2BBBC;
+    
+}
+.tasks-end {
+    background: #3896C3;
+    border: 1px solid  rgb(95, 191, 255);
+}
+a.boton#btn-iniciar-red,
+a.boton#btn-finalizar-red {
+    background: rgb(255, 71, 84);    
+    border: 1px solid rgb(218, 37, 13);
+}
+a.boton:hover#btn-iniciar-red,
+a.boton:hover#btn-finalizar-red {
+    background: rgb(253, 121, 130);
+}
+
+a.boton#btn-iniciar-gray {
+    background: rgb(199, 199, 199);   
+    border: 1px solid rgb(182, 182, 182);
+}
+a.boton:hover#btn-iniciar-gray {
+    background: rgb(233, 233, 233);       
+}
+a.boton#btn-finalizar-green {
+    background: rgb(68, 182, 148);
+    border: 1px solid rgb(63, 153, 126);
+}
+a.boton:hover#btn-finalizar-green {
+    background: rgb(148, 207, 190);    
+}

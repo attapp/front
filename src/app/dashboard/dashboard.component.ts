@@ -21,8 +21,9 @@ export class DashboardComponent implements OnInit {
     //variables de prueba
     botones = true;
     tabla = false
-
+    contenido: Task[] = [];
     pageSize = 5;
+    tituloTabla;
 
     // arrays Tareas
     tasks: Task[];
@@ -81,6 +82,7 @@ export class DashboardComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges): void {
         // this.idProject = parseInt(localStorage.getItem('currentProyect'));
         // console.log('ID PROYECT : ' + this.idProject)
+        this.allTaskDelayed = [];
         this.tasks = [];
         this.tasksAtraXDepen = [];
         this.tasksAtraXInicio = [];
@@ -98,10 +100,18 @@ export class DashboardComponent implements OnInit {
     }
 
     //funcion de prueba (CONI)
-    llamarTabla(unArraySegunCaso: Task[]) {
-    
+    llamarTabla(lista: Task[]) {
         this.botones = false;
         this.tabla = true;
+
+        if (lista === this.allTaskDelayed) {
+            this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
+            this.contenido = this.allTaskDelayed;
+        } else if (lista === this.tasksInProgress) {
+            this.tituloTabla = 'DETALLE TAREAS EN CURSO';
+            this.contenido = this.tasksInProgress;
+        }
+
     } 
 
     //funcion volver 
@@ -115,7 +125,7 @@ export class DashboardComponent implements OnInit {
      */
     showTasks(idProject: number) {
         let tasks: Task[];        
-        this.taskService.getTasks( idProject)
+        this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
@@ -147,6 +157,7 @@ export class DashboardComponent implements OnInit {
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasksAtraXDepen = resp ? resp : [];
+                this.allTaskDelayed.push(...this.tasksAtraXDepen);
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
                         this.deberiaDepen.push(task);
@@ -166,6 +177,8 @@ export class DashboardComponent implements OnInit {
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasksAtraXInicio = resp ? resp : [];
+                this.allTaskDelayed.push(...this.tasksAtraXInicio);
+
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
                         this.deberiaInicio.push(task);
@@ -183,13 +196,14 @@ export class DashboardComponent implements OnInit {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
         // resp is of type
         .subscribe((resp: Task[]) => {
-            console.log('EN CURSO TAREAS : ' + resp);
             this.tasksInProgress = resp ? resp : [];
+
             for (let task of resp) {
                 if (new Date(task.endDatePlanning) < new Date()) {
                     this.deberiaInProgress.push(task);
                 }
             }
+            this.allTaskDelayed.push(...this.deberiaInProgress);
         });
     }
     showReal() {
@@ -202,9 +216,5 @@ export class DashboardComponent implements OnInit {
         return cont  + ' / ' + this.tasks.length;
     }
 
-    showDelayed() {
-        this.allTaskDelayed.push(...this.tasksAtraXDepen);
-        this.allTaskDelayed.push(...this.tasksAtraXInicio);
-        this.allTaskDelayed.push(...this.tasksInProgress);
-    }
+
 }

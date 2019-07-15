@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { ProjectDashComponent } from './project-dash/project-dash.component';
 import { ProjectResponsableComponent } from './project-responsable/project-responsable.component';
+import { TaskResponsableComponent } from './task-responsable/task-responsable.component';
 
 /**
  * Modulo que exporta las rutas del sistema
@@ -17,7 +18,10 @@ import { ProjectResponsableComponent } from './project-responsable/project-respo
 
 const routes: Routes = [
     
-    { path: '',  component: AppComponent, pathMatch: 'full' },    
+    { path: '', component: AppComponent, pathMatch: 'full' },  
+    { path: 'respo', redirectTo: 'responsable' },
+    { path: 'admi', redirectTo: 'project' },
+    { path: 'responsable', component: TaskResponsableComponent },
     { path: 'login', component: LoginComponent },
 
     { path: 'login/:idProfile', component: LoginComponent },

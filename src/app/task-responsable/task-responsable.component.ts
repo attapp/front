@@ -15,44 +15,36 @@ import { AuthService } from '../services/auth.service';
  * en este componente se encuentra la vista mobile y la de escritorio que viene dada por el servicio aplicationStateService
  */
 @Component({
-    selector: 'app-task',
-    templateUrl: './task.component.html',
-    styleUrls: ['./task.component.scss']
+  selector: 'app-task-responsable',
+  templateUrl: './task-responsable.component.html',
+  styleUrls: ['./task-responsable.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskResponsableComponent implements OnInit {
 
     tasks: Task[];
+    tasksByUser: Task[] = [];
     @Input() idProject: number;
     @Input() idUser: number;
-    interval;
-    page = 1;
-    pageSize = 50;
-    isMobileResolution: boolean;
 
-    profile: string = localStorage.getItem('currentProfile'); 
-
-    /**
-     * 
-     * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
-     * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
-     * @param titleCase Pipe que sirve para capitalizar los nombres, ej juan perez lo deja como Juan Perez
-     * @param applicationStateService Servicio que obtiene el tamaño de la pantalla y en base a eso modifica la estructura html
-     */
-    constructor(
-        private taskService: TaskService,
-        private modalService: ModalService,
-        private titleCase: TitleCasePipe,
-        private applicationStateService: ApplicationStateService,
-        private authService: AuthService
-    ) { }
-
+ /**
+   *  
+   * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
+   * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
+   * @param titleCase Pipe que sirve para capitalizar los nombres, ej juan perez lo deja como Juan Perez
+   * @param applicationStateService Servicio que obtiene el tamaño de la pantalla y en base a eso modifica la estructura html
+  */
+  constructor(
+    private taskService: TaskService,
+    private modalService: ModalService,
+    private titleCase: TitleCasePipe,
+    private authService: AuthService) { }
+   
     /**
      * al iniciar el componente consulta por la resolucion de pantalla y se subscribe al socket
      * el socket al momento de detectar un cambio modifica el valor de las tareas (si es que el usuario se encuentra en esa vista y si la 
      * tarea no esta finalizada)
      */
     ngOnInit() {
-        this.isMobileResolution = this.applicationStateService.getIsMobileResolution();
         this.taskService.getSocketTask('message').subscribe(
             projectTask => {
                 console.log('====>', projectTask);
@@ -74,28 +66,21 @@ export class TaskComponent implements OnInit {
      * lo que realiza es llamar a servicio que muestra las tareas
      */
     ngOnChanges(changes: SimpleChanges): void {
-        this.showTasks(this.idProject);
-    }
-
-    /**
-     * solamente llama al servicio que obtiene las tareas menos las tareas finalizadas
-     */
-    showTasks(idProject: number) {
-        this.taskService.getTasks(idProject, -TASK_STATE.FINISHED)
-            // resp is of type
-            .subscribe((resp: Task[]) => {
-                this.tasks = resp ? resp : [];
-            });
+        this.showTasksByUser(this.idProject, this.idUser);
     }
 
     /**
      * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
      */
     showTasksByUser(idProject: number, idUser: number) {
+        let tasks: Task[];        
         this.taskService.getTaskByUser(idProject, idUser)
             // resp is of type
-            .subscribe((resp: Task[]) => {
-                this.tasks = resp ? resp : [];
+            .subscribe((
+                resp: Task[]) => {
+                    tasks = resp ? resp : [];
+                    this.tasksByUser = tasks;
+        
             });
     }
 
