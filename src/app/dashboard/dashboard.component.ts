@@ -24,8 +24,9 @@ export class DashboardComponent implements OnInit {
     botones = true;
     tabla = false;
     porcentaje = 0;
-
+    contenido: Task[] = [];
     pageSize = 5;
+    tituloTabla;
 
     // arrays Tareas
     tasks: Task[];
@@ -85,6 +86,7 @@ export class DashboardComponent implements OnInit {
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
         // this.idProject = parseInt(localStorage.getItem('currentProyect'));
         // console.log('ID PROYECT : ' + this.idProject)
+        this.allTaskDelayed = [];
         this.tasks = [];
         this.tasksAtraXDepen = [];
         this.tasksAtraXInicio = [];
@@ -103,11 +105,19 @@ export class DashboardComponent implements OnInit {
     }
 
     //funcion de prueba (CONI)
-    llamarTabla(unArraySegunCaso: Task[]) {
-
+    llamarTabla(lista: Task[]) {
         this.botones = false;
         this.tabla = true;
-    }
+
+        if (lista === this.allTaskDelayed) {
+            this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
+            this.contenido = this.allTaskDelayed;
+        } else if (lista === this.tasksInProgress) {
+            this.tituloTabla = 'DETALLE TAREAS EN CURSO';
+            this.contenido = this.tasksInProgress;
+        }
+
+    } 
 
     //funcion volver 
     volver() {
@@ -119,7 +129,7 @@ export class DashboardComponent implements OnInit {
      * solamente llama al servicio que obtiene todas las tareas 
      */
     showTasks(idProject: number) {
-        let tasks: Task[];
+        let tasks: Task[];        
         this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
@@ -152,6 +162,7 @@ export class DashboardComponent implements OnInit {
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasksAtraXDepen = resp ? resp : [];
+                this.allTaskDelayed.push(...this.tasksAtraXDepen);
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
                         this.deberiaDepen.push(task);
@@ -171,6 +182,8 @@ export class DashboardComponent implements OnInit {
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasksAtraXInicio = resp ? resp : [];
+                this.allTaskDelayed.push(...this.tasksAtraXInicio);
+
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
                         this.deberiaInicio.push(task);
@@ -186,23 +199,24 @@ export class DashboardComponent implements OnInit {
      */
     getTasksInProgress(idProject: number) {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
-            // resp is of type
-            .subscribe((resp: Task[]) => {
-                console.log('EN CURSO TAREAS : ' + resp);
-                this.tasksInProgress = resp ? resp : [];
-                for (let task of resp) {
-                    if (new Date(task.endDatePlanning) < new Date()) {
-                        this.deberiaInProgress.push(task);
-                    }
+        // resp is of type
+        .subscribe((resp: Task[]) => {
+            this.tasksInProgress = resp ? resp : [];
+
+            for (let task of resp) {
+                if (new Date(task.endDatePlanning) < new Date()) {
+                    this.deberiaInProgress.push(task);
                 }
-            });
+            }
+            this.allTaskDelayed.push(...this.deberiaInProgress);
+        });
     }
 
     porcentajeReal() {
         /*console.log("task: ",this.tasksFinished.length);
         var algo = this.tasksFinished;
         console.log("algo: ",algo);*/
-        return '50%';
+        return '30%';
         return Math.round(((this.tasksFinished.length) * 100) / (this.tasks.length)) + "%";
 
     }
@@ -218,9 +232,9 @@ export class DashboardComponent implements OnInit {
         return cont + ' / ' + this.tasks.length;
     }
 
-    showDelayed() {
+   /* showDelayed() {
         this.allTaskDelayed.push(...this.tasksAtraXDepen);
         this.allTaskDelayed.push(...this.tasksAtraXInicio);
         this.allTaskDelayed.push(...this.tasksInProgress);
-    }
+    }*/
 } 

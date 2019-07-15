@@ -1,0 +1,40 @@
+  <div class="container-fluid">
+    <body>
+      <div class="card-deck">
+            
+            <div class="card"
+                [ngClass]="{'tasks-no-init': task.state.id == 1 || task.state.id == 2,
+                'tasks-in-progress': task.state.id == 3,
+                'tasks-delayed': task.state.id == 4 || task.state.id == 5 || task.state.id == 6,
+                'tasks-end': task.state.id == 7 }"  *ngFor="let task of tasksByUser">
+                    <div class="card-header">
+                        <a *ngIf="task.state.id == 1" class="boton" id="btn-iniciar-gray">Iniciar</a>
+                        <a *ngIf="task.state.id == 4" class="boton" id="btn-iniciar-red">Iniciar</a>
+                        <a *ngIf="task.state.id == 3" class="boton" id="btn-finalizar-green">Finalizar</a>
+                        <a *ngIf="task.state.id == 6" class="boton" id="btn-finalizar-red">Finalizar</a>
+                        <strong>{{task.externalCode}}</strong>
+                    </div>    
+                    <div class="card-body">
+
+                        <p class="card-text" >
+                            <strong>Descripción: </strong>{{task.description | truncate:[150, '...'] }}
+                        </p>
+                        <p class="card-text" *ngIf="task.state.id == 1 || task.state.id == 2">
+                            <strong>Inicio planificado:</strong> {{task.startDatePlanning | date:'medium' }}
+                        </p>
+                        <p class="card-text" *ngIf="task.state.id == 3 || task.state.id == 4 || task.state.id == 5 || task.state.id == 6">
+                            <strong>Fin planificado:</strong> {{task.endDatePlanning | date:'medium' }}
+                        </p>
+                        <p class="card-text" *ngIf="task.state.id == 7">
+                            <strong>Fin real:</strong> {{task.realEndDate | date:'medium' }}
+                        </p>
+                    </div>
+            </div>
+        </div>    
+    </body>  
+</div>
+
+
+
+        
+      
