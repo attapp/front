@@ -3,8 +3,10 @@ import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
 import { ModalService } from '../services/modal.service';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
+import { max } from 'moment';
+import { min } from 'rxjs/operators';
 
 
 /**
@@ -20,7 +22,8 @@ import { AuthService } from '../services/auth.service';
 export class DashboardComponent implements OnInit {
     //variables de prueba
     botones = true;
-    tabla = false
+    tabla = false;
+    porcentaje = 0;
 
     pageSize = 5;
 
@@ -40,6 +43,7 @@ export class DashboardComponent implements OnInit {
     @Input() idProject: number;
     isMobileResolution: boolean;
 
+    //variables coni
     /**
      * 
      * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
@@ -67,18 +71,18 @@ export class DashboardComponent implements OnInit {
 
                 tasks.forEach(newTask => {
                     const index = this.tasks.findIndex((t) => t.id === newTask.id);
-                    this.tasks[index] = newTask;  
+                    this.tasks[index] = newTask;
                 });
             });
     }
-        
+
     /**
        * 
        * @param changes los posibles cambios que pueden exisir
        * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
        * lo que realiza es llamar a servicio que muestra las tareas
        */
-    ngOnChanges(changes: SimpleChanges): void {
+    async ngOnChanges(changes: SimpleChanges): Promise<void> {
         // this.idProject = parseInt(localStorage.getItem('currentProyect'));
         // console.log('ID PROYECT : ' + this.idProject)
         this.tasks = [];
@@ -89,51 +93,52 @@ export class DashboardComponent implements OnInit {
         this.deberiaDepen = [];
         this.deberiaInicio = [];
         this.deberiaInProgress = [];
-        this.showTasks(this.idProject);
-        this.showTasksFinished(this.idProject);
+        await this.showTasks(this.idProject);
+        await this.showTasksFinished(this.idProject);
+        console.log(this.porcentajeReal());
         this.getTasksDelayedByDependency(this.idProject);
-        this.getTasksDelayedByStart(this.idProject);   
+        this.getTasksDelayedByStart(this.idProject);
         this.getTasksInProgress(this.idProject);
         // console.log('termina onchange');
     }
 
     //funcion de prueba (CONI)
     llamarTabla(unArraySegunCaso: Task[]) {
-    
+
         this.botones = false;
         this.tabla = true;
-    } 
+    }
 
     //funcion volver 
     volver() {
         console.log("vamos de vuelta");
-        this.botones=true;
-        this.tabla=false;
+        this.botones = true;
+        this.tabla = false;
     }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
      */
     showTasks(idProject: number) {
-        let tasks: Task[];        
-        this.taskService.getTasks( idProject)
+        let tasks: Task[];
+        this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasks = tasks;
+                tasks = resp ? resp : [];
+                this.tasks = tasks;
             });
     }
     /**
      * solamente llama al servicio que obtiene las tareas finalizadas
      */
     showTasksFinished(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject, TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasksFinished = tasks;
+                tasks = resp ? resp : [];
+                this.tasksFinished = tasks;
             });
     }
     /**
@@ -153,7 +158,7 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             });
-            
+
     }
     /**
      * llama al servicio que obtiene las tareas Atrasadas por inicio y las almacena en un array
@@ -181,17 +186,28 @@ export class DashboardComponent implements OnInit {
      */
     getTasksInProgress(idProject: number) {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
-        // resp is of type
-        .subscribe((resp: Task[]) => {
-            console.log('EN CURSO TAREAS : ' + resp);
-            this.tasksInProgress = resp ? resp : [];
-            for (let task of resp) {
-                if (new Date(task.endDatePlanning) < new Date()) {
-                    this.deberiaInProgress.push(task);
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                console.log('EN CURSO TAREAS : ' + resp);
+                this.tasksInProgress = resp ? resp : [];
+                for (let task of resp) {
+                    if (new Date(task.endDatePlanning) < new Date()) {
+                        this.deberiaInProgress.push(task);
+                    }
                 }
-            }
-        });
+            });
     }
+
+    porcentajeReal() {
+        /*console.log("task: ",this.tasksFinished.length);
+        var algo = this.tasksFinished;
+        console.log("algo: ",algo);*/
+        return '50%';
+        return Math.round(((this.tasksFinished.length) * 100) / (this.tasks.length)) + "%";
+
+    }
+
+
     showReal() {
         return this.tasksFinished.length + ' / ' + this.tasks.length;
     }
@@ -199,7 +215,7 @@ export class DashboardComponent implements OnInit {
     showPlanif() {
         //this.filtroEndPlaning(dependencys, byStart, inProgress)
         let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
-        return cont  + ' / ' + this.tasks.length;
+        return cont + ' / ' + this.tasks.length;
     }
 
     showDelayed() {
@@ -207,4 +223,4 @@ export class DashboardComponent implements OnInit {
         this.allTaskDelayed.push(...this.tasksAtraXInicio);
         this.allTaskDelayed.push(...this.tasksInProgress);
     }
-}
+} 

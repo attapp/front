@@ -1,21 +1,35 @@
     
-<!--Datos variables-->
-<div id="contenedor" >
-  <!--selector de html por referencia-->
+<!--Datos variables
+<div id="contenedor" >-->
+  <!--selector de html por referencia
   <h6>REAL:</h6>
     <div *ngIf="tasksFinished && tasks">{{showReal()}}</div>
       <br>
 
   <h6>IDEAL:</h6>
     <div *ngIf="deberiaDepen && deberiaInicio && deberiaInProgress">{{showPlanif()}}</div> 
+</div>-->
+
+<!--barra de progreso finalizadas-->
+<h4>Tareas Finalizadas</h4>
+<div class="progress">
+  <div class="progress-bar bg-secondary" [ngStyle]="{'width': porcentajeReal()}"> {{porcentajeReal()}} </div>
 </div>
+<br>
+<!--barra de progreso planificacion
+<h4>Tareas Planificadas</h4>
+<div class="progress">
+  <div class="progress-bar bg-secondary" style="width:70%"></div>
+</div>-->
+
+
 
 <!--botones-->
 <div id="contenedor" >
   <div *ngIf="botones===true">   
   <!--total de tareas-->
     <button id="btn-uno" type="button" class="btn btn-info btn-responsive btninter " > 
-      {{tasks.length}}
+      <!-- {{tasks.length}} --> Total de tareas
     </button>
     <!--tareas atrasadas-->
     <button id="btn-dos" (click)="llamarTabla(allTaskDelayed)" type="button" class="btn btn-info btn-responsive btninter" > 
