@@ -39,7 +39,7 @@ export class AuthService {
     switch (perfil) {
       case 4: 
         // Redirigir vista LIDER
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboards']);
         break;
       case 3:  
         // Vista Orquestador (ADM)

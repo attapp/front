@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer, ElementRef, Renderer2 } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
 import { ModalService } from '../services/modal.service';
 //import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
-import { max } from 'moment';
-import { min } from 'rxjs/operators';
+//import { max } from 'moment';
+//import { min } from 'rxjs/operators';
 
 
 /**
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     //variables de prueba
     botones = true;
     tabla = false;
-    porcentaje = 0;
+    //porcentaje = 0;
     contenido: Task[] = [];
     pageSize = 5;
     tituloTabla;
@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
     endPlaning: Task[];
     @Input() idProject: number;
     isMobileResolution: boolean;
+    @ViewChild("real") real: ElementRef;
+    @ViewChild("planificado") planif: ElementRef;
 
     //variables coni
     /**
@@ -51,9 +53,12 @@ export class DashboardComponent implements OnInit {
      * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
      */
     constructor(
+        private renderer: Renderer2,
         private taskService: TaskService,
         private modalService: ModalService,
-        private authService: AuthService
+        private authService: AuthService,
+        private render: Renderer,
+        private elRef: ElementRef
     ) { }
 
     /**
@@ -97,10 +102,10 @@ export class DashboardComponent implements OnInit {
         this.deberiaInProgress = [];
         await this.showTasks(this.idProject);
         await this.showTasksFinished(this.idProject);
-        console.log(this.porcentajeReal());
         this.getTasksDelayedByDependency(this.idProject);
         this.getTasksDelayedByStart(this.idProject);
         this.getTasksInProgress(this.idProject);
+
         // console.log('termina onchange');
     }
 
@@ -117,11 +122,11 @@ export class DashboardComponent implements OnInit {
             this.contenido = this.tasksInProgress;
         }
 
-    } 
+    }
 
     //funcion volver 
     volver() {
-        console.log("vamos de vuelta");
+        console.log("volvi a los botones");
         this.botones = true;
         this.tabla = false;
     }
@@ -129,7 +134,7 @@ export class DashboardComponent implements OnInit {
      * solamente llama al servicio que obtiene todas las tareas 
      */
     showTasks(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
@@ -149,6 +154,10 @@ export class DashboardComponent implements OnInit {
                 resp: Task[]) => {
                 tasks = resp ? resp : [];
                 this.tasksFinished = tasks;
+
+                //Update progress bar
+                this.render.setElementStyle(this.real.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
+             
             });
     }
     /**
@@ -199,42 +208,50 @@ export class DashboardComponent implements OnInit {
      */
     getTasksInProgress(idProject: number) {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
-        // resp is of type
-        .subscribe((resp: Task[]) => {
-            this.tasksInProgress = resp ? resp : [];
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                this.tasksInProgress = resp ? resp : [];
 
-            for (let task of resp) {
-                if (new Date(task.endDatePlanning) < new Date()) {
-                    this.deberiaInProgress.push(task);
+                for (let task of resp) {
+                    if (new Date(task.endDatePlanning) < new Date()) {
+                        this.deberiaInProgress.push(task);
+                    }
                 }
-            }
-            this.allTaskDelayed.push(...this.deberiaInProgress);
-        });
+                this.allTaskDelayed.push(...this.deberiaInProgress);
+            });
     }
 
     porcentajeReal() {
-        /*console.log("task: ",this.tasksFinished.length);
-        var algo = this.tasksFinished;
-        console.log("algo: ",algo);*/
-        return '30%';
+        //return '50%';
         return Math.round(((this.tasksFinished.length) * 100) / (this.tasks.length)) + "%";
-
     }
-
-
     showReal() {
         return this.tasksFinished.length + ' / ' + this.tasks.length;
     }
 
+
+    porcentajePlanif() {
+        let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
+        //console.log(cont);
+        return Math.round(((cont)*100) / (this.tasks.length)) + "%";
+
+    }
     showPlanif() {
         //this.filtroEndPlaning(dependencys, byStart, inProgress)
         let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
+        //return console.log(cont);
         return cont + ' / ' + this.tasks.length;
     }
 
-   /* showDelayed() {
-        this.allTaskDelayed.push(...this.tasksAtraXDepen);
-        this.allTaskDelayed.push(...this.tasksAtraXInicio);
-        this.allTaskDelayed.push(...this.tasksInProgress);
+    /*showInProgress () {
+        console.log(this.tasksInProgress.length);
+        return this.tasksInProgress.length;
+        
     }*/
+
+    /* showDelayed() {
+         this.allTaskDelayed.push(...this.tasksAtraXDepen);
+         this.allTaskDelayed.push(...this.tasksAtraXInicio);
+         this.allTaskDelayed.push(...this.tasksInProgress);
+     }*/
 } 
