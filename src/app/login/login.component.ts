@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     login() {  
       //event.preventDefault(); 
       
-      this.http.post<any>('http://191.232.188.6:3000/login', {user: this.user, password: this.password})
+      this.http.post<any>('http://localhost:3000/login', {user: this.user, password: this.password})
         .subscribe
         ((data) => {
             const id = data['idUser'];

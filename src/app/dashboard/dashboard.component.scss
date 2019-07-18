@@ -1,14 +1,69 @@
-#parrafo {
-    font-size: 50%;
+//cuadrosInfo
+.container-fluid {  
+    width: 100%;  
+    padding-right: 0px;  
+    padding-left: 0px;  
+    margin-right: 0px;  
+    margin-left: 0px;  
+}
+body {
+    width: 100%;
+    padding: 20px;
 }
 
-//colores tabla
-#cabecera {
-    background-color:  rgb(231, 234, 235);
+/**
+* Estilos cards 
+*/
+totalTareas.card {
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 300px;
+    height: 150px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
 }
-#cuerpo {
-    background-color: rgba(240, 240, 240, 0.897);
+.card-body {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
+.card-header {
+    color: white;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    text-align: center;
+}
+.card-text {
+    color: white;
+    float: left;
+    margin-bottom: 1px;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+
+#totalTareas{
+    background-color: rgb(187, 187, 187);
+}
+#enCurso {
+    background-color: #32C79A;
+}
+#finalizadas{
+    background-color: #3896C3;
+}
+#atrasadas{
+    background-color: #FB3E4C;
+}
 
 

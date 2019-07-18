@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer, ElementRef} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
@@ -20,6 +20,7 @@ import { AuthService } from '../services/auth.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    [x: string]: any;
     //variables de prueba
     botones = true;
     tabla = false;
@@ -44,7 +45,7 @@ export class DashboardComponent implements OnInit {
     @Input() idProject: number;
     isMobileResolution: boolean;
     @ViewChild("real") real: ElementRef;
-    @ViewChild("planificado") planif: ElementRef;
+    //@ViewChild("planificado") planif: ElementRef;
 
     //variables coni
     /**
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit {
      * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
      */
     constructor(
-        private renderer: Renderer2,
+        //private renderer: Renderer2,
         private taskService: TaskService,
         private modalService: ModalService,
         private authService: AuthService,
@@ -156,7 +157,7 @@ export class DashboardComponent implements OnInit {
                 this.tasksFinished = tasks;
 
                 //Update progress bar
-                this.render.setElementStyle(this.real.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
+                this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
              
             });
     }
@@ -225,9 +226,7 @@ export class DashboardComponent implements OnInit {
         //return '50%';
         return Math.round(((this.tasksFinished.length) * 100) / (this.tasks.length)) + "%";
     }
-    showReal() {
-        return this.tasksFinished.length + ' / ' + this.tasks.length;
-    }
+    
 
 
     porcentajePlanif() {
@@ -242,12 +241,25 @@ export class DashboardComponent implements OnInit {
         //return console.log(cont);
         return cont + ' / ' + this.tasks.length;
     }
+    showReal() {
+        return this.tasksFinished.length + ' / ' + this.tasks.length;
+    }
 
-    /*showInProgress () {
-        console.log(this.tasksInProgress.length);
+
+    //funciones que muestran informacion de tareas
+
+    showTotalTareas(){
+        return this.showTasks.length;
+    }
+    showTareasAtrasadas(){
+        return this.getTasksDelayedByStart.length + this.getTasksDelayedByDependency.length;
+    }
+    showInProgress() {
         return this.tasksInProgress.length;
-        
-    }*/
+    }  
+    showFinished() {
+        return this.tasksFinished.length;
+    }
 
     /* showDelayed() {
          this.allTaskDelayed.push(...this.tasksAtraXDepen);
