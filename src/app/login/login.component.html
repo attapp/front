@@ -1,30 +1,23 @@
-<div id="contentLogin">
+<div class="container-fluid">
+  <div id="contentLogin" class="card">
 
-  <h3 id="tittle">LOGIN</h3>
+    <h3 id="tittle">LOGIN</h3>
 
-  <div id="login">
-      <!--<div class="form-group" >
-          <label for="name">Nombre:</label>
-          <input id="name" type="text" class="form-control" [(ngModel)]="nomre" placeholder="name" required>
-      </div>-->
-
-    <div class="form-group" >
-      <label for="usuario">Correo de usuario:</label>
-      <input id="user" type="text" class="form-control" [(ngModel)]="user" placeholder="username" required>
-    </div>
-  
-    <div class="form-group" >
-      <label for="password">Ingresar Contraseña:</label>
-      <input id="password" type="password" class="form-control"  [(ngModel)]="password"  placeholder="*****"  required>
-
-      <div *ngIf=error class="alert alert-danger" >
-        <strong> ERROR! Usuario y/o contraseña inválido</strong> 
+    <div id="login">
+      <div class="form-group">
+        <label for="usuario">Correo de usuario:</label>
+        <input id="user" type="text" class="form-control" [(ngModel)]="user" placeholder="username" required>
       </div>
+
+      <div class="form-group">
+        <label for="password">Ingresar Contraseña:</label>
+        <input id="password" type="password" class="form-control" [(ngModel)]="password" placeholder="*****" required>
+
+        <div *ngIf=error class="alert alert-danger">
+          <strong> ERROR! Usuario y/o contraseña inválido</strong>
+        </div>
+      </div>
+      <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
     </div>
-    <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
-
   </div>
-    <!-- <button type="button" id= "salir" class="btn btn-secondary">Salir</button> -->
-
 </div>
-

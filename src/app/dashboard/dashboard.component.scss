@@ -1,73 +1,69 @@
-#contenedor {
-    border: 2px solid grey;
-    border-radius: 2px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 2%;
-    margin-bottom: 3%; 
+//cuadrosInfo
+.container-fluid {  
+    width: 100%;  
+    padding-right: 0px;  
+    padding-left: 0px;  
+    margin-right: 0px;  
+    margin-left: 0px;  
+}
+body {
+    width: 100%;
+    padding: 20px;
 }
 
-#btn-uno {
-    width:80%; 
-    height:10%;
-    border: 1px;
-    background-color: rgb(116, 128, 134);
-    margin-top: 1%;
-    margin-left: 10%;
+/**
+* Estilos cards 
+*/
+totalTareas.card {
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 300px;
+    height: 150px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+.card-body {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-#btn-dos {
-    width:60%; 
-    height:10%;
-    background-color: rgba(116, 97, 97, 0.897);
-    margin-top: 1%;
-    margin-left: 30%;
+.card-header {
+    color: white;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    text-align: center;
+}
+.card-text {
+    color: white;
+    float: left;
+    margin-bottom: 1px;
+    margin-left: 1em;
+    margin-right: 1em;
+
 }
 
-#btn-tres{
-    width:65%; 
-    height:10%;
-    background-color: rgb(133, 126, 98);
-    margin-top: 1%;
-    margin-left: 25%;
+#totalTareas{
+    background-color: rgb(187, 187, 187);
 }
-#btn-cuatro {
-    width:70%; 
-    height:10%;
-    background-color: rgb(82, 99, 86);
-    margin-top: 1%;
-    margin-left: 20%;
-    margin-bottom: 3%;   
+#enCurso {
+    background-color: #32C79A;
 }
-#tabla2 {
-    margin-top: 3%
+#finalizadas{
+    background-color: #3896C3;
 }
-
-//color cuadraditos
-
-.legend-botonuno {
-    color: rgb(116, 128, 134);
+#atrasadas{
+    background-color: #FB3E4C;
 }
-
-.legend-botondos {
-    color: rgba(116, 97, 97, 0.897);
-}
-
-.legend-botontres {
-    color: rgb(133, 126, 98);
-}
-
-.legend-botoncuatro {
-    color: rgb(82, 99, 86);
-}
-
-//colores tabla
-#cabecera {
-    background-color:  rgb(231, 234, 235);
-}
-#cuerpo {
-    background-color: rgba(240, 240, 240, 0.897);
-}
-
 
 

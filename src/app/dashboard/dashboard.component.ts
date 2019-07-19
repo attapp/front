@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer, ElementRef} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
 import { ModalService } from '../services/modal.service';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
+//import { max } from 'moment';
+//import { min } from 'rxjs/operators';
 
 
 /**
@@ -18,9 +20,11 @@ import { AuthService } from '../services/auth.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    [x: string]: any;
     //variables de prueba
     botones = true;
-    tabla = false
+    tabla = false;
+    //porcentaje = 0;
     contenido: Task[] = [];
     pageSize = 5;
     tituloTabla;
@@ -40,16 +44,22 @@ export class DashboardComponent implements OnInit {
     endPlaning: Task[];
     @Input() idProject: number;
     isMobileResolution: boolean;
+    @ViewChild("real") real: ElementRef;
+    //@ViewChild("planificado") planif: ElementRef;
 
+    //variables coni
     /**
      * 
      * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
      * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
      */
     constructor(
+        //private renderer: Renderer2,
         private taskService: TaskService,
         private modalService: ModalService,
-        private authService: AuthService
+        private authService: AuthService,
+        private render: Renderer,
+        private elRef: ElementRef
     ) { }
 
     /**
@@ -68,18 +78,18 @@ export class DashboardComponent implements OnInit {
 
                 tasks.forEach(newTask => {
                     const index = this.tasks.findIndex((t) => t.id === newTask.id);
-                    this.tasks[index] = newTask;  
+                    this.tasks[index] = newTask;
                 });
             });
     }
-        
+
     /**
        * 
        * @param changes los posibles cambios que pueden exisir
        * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
        * lo que realiza es llamar a servicio que muestra las tareas
        */
-    ngOnChanges(changes: SimpleChanges): void {
+    async ngOnChanges(changes: SimpleChanges): Promise<void> {
         // this.idProject = parseInt(localStorage.getItem('currentProyect'));
         // console.log('ID PROYECT : ' + this.idProject)
         this.allTaskDelayed = [];
@@ -91,11 +101,12 @@ export class DashboardComponent implements OnInit {
         this.deberiaDepen = [];
         this.deberiaInicio = [];
         this.deberiaInProgress = [];
-        this.showTasks(this.idProject);
-        this.showTasksFinished(this.idProject);
+        await this.showTasks(this.idProject);
+        await this.showTasksFinished(this.idProject);
         this.getTasksDelayedByDependency(this.idProject);
-        this.getTasksDelayedByStart(this.idProject);   
+        this.getTasksDelayedByStart(this.idProject);
         this.getTasksInProgress(this.idProject);
+
         // console.log('termina onchange');
     }
 
@@ -112,38 +123,42 @@ export class DashboardComponent implements OnInit {
             this.contenido = this.tasksInProgress;
         }
 
-    } 
+    }
 
     //funcion volver 
     volver() {
-        console.log("vamos de vuelta");
-        this.botones=true;
-        this.tabla=false;
+        console.log("volvi a los botones");
+        this.botones = true;
+        this.tabla = false;
     }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
      */
     showTasks(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasks = tasks;
+                tasks = resp ? resp : [];
+                this.tasks = tasks;
             });
     }
     /**
      * solamente llama al servicio que obtiene las tareas finalizadas
      */
     showTasksFinished(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject, TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasksFinished = tasks;
+                tasks = resp ? resp : [];
+                this.tasksFinished = tasks;
+
+                //Update progress bar
+                this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
+             
             });
     }
     /**
@@ -164,7 +179,7 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             });
-            
+
     }
     /**
      * llama al servicio que obtiene las tareas Atrasadas por inicio y las almacena en un array
@@ -194,27 +209,61 @@ export class DashboardComponent implements OnInit {
      */
     getTasksInProgress(idProject: number) {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
-        // resp is of type
-        .subscribe((resp: Task[]) => {
-            this.tasksInProgress = resp ? resp : [];
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                this.tasksInProgress = resp ? resp : [];
 
-            for (let task of resp) {
-                if (new Date(task.endDatePlanning) < new Date()) {
-                    this.deberiaInProgress.push(task);
+                for (let task of resp) {
+                    if (new Date(task.endDatePlanning) < new Date()) {
+                        this.deberiaInProgress.push(task);
+                    }
                 }
-            }
-            this.allTaskDelayed.push(...this.deberiaInProgress);
-        });
+                this.allTaskDelayed.push(...this.deberiaInProgress);
+            });
+    }
+
+    porcentajeReal() {
+        //return '50%';
+        return Math.round(((this.tasksFinished.length) * 100) / (this.tasks.length)) + "%";
+    }
+    
+
+
+    porcentajePlanif() {
+        let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
+        //console.log(cont);
+        return Math.round(((cont)*100) / (this.tasks.length)) + "%";
+
+    }
+    showPlanif() {
+        //this.filtroEndPlaning(dependencys, byStart, inProgress)
+        let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
+        //return console.log(cont);
+        return cont + ' / ' + this.tasks.length;
     }
     showReal() {
         return this.tasksFinished.length + ' / ' + this.tasks.length;
     }
 
-    showPlanif() {
-        //this.filtroEndPlaning(dependencys, byStart, inProgress)
-        let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
-        return cont  + ' / ' + this.tasks.length;
+
+    //funciones que muestran informacion de tareas
+
+    showTotalTareas(){
+        return this.showTasks.length;
+    }
+    showTareasAtrasadas(){
+        return this.getTasksDelayedByStart.length + this.getTasksDelayedByDependency.length;
+    }
+    showInProgress() {
+        return this.tasksInProgress.length;
+    }  
+    showFinished() {
+        return this.tasksFinished.length;
     }
 
-
-}
+    /* showDelayed() {
+         this.allTaskDelayed.push(...this.tasksAtraXDepen);
+         this.allTaskDelayed.push(...this.tasksAtraXInicio);
+         this.allTaskDelayed.push(...this.tasksInProgress);
+     }*/
+} 

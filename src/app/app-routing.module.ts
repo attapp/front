@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
 
     { path: 'login/:idProfile', component: LoginComponent },
-    { path: 'dashboard', component: ProjectDashComponent, canActivate: [GuardService] },
+    { path: 'dashboards', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
     // routes for Lider
     { path: 'projectresp', component: ProjectResponsableComponent, canActivate: [GuardService] },
