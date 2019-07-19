@@ -44,14 +44,14 @@ export class TaskResponsableComponent implements OnInit {
      * el socket al momento de detectar un cambio modifica el valor de las tareas (si es que el usuario se encuentra en esa vista y si la 
      * tarea no esta finalizada)
      */
-    ngOnInit() {
-        this.taskService.getSocketTask('message').subscribe(
+    async ngOnInit() {
+        await this.taskService.getSocketTask('message').subscribe(
             projectTask => {
                 console.log('====>', projectTask);
 
                 const tasks: Task[] = projectTask[this.idProject] ? projectTask[this.idProject] : [];
-                tasks.forEach(newTask => {
-                    const index = this.tasks.findIndex((t) => t.id === newTask.id);
+                tasks.forEach(async newTask => {
+                    const index = await this.tasks.findIndex((t) => t.id === newTask.id);
                     this.tasks[index] = newTask;
                     if (newTask.state.id === TASK_STATE.FINISHED) {
                         this.removeFinished(newTask.id);
@@ -65,8 +65,9 @@ export class TaskResponsableComponent implements OnInit {
      * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
      * lo que realiza es llamar a servicio que muestra las tareas
      */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges) {
         this.showTasksByUser(this.idProject, this.idUser);
+        
     }
 
     /**
@@ -80,8 +81,11 @@ export class TaskResponsableComponent implements OnInit {
                 resp: Task[]) => {
                     tasks = resp ? resp : [];
                     this.tasksByUser = tasks;
-        
+                this.tasksByUser.forEach(task => {
+                    console.log('STATE OF TASKS: ' + JSON.stringify(task.state));                
+                });    
             });
+            
     }
 
     /**

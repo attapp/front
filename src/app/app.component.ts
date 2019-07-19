@@ -14,14 +14,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-       constructor (private authService: AuthService) {}
+       constructor (private authService: AuthService,
+                    private router: Router) {}
         
        ngOnInit(){
            if (this.authService.isLoggedIn) {
                let profile = this.authService.usserLogged.perfil;
                console.log ("LLEGUEEEEE   " + profile);
                this.authService.redByUrlPerfiles(profile);
-           }
+           } else 
+                this.router.navigate(['/login']);
+
        }
   
 }

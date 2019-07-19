@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from "../services/auth.service";
 import { User } from '../interfaces/User';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,11 @@ export class LoginComponent implements OnInit {
     login() {  
       //event.preventDefault(); 
       
-      this.http.post<any>('http://localhost:3000/login', {user: this.user, password: this.password})
+      this.http.post<any>(environment.API_ENDPOINT + '/login', {user: this.user, password: this.password})
         .subscribe
         ((data) => {
             const id = data['idUser'];
-            const perfil = data['perfil'];
+            const perfil = data['idPerfil'];
             const u: User = {id: id, username: this.user, perfil: perfil};        
             this.authService.setUserLoggedIn(u);
             this.authService.redByUrlPerfiles(perfil);
