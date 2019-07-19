@@ -1,23 +1,39 @@
 <!--barra de progreso realizadas-->
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-body">
-      <h6>Avance ejecución</h6>
-      <div class="progress">
-        <div class="progress-bar bg-secondary" id="real" style="width: 0%"> {{porcentajeReal()}}</div>
-      </div>
-      <p id="parrafo">Avance real: {{showReal()}}</p>
+  <div class="card" id="barras">
+    <div class="card-header">Avance en ejecución</div>
+      <div class="card-body">
+        <div class="progress" id="barra1">
+          <!-- <div  id="real" style="width: 0%">  </div> -->
+        </div>
+        
+        <p id="parrafo">Avance real: {{showReal()}}</p>
 
-      <!--barra de progreso planificadas-->
-      <div class="progress">
-        <div class="progress-bar bg-secondary" id="planif" style="width: 0%"> {{porcentajePlanif()}} </div>
-      </div>
-      <p id="parrafo">Avance planificado: {{showPlanif()}} </p>
+        <!--barra de progreso planificadas-->
+        <div class="progress">
+          <!-- <div class="progress-bar bg-secondary" id="barra2" style="width: 0%"> {{porcentajePlanif()}} </div> -->
+        </div>
+        <p id="parrafo">Avance planificado: {{showPlanif()}} </p>
 
+      </div>
     </div>
   </div>
 
   <br>
+
+  <div class="progress">
+      <div class="progress-bar" id="success" style="width: 35%">
+        <span class="sr-only">35% completado (éxito)</span>
+      </div>
+      <div class="progress-bar" id="warning" style="width: 20%">
+        <span class="sr-only">20% completado (aviso)</span>
+      </div>
+      <div class="progress-bar" id="danger" style="width: 10%">
+        <span class="sr-only">10% completado (peligro)</span>
+      </div>
+    </div>
+
+
 
   <!--cuadros de informacion-->
 

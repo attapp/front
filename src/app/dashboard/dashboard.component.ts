@@ -156,8 +156,8 @@ export class DashboardComponent implements OnInit {
                 tasks = resp ? resp : [];
                 this.tasksFinished = tasks;
 
-                //Update progress bar
-                this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
+                // Update progress bar
+                // this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
              
             });
     }
