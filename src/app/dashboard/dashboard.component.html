@@ -1,106 +1,98 @@
 <!--barra de progreso realizadas-->
-<div class="container-fluid">
-  <div class="card" id="barras">
-    <div class="card-header">Avance en ejecución</div>
-      <div class="card-body">
-        <div class="progress" id="barra1">
-          <!-- <div  id="real" style="width: 0%">  </div> -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="container-fluid">
+      <div class="card" id="barras">
+        <div class="card-header">Avance en ejecución</div>
+        <div class="card-body">
+          <div class="progress">
+            <div id="real" style="width: 0%"> {{porcentajeReal()}}</div>
+          </div>
+          <p id="parrafo">Avance real: {{showReal()}}</p>
+<!--barra de progreso planificadas-->
+          <div class="progress">
+            <div class="progress-bar bg-secondary" id="barra2" style="width: 0%"> {{porcentajePlanif()}}</div>
+          </div>
+          <p id="parrafo">Avance planificado: {{showPlanif()}} </p>
         </div>
-        
-        <p id="parrafo">Avance real: {{showReal()}}</p>
-
-        <!--barra de progreso planificadas-->
-        <div class="progress">
-          <!-- <div class="progress-bar bg-secondary" id="barra2" style="width: 0%"> {{porcentajePlanif()}} </div> -->
-        </div>
-        <p id="parrafo">Avance planificado: {{showPlanif()}} </p>
-
       </div>
     </div>
   </div>
-
-  <br>
-
-  <div class="progress">
-      <div class="progress-bar" id="success" style="width: 35%">
-        <span class="sr-only">35% completado (éxito)</span>
-      </div>
-      <div class="progress-bar" id="warning" style="width: 20%">
-        <span class="sr-only">20% completado (aviso)</span>
-      </div>
-      <div class="progress-bar" id="danger" style="width: 10%">
-        <span class="sr-only">10% completado (peligro)</span>
-      </div>
-    </div>
+</div>
+<br>
 
 
 
-  <!--cuadros de informacion-->
-
-  <div id="totalTareas" class="card">
+<!--cuadros de informacion-->
+<div class="card-deck">
+  <div id="totalTareas" class="card btn-light" >
     <div class="card-header">Total de tareas</div>
     <div class="card-body">
-      <h2>{{showTotalTareas()}}</h2>
+      <h2>{{tasks.length}}</h2>
+      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles... </button>
     </div>
   </div>
-  <br>
   <div id="atrasadas" class="card">
     <div class="card-header">Tareas atrasadas</div>
     <div class="card-body">
-      <h2>{{ showTareasAtrasadas()}}</h2>
+      <h2>{{allTaskDelayed.length}}</h2>
+      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles... </button>
     </div>
   </div>
-  <br>
-  <div id="enCurso" class="card">
+  <div id="finalizadas" class="card">
     <div class="card-header">En curso</div>
     <div class="card-body">
-      <h2>{{showInProgress()}}</h2>
+      <h2>{{ tasksInProgress.length}}</h2>
+      <button (click)="mostrarTabla()" id="btn" type="button"  class="btn btn-light"> más detalles </button>
     </div>
   </div>
-  <br>
-  <div id="finalizadas" class="card">
+  <div id="enCurso" class="card">
     <div class="card-header">Finalizadas</div>
     <div class="card-body">
-      <h2>{{showFinished()}}</h2>
+      <h2>{{tasksFinished.length}}</h2>
+      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles </button>
+      
     </div>
   </div>
+</div>
 
 
-  <!--tabla con datos -->
+<!--tabla con datos -->
 
 <h5 *ngIf="tabla === true" class="text-center align-bottom">{{tituloTabla}}</h5>
-  <div class="table-responsive" id="tabla2" *ngIf="tabla===true">
+<div class="table-responsive" id="tabla2" *ngIf="tabla===true">
 
-    <table class="table table-hover table-bordered table-sm ">
+  <table class="table table-hover table-bordered table-sm ">
 
-      <thead>
-        <tr id="cabecera">
-          <th class="text-center align-middle" scope="col">ID</th>
-          <th class="text-center align-middle" scope="col">Tarea</th>
-          <th class="text-center align-middle" scope="col">Hora Fin Planificada</th>
-          <th class="text-center align-middle" scope="col">Responsable</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="cuerpo" *ngFor="let task of contenido ">
-          <th class="text-center align-middle" scope="row">{{task.id}}</th>
-          <td class="text-nowrap align-middle">
-            <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
-              {{task.description  | truncate:[60, '...'] }}
-            </div>
-            <div *ngIf="!(task.description.length >= 60)">
-              {{task.description}}
-            </div>
-          </td>
-          <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
-          <td class="text-center align-middle">{{task.resposible}}</td>
-        </tr>
-        <tr *ngIf="tasks?.length == 0">
-          <td colspan="10">
-            <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" (click)="volver()" class="btn btn-light">Volver</button>
-  </div>
+    <thead>
+      <tr id="cabecera">
+        <th class="text-center align-middle" scope="col">ID</th>
+        <th class="text-center align-middle" scope="col">Tarea</th>
+        <th class="text-center align-middle" scope="col">Hora Fin Planificada</th>
+        <th class="text-center align-middle" scope="col">Responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="cuerpo" *ngFor="let task of contenido ">
+        <th class="text-center align-middle" scope="row">{{task.id}}</th>
+        <td class="text-nowrap align-middle">
+          <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
+            {{task.description  | truncate:[60, '...'] }}
+          </div>
+          <div *ngIf="!(task.description.length >= 60)">
+            {{task.description}}
+          </div>
+        </td>
+        <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
+        <td class="text-center align-middle">{{task.resposible}}</td>
+      </tr>
+      <tr *ngIf="tasks?.length == 0">
+        <td colspan="10">
+          <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" (click)="atras()" class="btn btn-light">Atrás</button>
+  <button type="button" class="btn btn-link">Ver más...</button> <!--debe aparecer solo si la tabla tiene mas de 5 tareas-->
+</div>

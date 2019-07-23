@@ -111,7 +111,12 @@ export class DashboardComponent implements OnInit {
     }
 
     //funcion de prueba (CONI)
-    llamarTabla(lista: Task[]) {
+    /*mostrar() {
+        console.log('mostre tabla');
+        return this.tabla = true;
+    }*/
+    mostrarTabla(lista: Task[]) {
+        console.log('mostre tabla')
         this.botones = false;
         this.tabla = true;
 
@@ -126,7 +131,7 @@ export class DashboardComponent implements OnInit {
     }
 
     //funcion volver 
-    volver() {
+    atras() {
         console.log("volvi a los botones");
         this.botones = true;
         this.tabla = false;
@@ -157,7 +162,7 @@ export class DashboardComponent implements OnInit {
                 this.tasksFinished = tasks;
 
                 // Update progress bar
-                // this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
+                //this.render.setElementStyle(this.nativeElement.querySelector('.progress-bar'), 'width', this.porcentajeReal());
              
             });
     }
