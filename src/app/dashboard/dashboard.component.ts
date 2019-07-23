@@ -27,10 +27,15 @@ export class DashboardComponent implements OnInit {
     res: String;
 
     // arrays Tareas
+    // todas las tareas
     tasks: Task[];
+    // tareas finalizadas
     tasksFinished: Task[];
+    // tareas en curso
     tasksInProgress: Task[];
+    // todas las tareas atrasadas
     allTaskDelayed: Task[] = [];
+    // tareas atrasadas según fecha de termino
     tasksDelayedEnd: Task[] = [];
 
     perReal: String;
@@ -219,6 +224,8 @@ export class DashboardComponent implements OnInit {
         this.getTasksInProgress(idProject);
 
     }
+
+
 
     // porcentajePlanif() {
     //     let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;

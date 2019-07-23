@@ -29,6 +29,21 @@ body {
     padding-bottom: 1em;
     align-self: center;
 }
+#barras.card{
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 1200px;
+    height: 180px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
 .card:hover{
     color: white;
 }
@@ -76,6 +91,9 @@ hr {
 }
 #atrasadas{
     background-color: #FB3E4C;
+}
+#barras {
+    background-color: rgb(54, 54, 54);
 }
 
 .progress-bar {
