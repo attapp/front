@@ -70,12 +70,16 @@ hr {
     background-color: #FB3E4C;
 }
 
-.progress-bar #success {
-    color: green;
+.progress-bar {
+    background-color: green;  
+    width: 0%;
 }
-.progress-bar #warning {
-    color: orange;
+#real {
+    background-color: orange;
 }
-.progress-bar #danger {
-    color: red;
+
+#red {
+    background-color: red;
 }
+
+

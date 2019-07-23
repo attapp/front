@@ -1,38 +1,33 @@
+
 <!--barra de progreso realizadas-->
 <div class="container-fluid">
   <div class="card" id="barras">
     <div class="card-header">Avance en ejecución</div>
       <div class="card-body">
-        <div class="progress" id="barra1">
-          <!-- <div  id="real" style="width: 0%">  </div> -->
-        </div>
-        
-        <p id="parrafo">Avance real: {{showReal()}}</p>
+          <div class="container">
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">{{perReal}}</div>      
+              </div>
+              <div id="parrafo">Avance real: {{showReal()}}</div>
+              <br>
+  
+              <!-- barra de progreso planificadas -->
+              <div class="progress"> 
+                  <div class="w3-container" aria-valuemin="0" aria-valuemax="100">{{perPlanif}}</div>      
+              </div>
+              <div id="parrafo">Avance planificado: {{showPlanif()}} </div>
+          </div>
+	 
+          
+          
 
-        <!--barra de progreso planificadas-->
-        <div class="progress">
-          <!-- <div class="progress-bar bg-secondary" id="barra2" style="width: 0%"> {{porcentajePlanif()}} </div> -->
-        </div>
-        <p id="parrafo">Avance planificado: {{showPlanif()}} </p>
+        
 
       </div>
     </div>
   </div>
 
   <br>
-
-  <div class="progress">
-      <div class="progress-bar" id="success" style="width: 35%">
-        <span class="sr-only">35% completado (éxito)</span>
-      </div>
-      <div class="progress-bar" id="warning" style="width: 20%">
-        <span class="sr-only">20% completado (aviso)</span>
-      </div>
-      <div class="progress-bar" id="danger" style="width: 10%">
-        <span class="sr-only">10% completado (peligro)</span>
-      </div>
-    </div>
-
 
 
   <!--cuadros de informacion-->
@@ -40,28 +35,28 @@
   <div id="totalTareas" class="card">
     <div class="card-header">Total de tareas</div>
     <div class="card-body">
-      <h2>{{showTotalTareas()}}</h2>
+      <h2 *ngIf="tasks">{{tasks.length}}</h2>
     </div>
   </div>
   <br>
   <div id="atrasadas" class="card">
     <div class="card-header">Tareas atrasadas</div>
     <div class="card-body">
-      <h2>{{ showTareasAtrasadas()}}</h2>
+      <h2 *ngIf="allTaskDelayed">{{allTaskDelayed.length}}</h2>
     </div>
   </div>
   <br>
   <div id="enCurso" class="card">
     <div class="card-header">En curso</div>
     <div class="card-body">
-      <h2>{{showInProgress()}}</h2>
+      <h2 *ngIf="tasksInProgress">{{tasksInProgress.length}}</h2>
     </div>
   </div>
   <br>
   <div id="finalizadas" class="card">
     <div class="card-header">Finalizadas</div>
     <div class="card-body">
-      <h2>{{showFinished()}}</h2>
+      <h2 *ngIf="tasksFinished">{{tasksFinished.length}}</h2>
     </div>
   </div>
 
