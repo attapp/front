@@ -26,12 +26,12 @@ const routes: Routes = [
     { path: 'login/:idProfile', component: LoginComponent },
     { path: 'dashboards', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
+    { path: 'create', component: CreateComponent },
     // routes for Lider
     { path: 'projectresp', component: ProjectResponsableComponent, canActivate: [GuardService] },
     // routes for Adm (FALTAN)
     { path: 'project/:idProject', component: ProjectComponent, canActivateChild: [GuardService], 
         children: [
-            { path: 'create', component: CreateComponent },
             { path: 'tasks', component: TaskComponent }
     ]},  
     // routes for Reponsable

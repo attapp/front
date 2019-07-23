@@ -14,12 +14,12 @@ body {
 /**
 * Estilos cards 
 */
-
-totalTareas.card {
+.card {
     display: block;
     border-radius: 5;
     overflow: hidden;
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 350;
     height: 150px;
     margin-top: 6px;
     margin-bottom: 6px;
@@ -29,11 +29,15 @@ totalTareas.card {
     padding-bottom: 1em;
     align-self: center;
 }
+.card:hover{
+    color: white;
+}
 .card-body {
     color: white;
     text-align: center;
     padding: 10px;
 }
+
 hr {
     margin-top: 10px;
     margin-bottom: 5px;
@@ -53,20 +57,24 @@ hr {
     margin-right: 1em;
 
 }
-
-#barras {
-    background-color: rgb(78, 78, 78);
+//botones card
+#btn {
+    background-color: transparent;
+    border: transparent;
+    float: right;
+    color: white;
+    font-size: 10px
 }
-#totalTareas {
+#totalTareas{
     background-color: rgb(187, 187, 187);
 }
 #enCurso {
     background-color: #32C79A;
 }
-#finalizadas {
+#finalizadas{
     background-color: #3896C3;
 }
-#atrasadas {
+#atrasadas{
     background-color: #FB3E4C;
 }
 
