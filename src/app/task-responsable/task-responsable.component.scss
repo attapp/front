@@ -16,7 +16,7 @@ body {
 */
 .card {
     display: block;
-    border-radius: 0;
+    border-radius: 5px;
     overflow: hidden;
     min-width: 300px;
     height: 190px;
@@ -79,23 +79,37 @@ a.boton:hover {
 
 .tasks-in-progress {
     background: #32C79A;
-    border: 1px solid rgba(0, 231, 216, 0.808);
-   
+    border: 1px solid rgb(46, 158, 124);
+}
+.in-progress {
+    color: #32C79A;
 }
 .tasks-delayed {
     background: #FB3E4C;
-    border: 1px solid rgb(255, 65, 40);
-   
+    border: 1px solid rgb(221, 52, 63);
+}
+.delayed {
+    color: #FB3E4C;
 }
 .tasks-no-init {
     background-image: linear-gradient(to bottom right, #C2BBBC, rgb(228, 228, 228));
     border: 1px solid #C2BBBC;
-    
+}
+.card.tasks-no-init {
+    color: black;
+}
+.no-init {
+   color: #C2BBBC; 
 }
 .tasks-end {
     background: #3896C3;
-    border: 1px solid  rgb(95, 191, 255);
+    border: 1px solid  rgb(45, 126, 163);
 }
+.end {
+    color: #3896C3;
+}
+
+
 a.boton#btn-iniciar-red,
 a.boton#btn-finalizar-red {
     background: rgb(255, 71, 84);    

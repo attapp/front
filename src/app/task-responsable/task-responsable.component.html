@@ -1,5 +1,23 @@
 <div class="container-fluid">
-
+        <div class="d-flex justify-content-around py-1">
+                <div class="p-1">
+                    <em class="fas fa-square-full no-init border-black"></em>
+                    No iniciada / No iniciada por dependencia
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full delayed border-black"></em>
+                    Atrasadas
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full in-progress border-black"></em>
+                    En curso
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full end border-black"></em>
+                    Finalizado
+                </div>
+        
+        </div>
     <body>
         <div class="card-deck">
 
@@ -12,7 +30,7 @@
                     <a *ngIf="task.state.id == 4" class="boton" id="btn-iniciar-red">Iniciar</a>
                     <a *ngIf="task.state.id == 3" class="boton" id="btn-finalizar-green">Finalizar</a>
                     <a *ngIf="task.state.id == 6" class="boton" id="btn-finalizar-red">Finalizar</a>
-                    <strong>{{task.externalCode}}</strong>
+                    <strong>{{task.id}}</strong><p id="leyenda">{{task.state.description}}</p>
                 </div>
                 <div class="card-body">
 

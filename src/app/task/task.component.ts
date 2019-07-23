@@ -174,6 +174,8 @@ export class TaskComponent implements OnInit {
      */
     changeCss(idState: number): string {
         switch (idState) {
+            case TASK_STATE.NOT_START:
+                return 'table-default';
             case TASK_STATE.NOT_START_FOR_DEPENDENCY:
                 return 'table-secondary';
             case TASK_STATE.IN_PROGRESS:
