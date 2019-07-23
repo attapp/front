@@ -28,32 +28,37 @@
     <div class="card-header">Total de tareas</div>
     <div class="card-body">
       <h2>{{tasks.length}}</h2>
-      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles... </button>
+      <button  id="btn" type="button" class="btn btn-light"> más detalles... </button>
     </div>
   </div>
   <div id="atrasadas" class="card">
     <div class="card-header">Tareas atrasadas</div>
     <div class="card-body">
       <h2>{{allTaskDelayed.length}}</h2>
-      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles... </button>
+      <button (click)="mostrarTabla(allTaskDelayed)" id="btn" type="button" class="btn btn-light"> más detalles... </button>
     </div>
   </div>
   <div id="finalizadas" class="card">
     <div class="card-header">En curso</div>
     <div class="card-body">
       <h2>{{ tasksInProgress.length}}</h2>
-      <button (click)="mostrarTabla()" id="btn" type="button"  class="btn btn-light"> más detalles </button>
+      <button (click)="mostrarTabla( tasksInProgress)" id="btn" type="button"  class="btn btn-light"> más detalles </button>
     </div>
   </div>
   <div id="enCurso" class="card">
     <div class="card-header">Finalizadas</div>
     <div class="card-body">
       <h2>{{tasksFinished.length}}</h2>
-      <button (click)="mostrarTabla()" id="btn" type="button" class="btn btn-light"> más detalles </button>
+      <button id="btn" type="button" class="btn btn-light"> más detalles </button>
       
     </div>
   </div>
 </div>
+
+
+
+
+
 
 
 <!--tabla con datos -->
@@ -82,7 +87,7 @@
             {{task.description}}
           </div>
         </td>
-        <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
+        <td class="text-center align-middle">{{task.endDatePlanning | date:'short'}}</td>
         <td class="text-center align-middle">{{task.resposible}}</td>
       </tr>
       <tr *ngIf="tasks?.length == 0">
@@ -93,5 +98,5 @@
     </tbody>
   </table>
   <button type="button" (click)="atras()" class="btn btn-light">Atrás</button>
-  <button type="button" class="btn btn-link">Ver más...</button> <!--debe aparecer solo si la tabla tiene mas de 5 tareas-->
+  <button type="button" class="btn btn-link">Ver más...</button> 
 </div>
