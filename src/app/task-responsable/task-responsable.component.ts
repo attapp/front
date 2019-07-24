@@ -76,7 +76,7 @@ export class TaskResponsableComponent implements OnInit {
     showTasksByUser(idProject: number, idUser: number) {
         let tasks: Task[];  
         let order: number; 
-        this.taskService.getTaskByUser(1, idProject, idUser)
+        this.taskService.getTaskByUser(idProject, idUser)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
