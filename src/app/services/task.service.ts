@@ -14,8 +14,8 @@ export class TaskService {
     constructor(private http: HttpClient, private socketService: WebsocketService) { }
 
 
-    getTasks(idProject: number, state?: number) {
-        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks`;
+    getTasks(order: number, idProject: number, state?: number) {
+        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks/${order}`;
 
         if (state) {
             getTasksUrl = getTasksUrl + `?state=${state}`;
@@ -25,8 +25,8 @@ export class TaskService {
             return this.http.get(getTasksUrl);
     }
 
-    getTaskByUser(idProject: number, idUser: number) {
-        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks/${idUser}`;        
+    getTaskByUser(order: number, idProject: number, idUser: number) {
+        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks/${idUser}/${order}`;        
             return this.http.get(getTasksUrl);
     }
 

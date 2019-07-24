@@ -30,7 +30,7 @@
                     <a *ngIf="task.state.id == 4" class="boton" id="btn-iniciar-red">Iniciar</a>
                     <a *ngIf="task.state.id == 3" class="boton" id="btn-finalizar-green">Finalizar</a>
                     <a *ngIf="task.state.id == 6" class="boton" id="btn-finalizar-red">Finalizar</a>
-                    <strong>{{task.id}}</strong><p id="leyenda">{{task.state.description}}</p>
+                    <strong>{{task.id}}</strong><a id="status">{{task.state.description}}</a>
                 </div>
                 <div class="card-body">
 
@@ -49,6 +49,9 @@
                     </p>
                 </div>
             </div>
+        </div>
+        <div *ngIf="tasksByUser?.length == 0">
+            <h5>No se encontraron tareas para el proyecto seleccionado</h5>
         </div>
     </body>
 </div>

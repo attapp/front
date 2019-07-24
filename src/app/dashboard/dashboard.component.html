@@ -42,7 +42,7 @@
     <div class="card-header">En curso</div>
     <div class="card-body">
       <h2>{{ tasksInProgress.length}}</h2>
-      <button (click)="mostrarTabla( tasksInProgress)" id="btn" type="button"  class="btn btn-light"> más detalles </button>
+      <button (click)="mostrarTabla(tasksInProgress)" id="btn" type="button"  class="btn btn-light"> más detalles </button>
     </div>
   </div>
   <div id="enCurso" class="card">
@@ -77,7 +77,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr id="cuerpo" *ngFor="let task of contenido ">
+      <tr id="cuerpo" *ngFor="let task of contenido">
         <th class="text-center align-middle" scope="row">{{task.id}}</th>
         <td class="text-nowrap align-middle">
           <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>

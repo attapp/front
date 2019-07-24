@@ -10,7 +10,10 @@ body {
     width: 100%;
     padding: 20px;
 }
-
+#status {
+    margin-left: 12px;
+    font-size: 15px;
+}
 /**
 * Estilos cards 
 */
@@ -20,10 +23,10 @@ body {
     overflow: hidden;
     min-width: 300px;
     height: 190px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
     padding: 2px, 3px;
     padding-bottom: 1em;
     align-self: center;
@@ -44,7 +47,7 @@ hr {
 .card-text {
     color: white;
     float: left;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     margin-left: 1em;
     margin-right: 1em;
 
@@ -78,22 +81,22 @@ a.boton:hover {
 } 
 
 .tasks-in-progress {
-    background: #32C79A;
+    background-image: linear-gradient(#32C79A, rgb(35, 143, 110));
     border: 1px solid rgb(46, 158, 124);
 }
 .in-progress {
     color: #32C79A;
 }
 .tasks-delayed {
-    background: #FB3E4C;
+    background-image: linear-gradient(#FB3E4C, rgb(202, 34, 45));
     border: 1px solid rgb(221, 52, 63);
 }
 .delayed {
     color: #FB3E4C;
 }
 .tasks-no-init {
-    background-image: linear-gradient(to bottom right, #C2BBBC, rgb(228, 228, 228));
-    border: 1px solid #C2BBBC;
+    background-image: linear-gradient(to bottom right, #C2BBBC, rgb(124, 122, 122));
+    border: 1px solid rgb(128, 128, 128);
 }
 .card.tasks-no-init {
     color: black;
@@ -121,11 +124,11 @@ a.boton:hover#btn-finalizar-red {
 }
 
 a.boton#btn-iniciar-gray {
-    background: rgb(207, 207, 207);   
-    border: 1px solid rgb(182, 182, 182);
+    background: rgb(177, 177, 177);   
+    border: 1px solid rgb(148, 148, 148);
 }
 a.boton:hover#btn-iniciar-gray {
-    background: rgb(233, 233, 233);       
+    background: rgb(192, 192, 192);       
 }
 a.boton#btn-finalizar-green {
     background: rgb(68, 182, 148);
