@@ -10,7 +10,6 @@ body {
     width: 100%;
     padding: 20px;
 }
-
 /**
 * Estilos cards 
 */
@@ -29,7 +28,7 @@ body {
     padding-bottom: 1em;
     align-self: center;
 }
-#barras.card{
+.card#barras {
     display: block;
     border-radius: 5;
     overflow: hidden;

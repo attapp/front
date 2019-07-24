@@ -20,10 +20,10 @@
             <em class="fas fa-square-full legend-success border-black"></em>
             En curso
         </div>
-        <div class="p-1">
+        <!-- <div class="p-1">
             <em class="fas fa-square-full legend-primary border-black"></em>
             Finalizado
-        </div>
+        </div> -->
 
     </div>
     <div class="d-flex justify-content-between p-2">
@@ -53,7 +53,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr [ngClass]="changeCss(task.state.id) " class="animated fadeIn faster border-box"
+                <tr class="animated fadeIn faster border-box"
                     *ngFor="let task of tasks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <th class="text-center align-middle" scope="row">{{task.id}}</th>
                     <td class="text-nowrap align-middle">
@@ -70,7 +70,7 @@
                     <td class="text-center align-middle">{{task.realStartDate      | date:'short'}}</td>
                     <td class="text-center align-middle">{{ getNameResponsible(task.responsible) }}</td>
                     <td class="text-center align-middle">{{task.area.description       }}</td>
-                    <td class="text-center align-middle">{{task.state.description}}</td>
+                    <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div></td>
                     <td class="text-center align-middle">
                         <button *ngIf="!(task.state.id == 7)" class="btn btn-secondary btn-sm btn-block" placement="top"
                             ngbTooltip="Modificar Estado" [disabled]='validateState(task.state.id)'
@@ -113,7 +113,7 @@
                         <strong>Fecha Fin:</strong> {{task.endDatePlanning | date:'medium' }}
                     </div>
                     <div class="col-12 card-text">
-                        <strong>Estado:</strong> {{task.state.description}}
+                        <strong>Estado:</strong> <div class="circle"></div>
                     </div>
                     <div class="col-12 card-text">
                         <strong>Dependencias:</strong> {{task.dependencies}}

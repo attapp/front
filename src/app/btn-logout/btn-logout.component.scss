@@ -1,10 +1,13 @@
-#logout {
-    padding: 6px;
+.card {
+    float: left;
+    margin-top: auto;
+    margin-bottom: auto;
 }
-#logout.btn.btn-secondary {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 8px;
-    padding-left: 8px;
-    font-size: 70%
+
+button.btn.btn-secondary {
+    min-width: 60px;
+    padding: 5px 12px;
+    font-size: 15px;
+
 }
+

@@ -1,27 +1,65 @@
+.table-primary:hover,
+.table-primary {
+    background-color: #b8daff;    
+    border: 1px solid #a9c6e6;
+}
 .legend-primary {
     color: #b8daff;
 }
-
-.legend-default {
-    color: #ffffff;
+.table-default:hover,
+.table-default {    
+    background-color: #d6d8db;  
+    border: 1px solid #bebfc0;
 }
-
-.legend-secondary {
+.legend-default {
     color: #d6d8db;
 }
+.table-secondary:hover,
+.table-secondary {
+    background-color: yellow;
+    border: 1px solid rgb(231, 231, 1);
+}
+.legend-secondary {
+    color: yellow;
+}
+.table-danger:hover,
+.table-danger {
+    background-color: #ff0019;
+    border: 1px solid #eb041b;
 
+}
 .legend-danger {
-    color: #f5c6cb;
+    color: #ff0019;
 }
-
+.table-warning:hover,
+.table-warning {
+    background-color: #ff4800;    
+    border: 1px solid #e74302;
+}
 .legend-warning {
-    color: #ffeeba;
+    color: #ff4800;
 }
-
+.table-success:hover,
+.table-success {
+    background-color: #00b33c;
+    border: 1px solid #00a537;
+}
 .legend-success {
-    color: #c3e6cb;
+    color: #00b33c;
 }
-
+tbody {
+    background-color: whitesmoke;
+}
+.circle {
+    width: 50%;
+    height:0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50%;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+}
 .border-black {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #0000006e;

@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
      */
     showTasks(idProject: number) {
         let tasks: Task[];
-        this.taskService.getTasks(idProject)
+        this.taskService.getTasks(1, idProject)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
      */
     showTasksFinished(idProject: number) {
         let tasks: Task[];
-        this.taskService.getTasks(idProject, TASK_STATE.FINISHED)
+        this.taskService.getTasks(1, idProject, TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
 
     getAllTaskDelayed(idProject: number) {
         // x dependencia
-        this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_DEPENDENCY)
+        this.taskService.getTasks(1, idProject, TASK_STATE.DELAYED_BY_DEPENDENCY)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.allTaskDelayed.push(...resp);
@@ -168,7 +168,7 @@ export class DashboardComponent implements OnInit {
             });
 
         // x inicio
-        this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_START)
+        this.taskService.getTasks(1 ,idProject, TASK_STATE.DELAYED_BY_START)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.allTaskDelayed.push(...resp);
@@ -180,7 +180,7 @@ export class DashboardComponent implements OnInit {
             });    
           
         // x fin
-        this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_FINISH)
+        this.taskService.getTasks(1, idProject, TASK_STATE.DELAYED_BY_FINISH)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.allTaskDelayed.push(...resp);
@@ -199,7 +199,7 @@ export class DashboardComponent implements OnInit {
      * @param idProject 
      */
     getTasksInProgress(idProject: number) {
-        this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
+        this.taskService.getTasks(1, idProject, TASK_STATE.IN_PROGRESS)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasksInProgress = resp ? resp : [];

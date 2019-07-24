@@ -74,16 +74,17 @@ export class TaskResponsableComponent implements OnInit {
      * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
      */
     showTasksByUser(idProject: number, idUser: number) {
-        let tasks: Task[];        
-        this.taskService.getTaskByUser(idProject, idUser)
+        let tasks: Task[];  
+        let order: number; 
+        this.taskService.getTaskByUser(1, idProject, idUser)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
                     tasks = resp ? resp : [];
                     this.tasksByUser = tasks;
-                this.tasksByUser.forEach(task => {
-                    console.log('STATE OF TASKS: ' + JSON.stringify(task.state));                
-                });    
+                // this.tasksByUser.forEach(task => {
+                //     console.log('STATE OF TASKS: ' + JSON.stringify(task.state));                
+                // });    
             });
             
     }

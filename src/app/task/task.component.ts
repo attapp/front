@@ -81,7 +81,7 @@ export class TaskComponent implements OnInit {
      * solamente llama al servicio que obtiene las tareas menos las tareas finalizadas
      */
     showTasks(idProject: number) {
-        this.taskService.getTasks(idProject, -TASK_STATE.FINISHED)
+        this.taskService.getTasks(1, idProject, -TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasks = resp ? resp : [];
@@ -92,7 +92,7 @@ export class TaskComponent implements OnInit {
      * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
      */
     showTasksByUser(idProject: number, idUser: number) {
-        this.taskService.getTaskByUser(idProject, idUser)
+        this.taskService.getTaskByUser(1, idProject, idUser)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.tasks = resp ? resp : [];
@@ -174,6 +174,8 @@ export class TaskComponent implements OnInit {
      */
     changeCss(idState: number): string {
         switch (idState) {
+            case TASK_STATE.NOT_START:
+                return 'table-default';
             case TASK_STATE.NOT_START_FOR_DEPENDENCY:
                 return 'table-secondary';
             case TASK_STATE.IN_PROGRESS:
