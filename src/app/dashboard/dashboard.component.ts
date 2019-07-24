@@ -96,7 +96,6 @@ export class DashboardComponent implements OnInit {
         this.tasksInProgress = [];
         this.perReal = '';
         this.perPlanif = '';
-    
         this.getAllTasks(this.idProject);    
 
     }
@@ -107,9 +106,7 @@ export class DashboardComponent implements OnInit {
     }*/
     mostrarTabla(lista: Task[]) {
         console.log('mostre tabla')
-        this.botones = false;
         this.tabla = true;
-
         if (lista === this.allTaskDelayed) {
             this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
             this.contenido = this.allTaskDelayed;
@@ -117,7 +114,6 @@ export class DashboardComponent implements OnInit {
             this.tituloTabla = 'DETALLE TAREAS EN CURSO';
             this.contenido = this.tasksInProgress;
         }
-
     }
 
     //funcion volver 
