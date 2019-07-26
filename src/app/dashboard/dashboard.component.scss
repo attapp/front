@@ -110,6 +110,38 @@ hr {
 #contentColap {
     color: #FB3E4C;
 }
+#verMas{
+    float: right;
+}
 
+#colapseBtn {
+    background: transparent;
+    border: transparent;
+    color: white;
+    font: 100;
+    padding: 50px;
+}
+#tareasEnCurso {
+    background-color: #32C79A;
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 350;
+    height: 150px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+#textoCollapsable {
+    color: blue;
+   
+}
 
-
+#collapseTable.card-body {
+    padding-bottom: 300px;    
+}
