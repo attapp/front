@@ -1,3 +1,7 @@
+<!--proyectos listados-->
+<div>
+<h1>Proyectos asignados</h1>
+
 <!--barra de progreso realizadas-->
 <div class="card" id="barras">
   <div class="card-header">Avance en ejecución</div>
@@ -20,6 +24,7 @@
 <br>
 
 <!--cuadros de informacion-->
+<!--TOTAL DE TAREAS-->
 <div class="card-deck">
   <div id="totalTareas" class="card btn-light">
     <div class="card-header">Total de tareas</div>
@@ -27,25 +32,63 @@
       <h2>{{tasks.length}}</h2>
     </div>
   </div>
+
+  <!--Tareas atrasadas-->
   <div id="atrasadas" class="card">
     <div class="card-header">Tareas atrasadas</div>
     <div class="card-body">
       <h2>{{allTaskDelayed.length}}</h2>
       <button (click)=" mostrarTabla(allTaskDelayed)" id="btn" type="button" class="btn btn-light"> más detalles...
       </button>
-    
     </div>
   </div>
-  <div id="enCurso" class="card">
-    <div class="card-header">En curso</div>
-    <div class="card-body">
-      <h2>{{ tasksInProgress.length}}</h2>
-      <button (click)="mostrarTabla( tasksInProgres)" id="btn" type="button" class="btn btn-light"> más detalles... </button>
-      <!--<button class="btn btn-primary" (click)="mostrarTabla(tasksInProgres)" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          más detalles... 
-        </button>-->
+  <!--Tareas enCurso-->
+  <div class="card-deck">
+    <div id="tareasEnCurso" class="card-header">
+      <button id="colapseBtn" class="btn btn-primary" type="button" data-toggle="collapse"
+        data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
+        {{tasksInProgress.length}} En curso
+      </button>
+    </div>
+    <div class="collapse" id="collapseTable">
+      <div id="textoCollapsable" class="card card-body">
+        Aquí se muestra la tabla con informacion de las tareas.
+        <div>
+          <h2>Basic Table</h2>
+          <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+              </tr>
+              <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+
+
+  <!--PROXIMA TAREAS A EJECUTARSE-->
   <div id="proximaTarea" class="card">
     <div class="card-header">Próxima tarea a ejecutarse</div>
     <div class="card-body">
@@ -53,12 +96,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
 
 <!--tabla con datos -->
 
@@ -97,5 +134,5 @@
     </tbody>
   </table>
   <button type="button" (click)="atras()" class="btn btn-light">Atrás</button>
-  <button type="button" class="btn btn-link">Ver más...</button> 
+  <button id="verMas" type="button" class="btn btn-link">Ver más...</button>
 </div>
