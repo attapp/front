@@ -70,7 +70,13 @@
                     <td class="text-center align-middle">{{task.realStartDate      | date:'short'}}</td>
                     <td class="text-center align-middle">{{ getNameResponsible(task.responsible) }}</td>
                     <td class="text-center align-middle">{{task.area.description       }}</td>
-                    <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div></td>
+                    <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div>
+                            <div *ngIf="task.state.id == 1">No iniciada</div>
+                            <div *ngIf="task.state.id == 2">No iniciada por dependencia</div>
+                            <div *ngIf="task.state.id == 3">En curso</div>
+                            <div *ngIf="task.state.id == 4">Atrasada por inicio</div>
+                            <div *ngIf="task.state.id == 5">Atrasada por dependencia</div>
+                            <div *ngIf="task.state.id == 6">Atrasada por fin</div></td>
                     <td class="text-center align-middle">
                         <button *ngIf="!(task.state.id == 7)" class="btn btn-secondary btn-sm btn-block" placement="top"
                             ngbTooltip="Modificar Estado" [disabled]='validateState(task.state.id)'

@@ -26,11 +26,10 @@
                 'tasks-delayed': task.state.id == 4 || task.state.id == 5 || task.state.id == 6,
                 'tasks-end': task.state.id == 7 }" *ngFor="let task of tasksByUser">
                 <div class="card-header">
-                    <a *ngIf="task.state.id == 1" class="boton" id="btn-iniciar-gray">Iniciar</a>
-                    <a *ngIf="task.state.id == 4" class="boton" id="btn-iniciar-red">Iniciar</a>
-                    <a *ngIf="task.state.id == 3" class="boton" id="btn-finalizar-green">Finalizar</a>
-                    <a *ngIf="task.state.id == 6" class="boton" id="btn-finalizar-red">Finalizar</a>
-                    <strong>{{task.id}}</strong><a id="status">{{task.state.description}}</a>
+                    <a *ngIf="task.state.id == 1 || task.state.id == 3 || task.state.id == 4 || task.state.id == 6" class="boton" 
+                            [ngClass]="changeCssButton(task.state.id)">{{changeButtonName(task.state.id)}}</a>
+
+                    <strong>{{task.id}}</strong><div id="status">{{changeHeaderText(task.state.id)}}</div>
                 </div>
                 <div class="card-body">
 

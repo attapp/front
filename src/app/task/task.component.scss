@@ -8,56 +8,55 @@
 }
 .table-default:hover,
 .table-default {    
-    background-color: #d6d8db;  
+    background-color: #FFFFFF;  
     border: 1px solid #bebfc0;
 }
 .legend-default {
-    color: #d6d8db;
+    color: #FFFFFF;
 }
 .table-secondary:hover,
 .table-secondary {
-    background-color: yellow;
-    border: 1px solid rgb(231, 231, 1);
+    background-color: #D6D8DB;
+    border: 1px solid rgb(182, 183, 185);
 }
 .legend-secondary {
-    color: yellow;
+    color: #D6D8DB;
 }
 .table-danger:hover,
 .table-danger {
-    background-color: #ff0019;
-    border: 1px solid #eb041b;
+    background-color: #F5C6CB;
+    border: 1px solid rgb(216, 175, 179);
 
 }
 .legend-danger {
-    color: #ff0019;
+    color: #F5C6CB;
 }
 .table-warning:hover,
 .table-warning {
-    background-color: #ff4800;    
-    border: 1px solid #e74302;
+    background-color: #FFEEBA;    
+    border: 1px solid rgb(224, 207, 154);
 }
 .legend-warning {
-    color: #ff4800;
+    color: #FFEEBA;
 }
 .table-success:hover,
 .table-success {
-    background-color: #00b33c;
-    border: 1px solid #00a537;
+    background-color: #C3E6CB;
+    border: 1px solid rgb(174, 204, 181);
 }
 .legend-success {
-    color: #00b33c;
+    color: #C3E6CB;
 }
 tbody {
     background-color: whitesmoke;
 }
 .circle {
-    width: 50%;
-    height:0;
+    max-width: 30px;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 50%;
-    -moz-border-radius: 50%; 
-    -webkit-border-radius: 50%; 
+    padding-bottom: 30px;
+    -moz-border-radius: 30px; 
+    -webkit-border-radius: 30px; 
     border-radius: 50%;
 }
 .border-black {
