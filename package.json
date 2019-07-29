@@ -23,6 +23,7 @@
     "@angular/router": "~7.2.0",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
     "animate.css": "^3.7.0",
+    "blazy": "^1.8.2",
     "bootstrap": "^4.3.1",
 <<<<<<< HEAD
     "chart.js": "2.8.0",

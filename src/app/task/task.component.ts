@@ -111,11 +111,6 @@ export class TaskComponent implements OnInit {
 
             modalConfirm.result.then((result: boolean) => {
                 if (result) {
-                    const modalInfo = this.modalService.openModalInfo(
-                        { backdrop: 'static', centered: true, keyboard: true },
-                        'Tarea finalizada correctamente'
-                    );
-                    modalInfo.result.then();
                     this.callSetTask(this.idProject, task.id, TASK_STATE.FINISHED);
                 }
             }).catch((e) => console.log(e));
