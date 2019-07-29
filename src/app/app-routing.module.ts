@@ -18,7 +18,7 @@ import { TaskResponsableComponent } from './task-responsable/task-responsable.co
 
 const routes: Routes = [
     
-    { path: '', component: AppComponent, pathMatch: 'full' },  
+    { path: '', component: LoginComponent },  
     { path: 'respo', redirectTo: 'responsable' },
     { path: 'admi', redirectTo: 'project' },
     { path: 'responsable', component: TaskResponsableComponent },
