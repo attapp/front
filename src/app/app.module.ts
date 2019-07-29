@@ -31,6 +31,7 @@ import { ProjectDashComponent } from './project-dash/project-dash.component';
 import { ProjectResponsableComponent } from './project-responsable/project-responsable.component';
 import { TaskResponsableComponent } from './task-responsable/task-responsable.component';
 import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
+import { AllTasksComponent } from './all-tasks/all-tasks.component';
 //import { ChartsModule } from 'ng2-charts';
 
 
@@ -54,7 +55,8 @@ const config: SocketIoConfig = { url: environment.API_ENDPOINT, options: {} };
         ProjectDashComponent,
         ProjectResponsableComponent,
         TaskResponsableComponent,
-        TaskDashboardComponent
+        TaskDashboardComponent,
+        AllTasksComponent
     ],
     imports: [
         //ChartsModule,

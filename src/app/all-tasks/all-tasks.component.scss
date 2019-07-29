@@ -1,0 +1,100 @@
+.table-primary:hover,
+.table-primary {
+    background-color: #b8daff;    
+    border: 1px solid #a9c6e6;
+}
+.legend-primary {
+    color: #b8daff;
+}
+.table-default:hover,
+.table-default {    
+    background-color: #FFFFFF;  
+    border: 1px solid #bebfc0;
+}
+.legend-default {
+    color: #FFFFFF;
+    border: 1px solid #bebfc0;
+
+}
+.table-secondary:hover,
+.table-secondary {
+    background-color: rgb(163, 163, 163);
+    border: 1px solid rgb(88, 88, 88);
+}
+.legend-secondary {
+    color: rgb(163, 163, 163);
+}
+.table-danger:hover,
+.table-danger {
+    background-color: rgb(252, 159, 167);
+    border: 1px solid rgb(250, 128, 138);
+
+}
+.legend-danger {
+    color: rgb(252, 159, 167);
+
+}
+.table-warning:hover,
+.table-warning {
+    background-color: rgb(248, 220, 134);    
+    border: 1px solid rgb(245, 206, 92);
+}
+.legend-warning {
+    color: rgb(248, 220, 134);
+}
+.table-success:hover,
+.table-success {
+    background-color: rgb(113, 218, 137);
+    border: 1px solid rgb(88, 207, 116);
+}
+.legend-success {
+    color: rgb(113, 218, 137);
+}
+tbody {
+    background-color: whitesmoke;
+}
+.circle {
+    max-width: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    -moz-border-radius: 20px; 
+    -webkit-border-radius: 20px; 
+    border-radius: 50%;
+}
+.border-black {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #0000006e;
+}
+
+.border-box {
+    -webkit-animation-fill-mode: none;
+    animation-fill-mode: none;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-size {
+    max-width: 28em;
+    min-width: 18em;
+}
+
+
+.cdk-viewport {
+    height: 400px;
+    width: 100%;
+    border: 1px solid black;
+
+}
+
+cdk-virtual-scroll-viewport {
+    background-color: black;
+
+    .cdk-virtual-scroll-content-wrapper {
+
+        width: 100% !important;
+    }
+}
