@@ -89,17 +89,6 @@ export class TaskComponent implements OnInit {
     }
 
     /**
-     * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
-     */
-    showTasksByUser(idProject: number, idUser: number) {
-        this.taskService.getTaskByUser(idProject, idUser)
-            // resp is of type
-            .subscribe((resp: Task[]) => {
-                this.tasks = resp ? resp : [];
-            });
-    }
-
-    /**
      * actualiza las tareas, en caso de pasar a un estado no finalizado lo realiza inmediatamente llamando 
      * al método callSetTask, en caso de ser una tarea que va a finalizar, este llama a los dos modal, uno indicando 
      * si realmente desea finalizar la tarea y el siguiente es el que indica que la tarea ha sido finalizada
@@ -189,6 +178,27 @@ export class TaskComponent implements OnInit {
                 return 'table-primary';
             default:
                 return '';
+        }
+    }
+
+    /**
+     *  Modifica el nombre del botón con respecto a su estado.
+     * @param state dependiendo del estado cambia el nombre como inicar o finalizar
+     */
+    changeStateName(state: State): string {
+        switch (state.id) {
+            case TASK_STATE.NOT_START:
+                return "No iniciada";
+            case TASK_STATE.NOT_START_FOR_DEPENDENCY:
+                return "No iniciada por dependencia";
+            case TASK_STATE.IN_PROGRESS:
+                return "En progreso";
+            case TASK_STATE.DELAYED_BY_START:
+                return "Atrasada por inicio";
+            case TASK_STATE.DELAYED_BY_DEPENDENCY:
+                return "Atrasada por dependencia";    
+            case TASK_STATE.DELAYED_BY_FINISH:
+                return "Atrasada por fin";
         }
     }
 
