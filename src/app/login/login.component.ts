@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from "../services/auth.service";
 import { User } from '../interfaces/User';
 import { environment } from 'src/environments/environment';
+import { asTextData } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
     if (this.authService.getUserLoggedInLocal) {
       this.authService.setUserLoggedOut();
     }
-  }
-}
 
+  }
+
+}
