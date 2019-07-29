@@ -1,29 +1,28 @@
-<div *ngIf="!isMobileResolution; else mobileContainer">
     <div class="d-flex justify-content-around py-1">
         <div class="p-1">
-            <em class="fas fa-square-full legend-default border-black"></em>
+            <em class="fas fa-square-full legend-default"></em>
             No iniciado
         </div>
         <div class="p-1">
-            <em class="fas fa-square-full legend-secondary border-black"></em>
+            <em class="fas fa-square-full legend-secondary"></em>
             No iniciado por dependencia
         </div>
         <div class="p-1">
-            <em class="fas fa-square-full legend-warning border-black"></em>
+            <em class="fas fa-square-full legend-warning"></em>
             Atrasado por dependencia
         </div>
         <div class="p-1">
-            <em class="fas fa-square-full legend-danger border-black"></em>
+            <em class="fas fa-square-full legend-danger"></em>
             Atrasado por inicio / Atrasado por fin
         </div>
         <div class="p-1">
-            <em class="fas fa-square-full legend-success border-black"></em>
+            <em class="fas fa-square-full legend-success"></em>
             En curso
         </div>
-        <div class="p-1">
+        <!-- <div class="p-1">
             <em class="fas fa-square-full legend-primary border-black"></em>
             Finalizado
-        </div>
+        </div> -->
 
     </div>
     <div class="d-flex justify-content-between p-2">
@@ -42,6 +41,7 @@
                 <tr>
                     <th class="text-center align-middle" scope="col">ID</th>
                     <th class="text-center align-middle" scope="col">Descripción</th>
+                    <th class="text-center align-middle" scope="col">Etapa</th>
                     <th class="text-center align-middle" scope="col">Dependencias</th>
                     <th class="text-center align-middle" scope="col">Inicio Planificación</th>
                     <th class="text-center align-middle" scope="col">Fin Planificación</th>
@@ -53,9 +53,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr [ngClass]="changeCss(task.state.id) " class="animated fadeIn faster border-box"
+                <tr class="animated fadeIn faster border-box"
                     *ngFor="let task of tasks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                    <th class="text-center align-middle" scope="row">{{task.id}}</th>
+                    <th class="text-center align-middle" scope="row">{{task.externalCode}}</th>
                     <td class="text-nowrap align-middle">
                         <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
                             {{task.description  | truncate:[60, '...'] }}
@@ -64,13 +64,20 @@
                             {{task.description}}
                         </div>
                     </td>
-                    <td class="text-center align-middle">{{task.dependencies}}</td>
+                    <td class="text-center align-middle">{{task.category.name}}</td>
+                    <td class="text-center align-middle">{{task.infoDep}}</td>
                     <td class="text-center align-middle">{{task.startDatePlanning  | date:'short'}}</td>
                     <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
                     <td class="text-center align-middle">{{task.realStartDate      | date:'short'}}</td>
                     <td class="text-center align-middle">{{ getNameResponsible(task.responsible) }}</td>
                     <td class="text-center align-middle">{{task.area.description       }}</td>
-                    <td class="text-center align-middle">{{task.state.description}}</td>
+                    <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div>
+                            <div *ngIf="task.state.id == 1">No iniciada</div>
+                            <div *ngIf="task.state.id == 2">No iniciada por dependencia</div>
+                            <div *ngIf="task.state.id == 3">En curso</div>
+                            <div *ngIf="task.state.id == 4">Atrasada por inicio</div>
+                            <div *ngIf="task.state.id == 5">Atrasada por dependencia</div>
+                            <div *ngIf="task.state.id == 6">Atrasada por fin</div></td>
                     <td class="text-center align-middle">
                         <button *ngIf="!(task.state.id == 7)" class="btn btn-secondary btn-sm btn-block" placement="top"
                             ngbTooltip="Modificar Estado" [disabled]='validateState(task.state.id)'
@@ -92,44 +99,4 @@
                 [ellipses]="false" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
     </div>
-</div>
 
-<ng-template #mobileContainer>
-    <div class="p-2 row">
-        <div class="card m-2 border-dark text-white card-size animated fadeIn " [ngClass]="{'bg-dark ': task.state.id == 1 || task.state.id == 2,
-                 'bg-success': task.state.id == 3 ,
-                 'bg-danger': task.state.id == 4 || task.state.id == 6,
-                 'bg-warning': task.state.id == 5 ,
-                 'bg-primary': task.state.id == 7 }" *ngFor="let task of tasks">
-            <div class="card-header text-nowrap text-truncate" (click)="showModal()">
-                <strong>{{task.externalCode}}: </strong>{{task.description}}
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 card-text">
-                        <strong>Fecha Inicio:</strong> {{task.startDatePlanning | date:'medium' }}
-                    </div>
-                    <div class="col-12 card-text">
-                        <strong>Fecha Fin:</strong> {{task.endDatePlanning | date:'medium' }}
-                    </div>
-                    <div class="col-12 card-text">
-                        <strong>Estado:</strong> {{task.state.description}}
-                    </div>
-                    <div class="col-12 card-text">
-                        <strong>Dependencias:</strong> {{task.dependencies}}
-                    </div>
-                    <div class="col-12 card-text">
-                        <strong>Responsable:</strong> {{getNameResponsible(task.responsible)}}
-                    </div>
-                    <div class="p-1 col-6 offset-6">
-                        <button *ngIf="!(task.state.id == 7)" class="btn btn-secondary btn-sm btn-block" 
-                            [disabled]='validateState(task.state.id)'
-                            (click)="updateTask(task)">
-                            {{changeButtonName(task.state)}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-template>

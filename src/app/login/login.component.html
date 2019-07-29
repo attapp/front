@@ -1,30 +1,25 @@
-<div id="contentLogin">
-
-  <h3 id="tittle">LOGIN</h3>
-
-  <div id="login">
-      <!--<div class="form-group" >
-          <label for="name">Nombre:</label>
-          <input id="name" type="text" class="form-control" [(ngModel)]="nomre" placeholder="name" required>
-      </div>-->
-
-    <div class="form-group" >
-      <label for="usuario">Correo de usuario:</label>
-      <input id="user" type="text" class="form-control" [(ngModel)]="user" placeholder="username" required>
-    </div>
-  
-    <div class="form-group" >
-      <label for="password">Ingresar Contraseña:</label>
-      <input id="password" type="password" class="form-control"  [(ngModel)]="password"  placeholder="*****"  required>
-
-      <div *ngIf=error class="alert alert-danger" >
-        <strong> ERROR! Usuario y/o contraseña inválido</strong> 
+<div id="fondo" class="row">
+  <div id="contentLogin" class="card body d-flex">
+    <img src="./assets/accenture-logo.png" alt="Logo">
+    <h6 id="log">Login</h6>
+      <div class="form-group">
+        <label id="user-pass" for="usuario">Ingrese correo:</label>
+        <input type="text" class="form-control" [(ngModel)]="user" placeholder="username" required>
       </div>
-    </div>
-    <button (click)="login()" type="button" id="Ingresar" class="btn btn-secondary">Ingresar</button>
 
+      <div class="form-group">
+        <label id="user-pass" for="password">Ingrese contraseña:</label>
+        <input type="password" class="form-control" [(ngModel)]="password" placeholder="" required>
+
+        <div *ngIf=error class="alert alert-danger">
+          <strong> ERROR! Usuario y/o contraseña inválido</strong>
+        </div>
+      </div>
+      <div id="error">
+        <p *ngIf=error class="text-danger">Usuario y/o contraseña incorrectos.</p>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm ml-auto">Ingresar</button>
+      <!--<button (click)="login()" type="button" class="btn btn-secondary btn-sm ml-auto">Ingresar</button>-->
+      <p id="olvidar">¿olvidaste la contraseña?</p>
   </div>
-    <!-- <button type="button" id= "salir" class="btn btn-secondary">Salir</button> -->
-
 </div>
-

@@ -26,7 +26,7 @@ export class TaskService {
     }
 
     getTaskByUser(idProject: number, idUser: number) {
-        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks/${idUser}`;        
+        let getTasksUrl = environment.API_ENDPOINT + `/projects/${idProject}/tasks/${idUser}`;
             return this.http.get(getTasksUrl);
     }
 

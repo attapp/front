@@ -1,40 +1,56 @@
-  <div class="container-fluid">
+<div class="container-fluid">
+        <div class="d-flex justify-content-around py-1">
+                <div class="p-1">
+                    <em class="fas fa-square-full no-init border-black"></em>
+                    No iniciada / No iniciada por dependencia
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full delayed border-black"></em>
+                    Atrasadas
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full in-progress border-black"></em>
+                    En curso
+                </div>
+                <div class="p-1">
+                    <em class="fas fa-square-full end border-black"></em>
+                    Finalizado
+                </div>
+        
+        </div>
     <body>
-      <div class="card-deck">
-            
-            <div class="card"
-                [ngClass]="{'tasks-no-init': task.state.id == 1 || task.state.id == 2,
+        <div class="card-deck">
+
+            <div class="card" [ngClass]="{'tasks-no-init': task.state.id == 1 || task.state.id == 2,
                 'tasks-in-progress': task.state.id == 3,
                 'tasks-delayed': task.state.id == 4 || task.state.id == 5 || task.state.id == 6,
-                'tasks-end': task.state.id == 7 }"  *ngFor="let task of tasksByUser">
-                    <div class="card-header">
-                        <a *ngIf="task.state.id == 1" class="boton" id="btn-iniciar-gray">Iniciar</a>
-                        <a *ngIf="task.state.id == 4" class="boton" id="btn-iniciar-red">Iniciar</a>
-                        <a *ngIf="task.state.id == 3" class="boton" id="btn-finalizar-green">Finalizar</a>
-                        <a *ngIf="task.state.id == 6" class="boton" id="btn-finalizar-red">Finalizar</a>
-                        <strong>{{task.externalCode}}</strong>
-                    </div>    
-                    <div class="card-body">
+                'tasks-end': task.state.id == 7 }" *ngFor="let task of tasksByUser">
+                <div class="card-header">
+                    <a *ngIf="task.state.id == 1 || task.state.id == 3 || task.state.id == 4 || task.state.id == 6" class="boton" 
+                            [ngClass]="changeCssButton(task.state.id)">{{changeButtonName(task.state.id)}}</a>
 
-                        <p class="card-text" >
-                            <strong>Descripción: </strong>{{task.description | truncate:[150, '...'] }}
-                        </p>
-                        <p class="card-text" *ngIf="task.state.id == 1 || task.state.id == 2">
-                            <strong>Inicio planificado:</strong> {{task.startDatePlanning | date:'medium' }}
-                        </p>
-                        <p class="card-text" *ngIf="task.state.id == 3 || task.state.id == 4 || task.state.id == 5 || task.state.id == 6">
-                            <strong>Fin planificado:</strong> {{task.endDatePlanning | date:'medium' }}
-                        </p>
-                        <p class="card-text" *ngIf="task.state.id == 7">
-                            <strong>Fin real:</strong> {{task.realEndDate | date:'medium' }}
-                        </p>
-                    </div>
+                    <strong>{{task.id}}</strong><div id="status">{{changeHeaderText(task.state.id)}}</div>
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text">
+                        <strong>Descripción: </strong>{{task.description | truncate:[150, '...'] }}
+                    </p>
+                    <p class="card-text" *ngIf="task.state.id == 1 || task.state.id == 2">
+                        <strong>Inicio planificado:</strong> {{task.startDatePlanning | date:'medium' }}
+                    </p>
+                    <p class="card-text"
+                        *ngIf="task.state.id == 3 || task.state.id == 4 || task.state.id == 5 || task.state.id == 6">
+                        <strong>Fin planificado:</strong> {{task.endDatePlanning | date:'medium' }}
+                    </p>
+                    <p class="card-text" *ngIf="task.state.id == 7">
+                        <strong>Fin real:</strong> {{task.realEndDate | date:'medium' }}
+                    </p>
+                </div>
             </div>
-        </div>    
-    </body>  
+        </div>
+        <div *ngIf="tasksByUser?.length == 0">
+            <h5>No se encontraron tareas para el proyecto seleccionado</h5>
+        </div>
+    </body>
 </div>
-
-
-
-        
-      

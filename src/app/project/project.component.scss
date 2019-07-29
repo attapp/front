@@ -1,0 +1,23 @@
+img {
+    width: 75px;
+    margin-right: 15px; 
+}
+nav.navbar.bg-light {
+    background-image:linear-gradient(to right, #a100ff, #460073); 
+}
+a.navbar-brand {
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: auto;
+}
+li.nav-item a.nav-link {
+    color: white;
+}
+li.nav-item a.nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.342);
+    border-radius: 5px;
+}
+

@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer2, ElementRef, asNativeElements} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
 import { ModalService } from '../services/modal.service';
-import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
+import { element } from '@angular/core/src/render3';
 
 
 /**
@@ -20,27 +20,32 @@ import { AuthService } from '../services/auth.service';
 export class DashboardComponent implements OnInit {
     //variables de prueba
     botones = true;
-    tabla = false
+    tabla = false;
+    //porcentaje = 0;
     contenido: Task[] = [];
-    pageSize = 5;
     tituloTabla;
+    res: String;
 
     // arrays Tareas
+    // todas las tareas
     tasks: Task[];
+    // tareas finalizadas
     tasksFinished: Task[];
-    tasksAtraXDepen: Task[];
-    tasksAtraXInicio: Task[];
+    // tareas en curso
     tasksInProgress: Task[];
+    // todas las tareas atrasadas
     allTaskDelayed: Task[] = [];
+    // tareas atrasadas según fecha de termino
+    tasksDelayedEnd: Task[] = [];
 
-    deberiaDepen: Task[] = [];
-    deberiaInicio: Task[] = [];
-    deberiaInProgress: Task[] = [];
+    perReal: String;
+    perPlanif: String;
 
-    endPlaning: Task[];
     @Input() idProject: number;
-    isMobileResolution: boolean;
+    real: ElementRef;
+    planif: ElementRef;
 
+    //variables coni
     /**
      * 
      * @param taskService servicio que se conecta con el endpoint que trae las tareas, menos las finalizadas
@@ -48,8 +53,9 @@ export class DashboardComponent implements OnInit {
      */
     constructor(
         private taskService: TaskService,
-        private modalService: ModalService,
-        private authService: AuthService
+        private authService: AuthService,
+        private render: Renderer2,
+        private elRef: ElementRef
     ) { }
 
     /**
@@ -57,7 +63,7 @@ export class DashboardComponent implements OnInit {
      * el socket al momento de detectar un cambio modifica el valor de las tareas (si es que el usuario se encuentra en esa vista y si la 
      * tarea no esta finalizada)
      */
-    ngOnInit() {
+    async ngOnInit() {
         //this.idProject = parseInt(localStorage.getItem('currentProyect'));
         //console.log('PROYECTO LOCAL : ' + localStorage.getItem('currentProyect'));
         this.taskService.getSocketTask('message').subscribe(
@@ -68,42 +74,39 @@ export class DashboardComponent implements OnInit {
 
                 tasks.forEach(newTask => {
                     const index = this.tasks.findIndex((t) => t.id === newTask.id);
-                    this.tasks[index] = newTask;  
+                    this.tasks[index] = newTask;
                 });
             });
+        this.real = this.elRef.nativeElement.querySelector('.progress-bar');
+        this.planif = this.elRef.nativeElement.querySelector('.w3-container');
+
     }
-        
+
     /**
        * 
        * @param changes los posibles cambios que pueden exisir
        * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
        * lo que realiza es llamar a servicio que muestra las tareas
        */
-    ngOnChanges(changes: SimpleChanges): void {
-        // this.idProject = parseInt(localStorage.getItem('currentProyect'));
-        // console.log('ID PROYECT : ' + this.idProject)
+    ngOnChanges(changes: SimpleChanges) {
         this.allTaskDelayed = [];
+        this.tasksDelayedEnd = [];
         this.tasks = [];
-        this.tasksAtraXDepen = [];
-        this.tasksAtraXInicio = [];
         this.tasksFinished = [];
         this.tasksInProgress = [];
-        this.deberiaDepen = [];
-        this.deberiaInicio = [];
-        this.deberiaInProgress = [];
-        this.showTasks(this.idProject);
-        this.showTasksFinished(this.idProject);
-        this.getTasksDelayedByDependency(this.idProject);
-        this.getTasksDelayedByStart(this.idProject);   
-        this.getTasksInProgress(this.idProject);
-        // console.log('termina onchange');
+        this.perReal = '';
+        this.perPlanif = '';
+        this.getAllTasks(this.idProject);    
+
     }
-
     //funcion de prueba (CONI)
-    llamarTabla(lista: Task[]) {
-        this.botones = false;
+    /*mostrar() {
+        console.log('mostre tabla');
+        return this.tabla = true;
+    }*/
+    mostrarTabla(lista: Task[]) {
+        console.log('mostre tabla')
         this.tabla = true;
-
         if (lista === this.allTaskDelayed) {
             this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
             this.contenido = this.allTaskDelayed;
@@ -111,81 +114,84 @@ export class DashboardComponent implements OnInit {
             this.tituloTabla = 'DETALLE TAREAS EN CURSO';
             this.contenido = this.tasksInProgress;
         }
-
-    } 
+    }
 
     //funcion volver 
-    volver() {
-        console.log("vamos de vuelta");
-        this.botones=true;
-        this.tabla=false;
+    atras() {
+        console.log("volvi a los botones");
+        this.botones = true;
+        this.tabla = false;
     }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
      */
     showTasks(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasks = tasks;
+                tasks = resp ? resp : [];
+                this.tasks = tasks;
             });
     }
     /**
      * solamente llama al servicio que obtiene las tareas finalizadas
      */
     showTasksFinished(idProject: number) {
-        let tasks: Task[];        
+        let tasks: Task[];
         this.taskService.getTasks(idProject, TASK_STATE.FINISHED)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
-                    tasks = resp ? resp : [];
-                    this.tasksFinished = tasks;
+                tasks = resp ? resp : [];
+                this.tasksFinished = tasks;
+                let porcenta = Math.round((this.tasksFinished.length * 100) / this.tasks.length) + "%";
+                this.perReal = porcenta;
+                this.render.setStyle(this.real, 'width', this.perReal);
+
+
             });
     }
-    /**
-     * llama al servicio que obtiene las tareas Atrasadas por dependencia y las almacena en un array
-     * también busca las que ya pasaron su fecha de termino planificada
-     * y las guarda en otro.
-     * @param idProject 
-     */
-    getTasksDelayedByDependency(idProject: number) {
+
+    getAllTaskDelayed(idProject: number) {
+        // x dependencia
         this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_DEPENDENCY)
             // resp is of type
             .subscribe((resp: Task[]) => {
-                this.tasksAtraXDepen = resp ? resp : [];
-                this.allTaskDelayed.push(...this.tasksAtraXDepen);
+                this.allTaskDelayed.push(...resp);
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
-                        this.deberiaDepen.push(task);
+                        this.tasksDelayedEnd.push(task);
                     }
                 }
             });
-            
-    }
-    /**
-     * llama al servicio que obtiene las tareas Atrasadas por inicio y las almacena en un array
-     * también busca las que ya pasaron su fecha de termino planificada
-     * y las guarda en otro.
-     * @param idProject 
-     */
-    getTasksDelayedByStart(idProject: number) {
+
+        // x inicio
         this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_START)
             // resp is of type
             .subscribe((resp: Task[]) => {
-                this.tasksAtraXInicio = resp ? resp : [];
-                this.allTaskDelayed.push(...this.tasksAtraXInicio);
-
+                this.allTaskDelayed.push(...resp);
                 for (let task of resp) {
                     if (new Date(task.endDatePlanning) < new Date()) {
-                        this.deberiaInicio.push(task);
+                        this.tasksDelayedEnd.push(task);
                     }
                 }
-            });
+            });    
+          
+        // x fin
+        this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_FINISH)
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                this.allTaskDelayed.push(...resp);
+                this.tasksDelayedEnd.push(...resp);
+            })    
+
+        let cont = this.tasksDelayedEnd.length + this.tasksFinished.length;  
+        this.perPlanif = Math.round((cont * 100) / this.tasks.length) + "%";
+
     }
+
     /**
      * llama al servicio que obtiene las tareas en curso y las almacena en un array
      * también busca las que ya pasaron su fecha de termino planificada
@@ -194,27 +200,34 @@ export class DashboardComponent implements OnInit {
      */
     getTasksInProgress(idProject: number) {
         this.taskService.getTasks(idProject, TASK_STATE.IN_PROGRESS)
-        // resp is of type
-        .subscribe((resp: Task[]) => {
-            this.tasksInProgress = resp ? resp : [];
-
-            for (let task of resp) {
-                if (new Date(task.endDatePlanning) < new Date()) {
-                    this.deberiaInProgress.push(task);
-                }
-            }
-            this.allTaskDelayed.push(...this.deberiaInProgress);
-        });
+            // resp is of type
+            .subscribe((resp: Task[]) => {
+                this.tasksInProgress = resp ? resp : [];
+            });
+    }
+    showPlanif() {
+        let cont = this.tasksDelayedEnd.length + this.tasksFinished.length;
+        return cont + ' / ' + this.tasks.length;
     }
     showReal() {
         return this.tasksFinished.length + ' / ' + this.tasks.length;
     }
 
-    showPlanif() {
-        //this.filtroEndPlaning(dependencys, byStart, inProgress)
-        let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
-        return cont  + ' / ' + this.tasks.length;
+    getAllTasks(idProject: number) {
+        this.showTasks(idProject);
+        this.showTasksFinished(idProject);
+        this.getAllTaskDelayed(idProject);
+        this.getTasksInProgress(idProject);
+
     }
 
 
-}
+
+    // porcentajePlanif() {
+    //     let cont = this.deberiaDepen.length + this.deberiaInicio.length + this.deberiaInProgress.length + this.tasksFinished.length;
+    //     //console.log(cont);
+    //     this.porcentajePla = "" + Math.round(((cont)*100) / (this.tasks.length)) + "%";
+    //     return this.porcentajePla;
+    // }
+    
+} 

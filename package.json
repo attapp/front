@@ -24,7 +24,11 @@
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
     "animate.css": "^3.7.0",
     "bootstrap": "^4.3.1",
+<<<<<<< HEAD
     "chart.js": "2.8.0",
+=======
+    "chart.js": "^2.2.3",
+>>>>>>> 890d8f3288a8396ae2ce67e828d04964652b8a8e
     "core-js": "^2.5.4",
     "moment": "^2.24.0",
     "ng2-charts": "^2.2.3",

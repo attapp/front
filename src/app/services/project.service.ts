@@ -25,7 +25,6 @@ export class ProjectService {
     }
 
     createProject(data: FormData) {
-
         return this.http.post(this.createProjectsUrl, data, {
             //reportProgress: true,
             //observe: 'events'

@@ -18,21 +18,29 @@ import { TaskResponsableComponent } from './task-responsable/task-responsable.co
 
 const routes: Routes = [
     
+<<<<<<< HEAD
     { path: '', component: LoginComponent },  
     { path: 'respo', redirectTo: 'responsable' },
     { path: 'admi', redirectTo: 'project' },
+=======
+    { path: '', component: AppComponent, pathMatch: 'full' }, // este debes comentar
+    // CUANDO NO QUIERAS LOGEARTE 
+    // { path: '', component: ProjectDashComponent } - para proyecto -
+    // { path: '', component: DashboardComponent } - para dashboard -
+
+>>>>>>> 890d8f3288a8396ae2ce67e828d04964652b8a8e
     { path: 'responsable', component: TaskResponsableComponent },
     { path: 'login', component: LoginComponent },
 
     { path: 'login/:idProfile', component: LoginComponent },
-    { path: 'dashboard', component: ProjectDashComponent, canActivate: [GuardService] },
+    { path: 'dashboards', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },
-    { path: 'projectresp', component: ProjectResponsableComponent, canActivate: [GuardService] },
+    { path: 'create', component: CreateComponent },
     // routes for Lider
+    { path: 'projectresp', component: ProjectResponsableComponent, canActivate: [GuardService] },
     // routes for Adm (FALTAN)
     { path: 'project/:idProject', component: ProjectComponent, canActivateChild: [GuardService], 
         children: [
-            { path: 'create', component: CreateComponent },
             { path: 'tasks', component: TaskComponent }
     ]},  
     // routes for Reponsable

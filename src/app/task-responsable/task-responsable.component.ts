@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
 import { State } from '../interfaces/State';
 import { Responsible } from '../interfaces/Responsible';
 import { TitleCasePipe } from '@angular/common';
-import { ApplicationStateService } from '../services/application-state.service';
 import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
 
@@ -44,15 +42,15 @@ export class TaskResponsableComponent implements OnInit {
      * el socket al momento de detectar un cambio modifica el valor de las tareas (si es que el usuario se encuentra en esa vista y si la 
      * tarea no esta finalizada)
      */
-    ngOnInit() {
-        this.taskService.getSocketTask('message').subscribe(
-            projectTask => {
+    async ngOnInit() {
+        await this.taskService.getSocketTask('message').subscribe(
+            async projectTask => {
                 console.log('====>', projectTask);
 
                 const tasks: Task[] = projectTask[this.idProject] ? projectTask[this.idProject] : [];
-                tasks.forEach(newTask => {
+                await tasks.forEach(async newTask => {
                     const index = this.tasks.findIndex((t) => t.id === newTask.id);
-                    this.tasks[index] = newTask;
+                    this.tasks[index] = await newTask;
                     if (newTask.state.id === TASK_STATE.FINISHED) {
                         this.removeFinished(newTask.id);
                     }
@@ -65,23 +63,27 @@ export class TaskResponsableComponent implements OnInit {
      * se necesita verificar que el cambi oque gatilla este método sea el cambio de projecto
      * lo que realiza es llamar a servicio que muestra las tareas
      */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges) {
         this.showTasksByUser(this.idProject, this.idUser);
+        
     }
 
     /**
      * solamente llama al servicio que obtiene las tareas del usuario, menos las tareas finalizadas
      */
     showTasksByUser(idProject: number, idUser: number) {
-        let tasks: Task[];        
+        let tasks: Task[];  
         this.taskService.getTaskByUser(idProject, idUser)
             // resp is of type
             .subscribe((
                 resp: Task[]) => {
                     tasks = resp ? resp : [];
                     this.tasksByUser = tasks;
-        
+                // this.tasksByUser.forEach(task => {
+                //     console.log('STATE OF TASKS: ' + JSON.stringify(task.state));                
+                // });    
             });
+            
     }
 
     /**
@@ -138,23 +140,8 @@ export class TaskResponsableComponent implements OnInit {
     }
 
     /**
-     * método que muestra el bótón de iniciar o finalizar como activo o inactivo
-     * @param state valida el estado
-     */
-    validateState(state: number): boolean {
-        switch (state) {
-            case TASK_STATE.NOT_START:
-            case TASK_STATE.DELAYED_BY_START:
-            case TASK_STATE.IN_PROGRESS:
-            case TASK_STATE.DELAYED_BY_FINISH:
-                return false;
-            default:
-                return true;
-        }
-    }
-
-    /**
-     * Sirve para modificar el color de fondo de la tabla en la vista desktop, lo modifica con respecto al estado que presente
+     * Sirve para modificar el color de fondo de las card en la vista respo, 
+     * lo modifica con respecto al estado que presente
      * @param idState el id del estado
      */
     changeCss(idState: number): string {
@@ -175,6 +162,24 @@ export class TaskResponsableComponent implements OnInit {
         }
     }
 
+      /**
+     * Sirve para modificar el color de fondo del boton de la card en la vista respo, 
+     * lo modifica con respecto al estado que presente
+     * @param idState el id del estado
+     */
+    changeCssButton(idState: number): string {
+        switch (idState) {
+            case TASK_STATE.NOT_START:
+                return 'btn-iniciar-gray';
+            case TASK_STATE.IN_PROGRESS:
+                return 'btn-finalizar-green';
+            case TASK_STATE.DELAYED_BY_START:
+                return 'btn-iniciar-red';
+            case TASK_STATE.DELAYED_BY_FINISH:
+                return 'btn-finalizar-red';
+        }
+    }
+
     /**
      *  Modifica el nombre del botón con respecto a su estado.
      * @param state dependiendo del estado cambia el nombre como inicar o finalizar
@@ -189,6 +194,29 @@ export class TaskResponsableComponent implements OnInit {
                 return 'Finalizar';
             default:
                 return 'Iniciar';
+        }
+    }
+
+     /**
+     *  Modifica el nombre del botón con respecto a su estado.
+     * @param state dependiendo del estado cambia el nombre como inicar o finalizar
+     */
+    changeHeaderText(state: State): string {
+        switch (state.id) {
+            case TASK_STATE.NOT_START:
+                return 'No iniciado';                
+            case TASK_STATE.NOT_START_FOR_DEPENDENCY:
+                return 'No iniciado por dependencia';
+            case TASK_STATE.IN_PROGRESS:
+                return 'En curso';
+            case TASK_STATE.DELAYED_BY_START:
+                return 'Atrasada por inicio';
+            case TASK_STATE.DELAYED_BY_FINISH:
+                return 'Atrasada por fin';
+            case TASK_STATE.DELAYED_BY_DEPENDENCY:
+                return 'Atrasada por dependencia';
+            case TASK_STATE.FINISHED:
+                return 'Finalizada';
         }
     }
 

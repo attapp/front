@@ -18,7 +18,7 @@
         <tbody>
             <tr class="animated fadeIn faster border-box"
                 *ngFor="let task of tasks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                <th class="text-center align-middle" scope="row">{{task.id}}</th>
+                <th class="text-center align-middle" scope="row">{{task.externalCode}}</th>
                 <td class="text-nowrap align-middle">
                     <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
                         {{task.description  | truncate:[60, '...'] }}
@@ -31,7 +31,7 @@
                 <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
                 <td class="text-center align-middle">{{task.realEndDate    | date:'short'}}</td>
                 <td class="text-center align-middle">{{getNameResponsible(task.responsible) }}</td>
-                <td class="text-center align-middle">{{task.area.description       }}</td>
+                <td class="text-center align-middle">{{task.area.description}}</td>
                 <td class="text-center align-middle">
                     <em class="fas" [ngClass]=getClassVariance(task)> </em>
                     {{getVariance(task)}}</td>

@@ -1,73 +1,147 @@
-#contenedor {
-    border: 2px solid grey;
-    border-radius: 2px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 2%;
-    margin-bottom: 3%; 
+//cuadrosInfo
+.container-fluid {  
+    width: 100%;  
+    padding-right: 0px;  
+    padding-left: 0px;  
+    margin-right: 0px;  
+    margin-left: 0px;  
+}
+body {
+    width: 100%;
+    padding: 20px;
+}
+/**
+* Estilos cards 
+*/
+.card {
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 350;
+    height: 150px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+.card#barras {
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 1200px;
+    height: 180px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+.card:hover{
+    color: white;
+}
+.card-body {
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
 
-#btn-uno {
-    width:80%; 
-    height:10%;
-    border: 1px;
-    background-color: rgb(116, 128, 134);
-    margin-top: 1%;
-    margin-left: 10%;
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-#btn-dos {
-    width:60%; 
-    height:10%;
-    background-color: rgba(116, 97, 97, 0.897);
-    margin-top: 1%;
-    margin-left: 30%;
+.card-header {
+    color: white;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    text-align: center;
+}
+.card-text {
+    color: white;
+    float: left;
+    margin-bottom: 1px;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+//botones card
+#btn {
+    background-color: transparent;
+    border: transparent;
+    float: right;
+    color: white;
+    font-size: 10px
+}
+#totalTareas{
+    background-color: rgb(187, 187, 187);
+}
+#enCurso {
+    background-color: #32C79A;
+}
+#proximaTarea{
+    background-color: #3896C3;
+}
+#atrasadas{
+    background-color: #FB3E4C;
+}
+#barras {
+    background-color: rgb(54, 54, 54);
 }
 
-#btn-tres{
-    width:65%; 
-    height:10%;
-    background-color: rgb(133, 126, 98);
-    margin-top: 1%;
-    margin-left: 25%;
+.progress-bar {
+    background-color: green;  
+    width: 0%;
 }
-#btn-cuatro {
-    width:70%; 
-    height:10%;
-    background-color: rgb(82, 99, 86);
-    margin-top: 1%;
-    margin-left: 20%;
-    margin-bottom: 3%;   
-}
-#tabla2 {
-    margin-top: 3%
+#real {
+    background-color: orange;
 }
 
-//color cuadraditos
-
-.legend-botonuno {
-    color: rgb(116, 128, 134);
+#red {
+    background-color: red;
 }
 
-.legend-botondos {
-    color: rgba(116, 97, 97, 0.897);
+#contentColap {
+    color: #FB3E4C;
+}
+#verMas{
+    float: right;
 }
 
-.legend-botontres {
-    color: rgb(133, 126, 98);
+#colapseBtn {
+    background: transparent;
+    border: transparent;
+    color: white;
+    font: 100;
+    padding: 50px;
+}
+#tareasEnCurso {
+    background-color: #32C79A;
+    display: block;
+    border-radius: 5;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 350;
+    height: 150px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1px, 1px;
+    padding-bottom: 1em;
+    align-self: center;
+}
+#textoCollapsable {
+    color: blue;
+   
 }
 
-.legend-botoncuatro {
-    color: rgb(82, 99, 86);
+#collapseTable.card-body {
+    padding-bottom: 300px;    
 }
-
-//colores tabla
-#cabecera {
-    background-color:  rgb(231, 234, 235);
-}
-#cuerpo {
-    background-color: rgba(240, 240, 240, 0.897);
-}
-
-
-

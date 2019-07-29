@@ -4,7 +4,11 @@
 
 export const environment = {
     production: false,
+<<<<<<< HEAD
     API_ENDPOINT: 'http://191.232.188.6:3000',
+=======
+    API_ENDPOINT: 'http://191.232.188.6:3000', 
+>>>>>>> 890d8f3288a8396ae2ce67e828d04964652b8a8e
     debugMode: true
 };
 

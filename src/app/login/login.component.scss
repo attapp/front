@@ -1,33 +1,96 @@
-#contentLogin { 
+#fondo {
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    background-image:linear-gradient(to right, #a100ff, #460073);  
+
+}
+.card.body{ 
+    
+    background-color: white;
+    align-content: center;
     border: 1px solid grey;
     border-radius: 4px;
-    
-    margin-top: 5%;
-    margin-bottom: 0%;
-    margin-right: 20%;
-    margin-left: 20%;
-    
-    padding-top: 2%;
-    padding-right: 2%;
-    padding-bottom: 2%;
-    padding-left: 2%;
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 1em;
+    align-self: center;
+    min-width: 300px;
+    max-width: 400px;
+    height: 450px;
+    margin:auto;
+    padding: 1rem;
 }
-
-#tittle {
+img{
+    width: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+#log{
     text-align: center;
-    margin-bottom: 3%;
+    color: #460073;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+#user-pass{
+    margin-left:20%;
+    width: 148px;
+    height: 20px;
+    left: 68px;
+    top: 250px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 50px;
+    color: #460073;
+   
+}
+input.form-control {
+    margin-left:20%;
+    width: 228px;
+    height: 35px;
+    left: 66px;
+    top: 356px;
+    background: #EBEBEB;
+    border: 0.5px solid #460073;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 15px; 
+    margin-top: 2px;
+   
 }
 
-#pass {
-    margin-bottom: 3%;
+.btn.btn-secondary{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background: #00BAFF;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    left: 105px;
+    top: 415px;
+    
+}
+#error{
+    margin-left:8%;
+    margin-bottom: 0%;
+    color: red;
+
 }
 
-#Ingresar {
-    margin-left: 25%;
-    width: 50%
-}
-#salir {
-    margin-left: 25%;
-    width: 50%
-}
+#olvidar {
+    text-align: center;
+    color: #00BAFF;
+    margin: 0%;
+    margin-top: 10%;
+    float: center;
 
+}
+.form-group {
+    margin: 0%;
+    width: 100px;
+}
