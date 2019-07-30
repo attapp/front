@@ -20,7 +20,7 @@
       En curso
   </div>
   <div class="p-1">
-      <em class="fas fa-square-full legend-primary border-black"></em>
+      <em class="fas fa-square-full legend-primary"></em>
       Finalizado
   </div>
 
@@ -41,7 +41,7 @@
           <tr>
               <th class="text-center align-middle" scope="col">ID</th>
               <th class="text-center align-middle" scope="col">Descripción</th>
-              <!-- <th class="text-center align-middle" scope="col">Etapa</th> -->
+              <th class="text-center align-middle" scope="col">Etapa</th>
               <th class="text-center align-middle" scope="col">Dependencias</th>
               <th class="text-center align-middle" scope="col">Inicio Planificación</th>
               <th class="text-center align-middle" scope="col">Fin Planificación</th>
@@ -63,7 +63,7 @@
                       {{task.description}}
                   </div>
               </td>
-              <!-- <td class="text-center align-middle">{{task.category.name}}</td> -->
+              <td class="text-center align-middle">{{task.category.name}}</td>
               <td class="text-center align-middle">{{task.infoDep}}</td>
               <td class="text-center align-middle">{{task.startDatePlanning  | date:'short'}}</td>
               <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
@@ -71,13 +71,7 @@
               <td class="text-center align-middle">{{ getNameResponsible(task.responsible) }}</td>
               <td class="text-center align-middle">{{task.area.description       }}</td>
               <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div>
-                      <div *ngIf="task.state.id == 1">No iniciada</div>
-                      <div *ngIf="task.state.id == 2">No iniciada por dependencia</div>
-                      <div *ngIf="task.state.id == 3">En curso</div>
-                      <div *ngIf="task.state.id == 4">Atrasada por inicio</div>
-                      <div *ngIf="task.state.id == 5">Atrasada por dependencia</div>
-                      <div *ngIf="task.state.id == 6">Atrasada por fin</div>
-                      <div *ngIf="task.state.id == 7">Finalizada</div>
+                      <div>{{task.state.description}}</div>
               </td>
           </tr>
           <tr *ngIf="tasks?.length == 0">

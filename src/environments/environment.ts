@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    API_ENDPOINT: 'http://191.232.188.6:3000', 
+    API_ENDPOINT: 'http://localhost:3000', 
     debugMode: true
 };
 
