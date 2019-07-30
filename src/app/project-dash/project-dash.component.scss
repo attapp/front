@@ -1,27 +1,46 @@
-#header {
-    background-image:linear-gradient(to right, #a100ff, #460073); 
-    width:  100% ;
-    margin: 0%;
-    height: 8%
-}
-img{
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
+
+#flecha{
+    width: 25px;
+    height: 25px;
+    margin-left: 0px;
     margin-top: 10px;
+}
+img {
+    width: 75px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    margin-top: 0px;
+ 
+}
+nav.navbar.bg-light {
+    background-image:linear-gradient(to right, #a100ff, #460073); 
+}
+#att {
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: auto;
+}
+#log-out{
+    margin-top: auto;
+    margin-bottom: auto; 
+    size: 10%;
 }
 #tittle {
     color: #460073;
-    margin-top: 50px;
+    margin-top: 100px;
     text-align: center;
 }
-.card{
+.card-body.btn-light{
     background: #7500c0;
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px; 
+    width: 250px;
+    height: 20px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    font: 200;
 }

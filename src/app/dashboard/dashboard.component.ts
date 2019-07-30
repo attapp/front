@@ -5,7 +5,7 @@ import { TASK_STATE } from 'src/environments/environment';
 import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
 import { element } from '@angular/core/src/render3';
-
+import { ProjectDashComponent } from '../project-dash/project-dash.component';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     perReal: String;
     perPlanif: String;
 
-    @Input() idProject: number;
+    idProject: number;
     real: ElementRef;
     planif: ElementRef;
 
@@ -55,7 +55,8 @@ export class DashboardComponent implements OnInit {
         private taskService: TaskService,
         private authService: AuthService,
         private render: Renderer2,
-        private elRef: ElementRef
+        private elRef: ElementRef,
+        private projectDash: ProjectDashComponent
     ) { }
 
     /**
@@ -89,6 +90,7 @@ export class DashboardComponent implements OnInit {
        * lo que realiza es llamar a servicio que muestra las tareas
        */
     ngOnChanges(changes: SimpleChanges) {
+        this.idProject = this.projectDash.projectId;
         this.allTaskDelayed = [];
         this.tasksDelayedEnd = [];
         this.tasks = [];

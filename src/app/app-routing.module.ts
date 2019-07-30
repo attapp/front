@@ -18,11 +18,11 @@ import { TaskResponsableComponent } from './task-responsable/task-responsable.co
 
 const routes: Routes = [
     
-    { path: '', component: AppComponent, pathMatch: 'full' },
-
+    { path: '', component: AppComponent, pathMatch: 'full'},
+    { path: 'prueba', component: DashboardComponent, canActivate: [GuardService]  },
+    //{ path: '', component:ProjectDashComponent , pathMatch: 'full'},
     { path: 'responsable', component: TaskResponsableComponent },
     { path: 'login', component: LoginComponent },
-
     { path: 'login/:idProfile', component: LoginComponent },
     { path: 'dashboards', component: ProjectDashComponent, canActivate: [GuardService] },
     { path: 'project', component: ProjectComponent, canActivate: [GuardService] },

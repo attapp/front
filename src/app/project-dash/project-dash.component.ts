@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
 import { Project } from '../interfaces/Project';
+import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { from } from 'rxjs';
+import { Routes} from '@angular/router';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos 
@@ -12,13 +15,15 @@ import { Project } from '../interfaces/Project';
   styleUrls: ['./project-dash.component.scss']
 })
 export class ProjectDashComponent implements OnInit {
+  router: any;
 
   constructor(private projectService: ProjectService,
               private authService: AuthService) { }
 
   private projects: Project[];
-  public projectId = '';
+  public projectId: number;
   private idUser;
+
 
   /**
    * al iniciar llama a showprojectbyuser para mostrar los proyectos según usuario
@@ -49,4 +54,9 @@ export class ProjectDashComponent implements OnInit {
 
 
   }
+  showDash () {
+    this.router.navigate(['/prueba']);
+    
+  }
+
 }
