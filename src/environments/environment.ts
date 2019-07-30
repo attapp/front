@@ -4,11 +4,7 @@
 
 export const environment = {
     production: false,
-<<<<<<< HEAD
     API_ENDPOINT:'http://localhost:3000', //'http://191.232.188.6:3000', 
-=======
-    API_ENDPOINT: 'http://localhost:3000', 
->>>>>>> 0aff2f47a9d7fec2a6c09453cb5e6cd8005e2c9c
     debugMode: true
 };
 

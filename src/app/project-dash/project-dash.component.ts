@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
 import { Project } from '../interfaces/Project';
-import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { from } from 'rxjs';
-import { Routes} from '@angular/router';
+import { Router} from '@angular/router';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos 
@@ -15,10 +13,10 @@ import { Routes} from '@angular/router';
   styleUrls: ['./project-dash.component.scss']
 })
 export class ProjectDashComponent implements OnInit {
-  router: any;
 
   constructor(private projectService: ProjectService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   private projects: Project[];
   public projectId = '';
@@ -51,8 +49,6 @@ export class ProjectDashComponent implements OnInit {
     change(id: number) {
       console.log("projectID change", this.projectId);
       this.authService.setProjectUser(this.projectId);
-
-
   }
   showDash () {
     this.router.navigate(['/prueba']);

@@ -10,19 +10,10 @@
       <div class="form-group">
         <label id="user-pass" for="password">Ingrese contraseña:</label>
         <input type="password" class="form-control" [(ngModel)]="password" placeholder="******" required>
-
-        <div *ngIf=error class="alert alert-danger">
-          <strong> ERROR! Usuario y/o contraseña inválido</strong>
-        </div>
-      </div>
       <div id="error">
         <p *ngIf=error class="text-danger">Usuario y/o contraseña incorrectos.</p>
       </div>
-<<<<<<< HEAD
       <button (click)="login()" type="button" class="btn btn-secondary btn-sm ml-auto">Ingresar</button>
-=======
-        <button (click)="login()" type="button" class="btn btn-secondary btn-sm ml-auto">Ingresar</button>
->>>>>>> 0aff2f47a9d7fec2a6c09453cb5e6cd8005e2c9c
       <p id="olvidar">¿olvidaste la contraseña?</p>
   </div>
 </div>
