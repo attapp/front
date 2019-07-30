@@ -18,17 +18,11 @@ import { TaskResponsableComponent } from './task-responsable/task-responsable.co
 
 const routes: Routes = [
     
-<<<<<<< HEAD
-    { path: '', component: AppComponent, pathMatch: 'full'},
-    { path: 'prueba', component: DashboardComponent, canActivate: [GuardService]  },
-    //{ path: '', component:ProjectDashComponent , pathMatch: 'full'},
-=======
     { path: '', component: AppComponent, pathMatch: 'full' }, // este debes comentar
     // CUANDO NO QUIERAS LOGEARTE 
     // { path: '', component: ProjectDashComponent } - para proyecto -
     // { path: '', component: DashboardComponent } - para dashboard -
 
->>>>>>> 0aff2f47a9d7fec2a6c09453cb5e6cd8005e2c9c
     { path: 'responsable', component: TaskResponsableComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/:idProfile', component: LoginComponent },
