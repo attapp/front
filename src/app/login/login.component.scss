@@ -60,8 +60,11 @@ input.form-control {
     padding: 5px;
     padding-left: 15px; 
     margin-top: 2px;
-   
 }
+
+// input.form-control:invalid {
+//     border: 0.5px solid red;
+// }
 
 .btn.btn-secondary{
     margin-left: auto;
@@ -93,4 +96,8 @@ input.form-control {
 .form-group {
     margin: 0%;
     width: 100px;
+}
+
+p.text-danger {
+    margin-bottom: 0px;
 }
