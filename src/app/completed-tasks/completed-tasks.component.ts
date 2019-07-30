@@ -103,13 +103,16 @@ export class CompletedTasksComponent implements OnInit {
         const variance = task.variance as moment.Duration;
         const hours = variance.asHours();
         const minutes = variance.asMinutes() - variance.asHours() * 60;
+        // SEGUNDOS
         if (variance.asMinutes() < 0) {
-            return 'fa-arrow-up text-success';
+            return 'fa-arrow-down text-success';
         } else if (variance.asMinutes() === 0) {
             return 'fa-minus text-warning';
         } else {
-            return 'fa-arrow-down text-danger';
+            return 'fa-arrow-up text-danger';
         }
     }
 
+    // antes de lo planificado abajo verde (tiempos en positivo)
+    // 
 }

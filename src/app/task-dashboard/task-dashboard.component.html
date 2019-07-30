@@ -23,7 +23,7 @@
               </div>
             </td>
             <td class="text-center align-middle">{{task.endDatePlanning | date:'short'}}</td>
-            <td class="text-center align-middle">{{task.Responsible}}</td>
+            <td class="text-center align-middle">{{getNameResponsible(task.responsible)}}</td>
           </tr>
           <tr *ngIf="tasks?.length == 0">
             <td colspan="10">

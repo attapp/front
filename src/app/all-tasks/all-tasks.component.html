@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-around py-1">
+  <div class="p-1">
+      <em class="fas fa-square-full legend-default"></em>
+      No iniciado
+  </div>
+  <div class="p-1">
+      <em class="fas fa-square-full legend-secondary"></em>
+      No iniciado por dependencia
+  </div>
+  <div class="p-1">
+      <em class="fas fa-square-full legend-warning"></em>
+      Atrasado por dependencia
+  </div>
+  <div class="p-1">
+      <em class="fas fa-square-full legend-danger"></em>
+      Atrasado por inicio / Atrasado por fin
+  </div>
+  <div class="p-1">
+      <em class="fas fa-square-full legend-success"></em>
+      En curso
+  </div>
+  <div class="p-1">
+      <em class="fas fa-square-full legend-primary"></em>
+      Finalizado
+  </div>
+
+</div>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="tasks?.length" [(page)]="page" [maxSize]="5" [rotate]="true"
+      [ellipses]="false" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+      <option [ngValue]="50">50 items por pagina</option>
+      <option [ngValue]="75">75 items por pagina</option>
+      <option [ngValue]="100">100 items por pagina</option>
+  </select>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover table-bordered table-sm ">
+      <thead class="thead-dark">
+          <tr>
+              <th class="text-center align-middle" scope="col">ID</th>
+              <th class="text-center align-middle" scope="col">Descripción</th>
+              <th class="text-center align-middle" scope="col">Etapa</th>
+              <th class="text-center align-middle" scope="col">Dependencias</th>
+              <th class="text-center align-middle" scope="col">Inicio Planificación</th>
+              <th class="text-center align-middle" scope="col">Fin Planificación</th>
+              <th class="text-center align-middle" scope="col">Inicio Real</th>
+              <th class="text-center align-middle" scope="col">Responsable</th>
+              <th class="text-center align-middle" scope="col">Area</th>
+              <th class="text-center align-middle" scope="col">Estado</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr class="animated fadeIn faster border-box"
+              *ngFor="let task of tasks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <th class="text-center align-middle" scope="row">{{task.externalCode}}</th>
+              <td class="text-nowrap align-middle">
+                  <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
+                      {{task.description  | truncate:[60, '...'] }}
+                  </div>
+                  <div *ngIf="!(task.description.length >= 60)">
+                      {{task.description}}
+                  </div>
+              </td>
+              <td class="text-center align-middle">{{task.category.name}}</td>
+              <td class="text-center align-middle">{{task.infoDep}}</td>
+              <td class="text-center align-middle">{{task.startDatePlanning  | date:'short'}}</td>
+              <td class="text-center align-middle">{{task.endDatePlanning    | date:'short'}}</td>
+              <td class="text-center align-middle">{{task.realStartDate      | date:'short'}}</td>
+              <td class="text-center align-middle">{{ getNameResponsible(task.responsible) }}</td>
+              <td class="text-center align-middle">{{task.area.description       }}</td>
+              <td class="text-center align-middle"><div class="circle" [ngClass]="changeCss(task.state.id)"></div>
+                      <div>{{task.state.description}}</div>
+              </td>
+          </tr>
+          <tr *ngIf="tasks?.length == 0">
+              <td colspan="10">
+                  <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="tasks?.length" [(page)]="page" [maxSize]="5" [rotate]="true"
+          [ellipses]="false" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+</div>
+

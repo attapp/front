@@ -55,8 +55,7 @@ export class DashboardComponent implements OnInit {
         private taskService: TaskService,
         private authService: AuthService,
         private render: Renderer2,
-        private elRef: ElementRef,
-        private projectDash: ProjectDashComponent
+        private elRef: ElementRef
     ) { }
 
     /**
@@ -90,7 +89,7 @@ export class DashboardComponent implements OnInit {
        * lo que realiza es llamar a servicio que muestra las tareas
        */
     ngOnChanges(changes: SimpleChanges) {
-        this.idProject = this.projectDash.projectId;
+        this.idProject = Number(localStorage.getItem('currentProyect'));
         this.allTaskDelayed = [];
         this.tasksDelayedEnd = [];
         this.tasks = [];

@@ -21,7 +21,7 @@ export class ProjectDashComponent implements OnInit {
               private authService: AuthService) { }
 
   private projects: Project[];
-  public projectId: number;
+  public projectId = '';
   private idUser;
 
 

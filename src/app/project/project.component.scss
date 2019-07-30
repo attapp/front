@@ -15,4 +15,10 @@ a.navbar-brand {
 li.nav-item a.nav-link {
     color: white;
 }
+li.nav-item a.nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.342);
+    border-radius: 5px;
+}
+
 
