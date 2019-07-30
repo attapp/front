@@ -27,11 +27,7 @@ export class LoginComponent implements OnInit {
     login() {  
       //event.preventDefault(); 
       
-<<<<<<< HEAD
-      this.http.post<any>('http://191.232.188.6:3000/login', {user: this.user, password: this.password})
-=======
       this.http.post<any>(environment.API_ENDPOINT + '/login', {user: this.user, password: this.password})
->>>>>>> 890d8f3288a8396ae2ce67e828d04964652b8a8e
         .subscribe
         ((data) => {
             const id = data['idUser'];
