@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ProjectDashComponent } from './project-dash/project-dash.component';
 import { ProjectResponsableComponent } from './project-responsable/project-responsable.component';
 import { TaskResponsableComponent } from './task-responsable/task-responsable.component';
+import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
 
 /**
  * Modulo que exporta las rutas del sistema
@@ -25,7 +26,9 @@ const routes: Routes = [
     // CUANDO NO QUIERAS LOGEARTE 
     // { path: '', component: ProjectDashComponent } - para proyecto -
     // { path: '', component: DashboardComponent } - para dashboard -
-    { path: 'prueba', component: DashboardComponent, canActivate: [GuardService]  },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService]  },
+    { path: 'dash/:idProject', component: DashboardComponent, canActivate: [GuardService]  },
+    { path: 'taskDash', component: TaskDashboardComponent, canActivate: [GuardService]  },
 
     { path: 'responsable', component: TaskResponsableComponent },
     { path: 'login', component: LoginComponent },

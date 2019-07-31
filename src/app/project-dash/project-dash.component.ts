@@ -39,9 +39,11 @@ export class ProjectDashComponent implements OnInit {
         // resp is of type
         .subscribe((resp: Project[]) => {
             this.projects = resp;
+            console.log(this.projects);
+
         });
         
-} 
+      } 
   /**
      * 
      * @param id muestra los cambios en el proyecto
@@ -50,9 +52,12 @@ export class ProjectDashComponent implements OnInit {
       console.log("projectID change", this.projectId);
       this.authService.setProjectUser(this.projectId);
   }
-  showDash () {
-    this.router.navigate(['/prueba']);
+  showDash (id: number) {
+    this.router.navigate(['/dash', id]);
     
+  }
+  flechaVolver() {
+    this.router.navigate(['login']);
   }
 
 }

@@ -1,20 +1,15 @@
-
+#btnVolver {
+    background: transparent;
+    border: transparent;
+    padding: 0px;
+}
 #flecha{
     width: 25px;
     height: 25px;
     margin-left: 0px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
-img {
-    width: 75px;
-    margin-bottom: 5px;
-    margin-left:5px;
-    margin-top: 0px;
- 
-}
-nav.navbar.bg-light {
-    background-image:linear-gradient(to right, #a100ff, #460073); 
-}
+
 #att {
     color: white;
     font-family: sans-serif;
@@ -38,9 +33,51 @@ nav.navbar.bg-light {
     margin-left: auto;
     margin-right: auto;
     width: 250px;
-    height: 20px;
+    height: 50px;
     border-radius: 4px;
     color: white;
+    padding:10px;
     text-align: center;
-    font: 200;
+    font-size: 20px;
+    
+}
+
+p {
+    text-align: center;
+    margin: auto;
+}
+#flechaProject{
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-top: 5px;
+}
+
+//boton log out
+nav.navbar.bg-light {
+    background-image:linear-gradient(to right, #a100ff, #460073); 
+}
+img {
+    width: 60px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    margin-top: 0px;
+}     
+
+.btn.btn-secondary {
+    margin-top: 5px;
+    margin-left: 5px;
+    background: #00BAFF;
+    border-radius: 4px;
+    border:1px solid rgb(1, 171, 233);
+    width: 50px;
+    height: 20px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right:3px;
+    font-size: 10px;
+}
+.btn.btn-secondary:hover {
+    background: rgb(43, 198, 255);
 }

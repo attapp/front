@@ -1,37 +1,16 @@
+<!--card con tareas -->
+<div id="fondo" class="row">
+  <div class="card" *ngFor="let project of projects">
 
-  <!--tabla con datos -->
-  <h5 class="text-center align-bottom">{{tituloTabla}}</h5>
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered table-sm ">
-        <thead>
-          <tr id="cabecera">
-            <th class="text-center align-middle" scope="col">ID</th>
-            <th class="text-center align-middle" scope="col">Tarea</th>
-            <th class="text-center align-middle" scope="col">Hora Fin Planificada</th>
-            <th class="text-center align-middle" scope="col">Responsable</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="cuerpo" *ngFor="let task of contenido | slice: -5">
-            <th class="text-center align-middle" scope="row">{{task.id }}</th>
-            <td class="text-nowrap align-middle">
-              <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
-                {{task.description  | truncate:[60, '...'] }}
-              </div>
-              <div *ngIf="!(task.description.length >= 60)">
-                {{task.description}}
-              </div>
-            </td>
-            <td class="text-center align-middle">{{task.endDatePlanning | date:'short'}}</td>
-            <td class="text-center align-middle">{{getNameResponsible(task.responsible)}}</td>
-          </tr>
-          <tr *ngIf="tasks?.length == 0">
-            <td colspan="10">
-              <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" (click)="atras()" class="btn btn-light">Atrás</button>
-      <button id="verMas" type="button" class="btn btn-link">Ver más...</button>
+    <div class="card-header">nombre de la tarea.</div>
+    <div class="card-body btn-light">nombre de la etapa <br> nombre del responsable</div>
+    <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseExample"
+      aria-expanded="false" aria-controls="collapseExample">
+      Button with data-target
+    </button>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        informacion de usuario
+      </div>
     </div>
+  </div>

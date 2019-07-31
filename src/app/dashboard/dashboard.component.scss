@@ -13,146 +13,132 @@ body {
 /**
 * Estilos cards 
 */
-#total {
-    background: #A100FF;
-    border-radius: 5px;
-    color: white;
-    width: 120px;
-    height: 100px;
-    margin: auto;
-    
+.row{
+    margin-top: 20%; 
+    display:flex;
+    justify-content: center;
 }
-/*
-.card {
-    display: block;
-    border-radius: 5;
-    overflow: hidden;
-    min-width: 90px;
-    max-width: 90px;
-    height: 90px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 1px, 1px;
-    padding-bottom: 1em;
-    align-self: left;
-}
-.card#barras {
-    display: block;
-    border-radius: 5;
-    overflow: hidden;
-    min-width: 250px;
-    max-width: 1200px;
-    height: 180px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1px, 1px;
-    padding-bottom: 1em;
-    align-self: center;
-}
-.card:hover{
-    color: white;
-}
-.card-body {
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-hr {
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.card-header {
-    color: white;
-    overflow-wrap: break-word;
-    font-size: 18px;
-    text-align: center;
+#tareaEjecucion{
+    margin-top: 20%;
+    margin-bottom: 5%;
 }
 .card-text {
-    color: white;
-    float: left;
-    margin-bottom: 1px;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 5px;
 
 }
-*/
-//botones card
-#btn {
-    background-color: transparent;
-    border: transparent;
-    float: right;
+#total {
+    background:  #A100FF;
+    border-radius: 4px;
     color: white;
-    font-size: 10px
-}
-#totalTareas{
-    background-color: rgb(187, 187, 187);
-}
-#enCurso {
-    background-color: #32C79A;
-}
-#proximaTarea{
-    background-color: #3896C3;
+    min-width: 100px;
+    max-width: 120px;
+    height: 100px;
+    margin:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 #atrasadas{
-    background-color: #FB3E4C;
+    background: #FB3E4C;
+    border-radius: 4px;
+    color: white;
+    min-width: 100px;
+    max-width: 120px;
+    height: 100px;
+    margin:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
-#barras {
-    background-color: rgb(54, 54, 54);
+#tareasEnCurso{
+    background: #32C79A;
+    border-radius: 4px;
+    color: white;
+    min-width: 100px;
+    max-width: 120px;
+    height: 100px;
+    margin:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;   
+}
+#proxTarea{ 
+    background: #BBBBBB;
+    border-radius: 4px;
+    color: white;
+    min-width: 210px;
+    max-width: 260px;
+    height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#finalizadas{
+    background: #3691BD;
+    border-radius: 4px;
+    color: white;
+    min-width: 100px;
+    max-width: 120px;
+    height: 100px;
+    margin:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+h3 {
+    margin-left:auto;
+    margin-right: auto;
+    padding-top: 10px;
+    text-align: center;
+    padding: 0px;
+}
+p {
+    margin-left:auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
-.progress-bar {
-    background-color: green;  
-    width: 0%;
-}
-#real {
-    background-color: orange;
-}
-
-#red {
-    background-color: red;
-}
-
-#contentColap {
-    color: #FB3E4C;
-}
-#verMas{
-    float: right;
-}
-
-#colapseBtn {
+//barra superior
+#btnVolver {
     background: transparent;
     border: transparent;
-    color: white;
-    font: 100;
-    padding: 50px;
+    padding: 0px;
 }
-#tareasEnCurso {
-    background-color: #32C79A;
-    display: block;
-    border-radius: 5;
-    overflow: hidden;
-    min-width: 100px;
-    max-width: 100;
-    height: 100px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 1px, 1px;
-    padding-bottom: 1em;
-    align-self: left;
+nav.navbar.bg-light {
+    background-image:linear-gradient(to right, #a100ff, #460073); 
 }
-#textoCollapsable {
-    color: blue;
-   
+img {
+    width: 60px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    margin-top: 0px;
+}     
+
+.btn.btn-secondary {
+    margin-top: 5px;
+    margin-left: 5px;
+    background: #00BAFF;
+    border-radius: 4px;
+    border:1px solid rgb(1, 171, 233);
+    width: 50px;
+    height: 20px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right:3px;
+    font-size: 10px;
+}
+.btn.btn-secondary:hover {
+    background: rgb(43, 198, 255);
+}
+#flecha{
+    width: 20px;
+    height: 20px;
 }
 
-#collapseTable.card-body {
-    padding-bottom: 300px;    
-}
+
+
+
+
+
+
+

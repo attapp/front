@@ -1,14 +1,17 @@
 <div>
     <nav class="navbar fixed-top  navbar-expand-lg navbar-light bg-light" style="  border-bottom: 1px solid #f0f4f2;  ">
-        <img id="flecha" src="./assets/flechaAtras.png">
+        <button type="button" id="btnVolver" class="btn btn-light" (click)="flechaVolver()"><img id="flecha" src="./assets/flechaAtras.png" ></button>
         <div id="att"> ATT - <img src="./assets/ACC_hpd_logo3.png"> </div>
-        <app-btn-logout id="log-out"> </app-btn-logout>
+        <button (click)="logout()" type="button" class="btn btn-secondary"> Log Out</button>
     </nav>
 </div>
 <div>
     <h4 id="tittle">Proyectos asignados</h4>
 </div>
-<div class="card-body btn-light" *ngFor="let project of projects" (click)="showDash()">{{project.name}}</div>
+<div class="card-body btn-light" *ngFor="let project of projects" (click)="showDash(project.id)">
+    {{project.name}} <img id="flechaProject" src="./assets/flechaDerecha.png" >
+    
+</div>
 
 <!-- <div *ngIf="projectId">
     <app-dashboard [idProject]="projectId"></app-dashboard>
