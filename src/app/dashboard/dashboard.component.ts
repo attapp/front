@@ -114,26 +114,9 @@ export class DashboardComponent implements OnInit {
     }
     //funcion de prueba (CONI)
     mostrar() {
-        this.router.navigate(['taskDash']);
-
-        
+        this.router.navigate(['taskDash']);        
     }
-    // mostrarTabla(lista: Task[]) {
-    //     console.log('mostre tabla')
 
-    //     if (lista === this.allTaskDelayed) {
-    //         this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
-    //         this.contenido = this.allTaskDelayed;
-    //     } else if (lista === this.tasksInProgress) {
-    //         this.tituloTabla = 'DETALLE TAREAS EN CURSO';
-    //         this.contenido = this.tasksInProgress;
-    //     }
-    
-
-    //funcion volver 
-    flechaVolver() {
-        this.router.navigate(['dashboards'])
-    }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
      */

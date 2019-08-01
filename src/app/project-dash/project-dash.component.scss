@@ -1,83 +1,45 @@
-#btnVolver {
-    background: transparent;
-    border: transparent;
-    padding: 0px;
-}
-#flecha{
-    width: 25px;
-    height: 25px;
-    margin-left: 0px;
-    margin-top: 8px;
+
+// FIN HEADER
+.proyectos {
+    color: #460073;
+    margin-top: 40%;
+    text-align: center;
+    font-family: sans-serif;
 }
 
-#att {
-    color: white;
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    margin: auto;
-}
-#log-out{
-    margin-top: auto;
-    margin-bottom: auto; 
-    size: 10%;
-}
-#tittle {
-    color: #460073;
-    margin-top: 100px;
-    text-align: center;
-}
 .card-body.btn-light{
-    background: #7500c0;
-    margin-top: 10%;
+    background-image:linear-gradient(to bottom right, #a100ff, #460073); 
+    border: 1px solid #5f009b;
+    margin-top: 25px;
+    margin-bottom: 25px;
     margin-left: auto;
     margin-right: auto;
-    width: 250px;
-    height: 50px;
-    border-radius: 4px;
+    width: 80%;
+    height: 46px;
+    border-radius: 8px;
     color: white;
-    padding:10px;
+    padding: 10px;
     text-align: center;
-    font-size: 20px;
-    
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
 }
-
-p {
-    text-align: center;
+img.flechaProject{
+    width: 25px;
+    height: 25px;
     margin: auto;
-}
-#flechaProject{
-    width: 20px;
-    height: 20px;
     float: right;
-    margin-top: 5px;
+}
+.card-body.btn-light img.flechaProject {
+    align-content: center;
 }
 
-//boton log out
-nav.navbar.bg-light {
-    background-image:linear-gradient(to right, #a100ff, #460073); 
-}
-img {
-    width: 60px;
-    margin-bottom: 5px;
-    margin-left:5px;
-    margin-top: 0px;
-}     
 
-.btn.btn-secondary {
-    margin-top: 5px;
-    margin-left: 5px;
-    background: #00BAFF;
-    border-radius: 4px;
-    border:1px solid rgb(1, 171, 233);
-    width: 50px;
-    height: 20px;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    padding-left: 3px;
-    padding-right:3px;
-    font-size: 10px;
-}
-.btn.btn-secondary:hover {
-    background: rgb(43, 198, 255);
-}
+
+     
+
+
+
+
+
+

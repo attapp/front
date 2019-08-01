@@ -1,0 +1,51 @@
+nav {
+    align-self: auto;
+}
+nav.navbar.bg-light {
+    background-image:linear-gradient(to right, #a100ff, #460073); 
+}
+.atras {
+    background: transparent;
+    border: transparent;
+    padding: 0px;
+}
+.navbar-brand {
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: auto;
+    justify-content: center;
+}
+img.accentureBrand {
+    width: 60px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    margin-top: 0px;
+}
+img.logOut {
+    height: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn.btn-secondary {
+    background: #00BAFF;
+    border-radius: 5px;
+    border: 1px solid rgb(1, 171, 233);
+    width: 40px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.btn.btn-secondary:hover {
+    background: rgb(43, 198, 255);
+}
+
+img.flecha{
+    width: 25px;
+    height: 25px;
+    margin-left: -7px;
+    visibility: visible;
+}

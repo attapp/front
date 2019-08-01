@@ -1,55 +1,53 @@
 <!-- barra superior -->
-<header>
-  <div>
-    <nav class="navbar fixed-top  navbar-expand-lg navbar-light bg-light" style="  border-bottom: 1px solid #f0f4f2;  ">
-      <button type="button" id="btnVolver" class="btn btn-light" (click)="flechaVolver()"><img id="flecha"
-          src="./assets/flechaAtras.png"></button>
-      <div id="att"> ATT - <img src="./assets/ACC_hpd_logo3.png"> </div>
-      <button (click)="logout()" type="button" class="btn btn-secondary"> Log Out</button>
-    </nav>
-  </div>
-</header>
-
+<app-nav-bar-mobile></app-nav-bar-mobile>
 <!--Gráfico de Dona -->
 
 
 <!--cuadros de informacion-->
 <!--TAREAS EN EJECUCION-->
-<div id="TareaEjecucion" class="card-body">
+<!-- <div id="TareaEjecucion" class="card-body">
   <p class="card-text"> rediseño de login </p>
   <p class="card-text"> desarrollo back-end </p>
+</div> -->
+  
+<div class="main">
+            
+            <div class="card">
+                <div class="card-body atrasada" (click)="mostrar(atrasas)">
+                    <h3 class="card-tittle">{{allTaskDelayed.length}}</h3>
+                    <p>Tareas atrasadas</p>
+                </div>    
+            </div>
+            
+            <div class="card"> 
+                <div class="card-body enCurso" (click)="mostrar(enCurso)"> 
+                    <h3 class="card-tittle">{{tasksInProgress.length}}</h3>
+                    <p>En curso</p>
+                </div>    
+            </div>
+            
+            <div class="card"> 
+                <div class="card-body finalizada" (click)="mostrarTabla(allTaskDelayed)">
+                    <h3 class="card-tittle">{{tasksFinished.length}}</h3>
+                    <p>Tareas Finalizadas</p>
+                </div>    
+            </div>
+
+            <div class="card">
+                <div class="card-body total">
+                    <h3 class="card-tittle">{{tasks.length}}</h3>
+                    <p>Total de tareas</p>
+                </div>   
+            </div>
+
+  <!--PROXIMA TAREAS A EJECUTARSE-->
+    <div class="card">
+        <div class="card-body proxTarea">
+            <p> rediseño de login </p>
+            <p> desarrollo back-end </p>
+        </div>   
+    </div>
+
 </div>
 
-<div class="row">
-  <!--Tareas atrasadas-->
-  <div id="atrasadas" class="card-body btn-light" (click)="mostrar()">
-    <h3 class="card-tittle">{{allTaskDelayed.length}}
-    </h3>
-    <p class="card-text">Tareas atrasadas</p>
-  </div>
-  <!--Tareas enCurso-->
-  <div id="tareasEnCurso" class="card-body btn-light">
-    <h3 class="card-tittle">
-      {{tasksInProgress.length}}
-    </h3>
-    <p class="card-text">En curso</p>
-  </div>
-  <!--Total de tareas-->
-  <div id="total" class="card-body ">
-    <h3 class="card-tittle">{{tasks.length}}
-    </h3>
-    <p class="card-text">Total de tareas</p>
-  </div>
-  <!--Tareas finalizadas-->
-  <div id="finalizadas" class="card-body btn-light" (click)="mostrarTabla(allTaskDelayed)">
-    <h3 class="card-tittle">
-      {{tasksFinished.length}}
-    </h3>
-    <p class="card-text">Tareas Finalizadas</p>
-  </div>
-  <!--PROXIMA TAREAS A EJECUTARSE-->
-  <div id="proxTarea" class="card-body">
-    <p class="card-text"> rediseño de login </p>
-    <p class="card-text"> desarrollo back-end </p>
-  </div>
-</div>
+      

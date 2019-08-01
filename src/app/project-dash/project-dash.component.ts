@@ -32,6 +32,14 @@ export class ProjectDashComponent implements OnInit {
   }
 
   /**
+   * Cierra sesión redirigiendo a Log IN
+   */
+  logout() { 
+      this.authService.setUserLoggedOut();
+      this.router.navigateByUrl('/login');
+  } 
+  
+  /**
      * muestra los proyectos según id de Usuario
     */
   showProjectsByUser() {
@@ -54,10 +62,5 @@ export class ProjectDashComponent implements OnInit {
   }
   showDash (id: number) {
     this.router.navigate(['/dash', id]);
-    
   }
-  flechaVolver() {
-    this.router.navigate(['login']);
-  }
-
 }
