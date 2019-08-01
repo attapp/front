@@ -52,7 +52,6 @@ export class TaskComponent implements OnInit {
      * tarea no esta finalizada)
      */
     ngOnInit() {
-        this.isMobileResolution = this.applicationStateService.getIsMobileResolution();
         this.taskService.getSocketTask('message').subscribe(
             projectTask => {
                 console.log('====>', projectTask);
