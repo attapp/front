@@ -1,138 +1,55 @@
-<!--proyectos listados-->
-<div>
-<h1>Proyectos asignados</h1>
-
-<!--barra de progreso realizadas-->
-<div class="card" id="barras">
-  <div class="card-header">Avance en ejecución</div>
-  <div class="card-body">
-    <div class="container">
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">{{perReal}}</div>
-      </div>
-      <div id="parrafo">Avance real: {{showReal()}}</div>
-      <br>
-      <!-- barra de progreso planificadas -->
-      <div class="progress">
-        <div class="w3-container" aria-valuemin="0" aria-valuemax="100">{{perPlanif}}</div>
-      </div>
-      <div id="parrafo">Avance planificado: {{showPlanif()}} </div>
-    </div>
+<!-- barra superior -->
+<header>
+  <div>
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-light bg-light" style="  border-bottom: 1px solid #f0f4f2;  ">
+      <button type="button" id="btnVolver" class="btn btn-light" (click)="flechaVolver()"><img id="flecha"
+          src="./assets/flechaAtras.png"></button>
+      <div id="att"> ATT - <img src="./assets/ACC_hpd_logo3.png"> </div>
+      <button (click)="logout()" type="button" class="btn btn-secondary"> Log Out</button>
+    </nav>
   </div>
-</div>
+</header>
 
-<br>
+<!--Gráfico de Dona -->
+
 
 <!--cuadros de informacion-->
-<!--TOTAL DE TAREAS-->
-<div class="card-deck">
-  <div id="totalTareas" class="card btn-light">
-    <div class="card-header">Total de tareas</div>
-    <div class="card-body">
-      <h2>{{tasks.length}}</h2>
-    </div>
-  </div>
-
-  <!--Tareas atrasadas-->
-  <div id="atrasadas" class="card">
-    <div class="card-header">Tareas atrasadas</div>
-    <div class="card-body">
-      <h2>{{allTaskDelayed.length}}</h2>
-      <button (click)=" mostrarTabla(allTaskDelayed)" id="btn" type="button" class="btn btn-light"> más detalles...
-      </button>
-    </div>
-  </div>
-  <!--Tareas enCurso-->
-  <div class="card-deck">
-    <div id="tareasEnCurso" class="card-header">
-      <button id="colapseBtn" class="btn btn-primary" type="button" data-toggle="collapse"
-        data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
-        {{tasksInProgress.length}} En curso
-      </button>
-    </div>
-    <div class="collapse" id="collapseTable">
-      <div id="textoCollapsable" class="card card-body">
-        Aquí se muestra la tabla con informacion de las tareas.
-        <div>
-          <h2>Basic Table</h2>
-          <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!--PROXIMA TAREAS A EJECUTARSE-->
-  <div id="proximaTarea" class="card">
-    <div class="card-header">Próxima tarea a ejecutarse</div>
-    <div class="card-body">
-      <h2>mostrar proximas dos tareas a ejecutarse.....</h2>
-    </div>
-  </div>
+<!--TAREAS EN EJECUCION-->
+<div id="TareaEjecucion" class="card-body">
+  <p class="card-text"> rediseño de login </p>
+  <p class="card-text"> desarrollo back-end </p>
 </div>
 
-<!--tabla con datos -->
-
-<h5 *ngIf="tabla === true" class="text-center align-bottom">{{tituloTabla}}</h5>
-<div class="table-responsive" id="tabla2" *ngIf="tabla===true">
-
-  <table class="table table-hover table-bordered table-sm ">
-
-    <thead>
-      <tr id="cabecera">
-        <th class="text-center align-middle" scope="col">ID</th>
-        <th class="text-center align-middle" scope="col">Tarea</th>
-        <th class="text-center align-middle" scope="col">Hora Fin Planificada</th>
-        <th class="text-center align-middle" scope="col">Responsable</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr id="cuerpo" *ngFor="let task of contenido">
-        <th class="text-center align-middle" scope="row">{{task.id}}</th>
-        <td class="text-nowrap align-middle">
-          <div *ngIf="task.description.length > 60" placement="top" ngbTooltip={{task.description}}>
-            {{task.description  | truncate:[60, '...'] }}
-          </div>
-          <div *ngIf="!(task.description.length >= 60)">
-            {{task.description}}
-          </div>
-        </td>
-        <td class="text-center align-middle">{{task.endDatePlanning | date:'short'}}</td>
-        <td class="text-center align-middle">{{task.resposible}}</td>
-      </tr>
-      <tr *ngIf="tasks?.length == 0">
-        <td colspan="10">
-          <div class="text-center align-middle">No se encontraron tareas para el proyecto seleccionado</div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" (click)="atras()" class="btn btn-light">Atrás</button>
-  <button id="verMas" type="button" class="btn btn-link">Ver más...</button>
+<div class="row">
+  <!--Tareas atrasadas-->
+  <div id="atrasadas" class="card-body btn-light" (click)="mostrar()">
+    <h3 class="card-tittle">{{allTaskDelayed.length}}
+    </h3>
+    <p class="card-text">Tareas atrasadas</p>
+  </div>
+  <!--Tareas enCurso-->
+  <div id="tareasEnCurso" class="card-body btn-light">
+    <h3 class="card-tittle">
+      {{tasksInProgress.length}}
+    </h3>
+    <p class="card-text">En curso</p>
+  </div>
+  <!--Total de tareas-->
+  <div id="total" class="card-body ">
+    <h3 class="card-tittle">{{tasks.length}}
+    </h3>
+    <p class="card-text">Total de tareas</p>
+  </div>
+  <!--Tareas finalizadas-->
+  <div id="finalizadas" class="card-body btn-light" (click)="mostrarTabla(allTaskDelayed)">
+    <h3 class="card-tittle">
+      {{tasksFinished.length}}
+    </h3>
+    <p class="card-text">Tareas Finalizadas</p>
+  </div>
+  <!--PROXIMA TAREAS A EJECUTARSE-->
+  <div id="proxTarea" class="card-body">
+    <p class="card-text"> rediseño de login </p>
+    <p class="card-text"> desarrollo back-end </p>
+  </div>
 </div>

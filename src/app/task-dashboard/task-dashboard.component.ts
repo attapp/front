@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../services/project.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { Task } from '../interfaces/Task';
 
 @Component({
   selector: 'app-task-dashboard',
@@ -7,7 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private projectService: ProjectService,
+    private authService: AuthService,
+    private router: Router) { }
+
+  private tasks: Task [];
+  
 
   ngOnInit() {
   }

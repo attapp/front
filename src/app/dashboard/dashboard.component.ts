@@ -1,11 +1,9 @@
-import { Component, OnInit, SimpleChanges, Input, ViewChild, Renderer2, ElementRef, asNativeElements} from '@angular/core';
+import { Component, OnInit, SimpleChanges, ElementRef} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/Task';
 import { TASK_STATE } from 'src/environments/environment';
-import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
-import { element } from '@angular/core/src/render3';
-import { ProjectDashComponent } from '../project-dash/project-dash.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /**
  * Componente que muestra el combobox con los distintos proyectos
@@ -18,9 +16,8 @@ import { ProjectDashComponent } from '../project-dash/project-dash.component';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    //variables de prueba
-    botones = true;
-    tabla = false;
+    //variable proyecto
+    projectID: number;
     //porcentaje = 0;
     contenido: Task[] = [];
     tituloTabla;
@@ -52,11 +49,16 @@ export class DashboardComponent implements OnInit {
      * @param modalService servicio que abre y agrega datos a los modal que son necesarios, es ideal que esten todos los modal centralizados en este servicio
      */
     constructor(
+        private route: ActivatedRoute,
+        private router: Router,
         private taskService: TaskService,
         private authService: AuthService,
-        private render: Renderer2,
         private elRef: ElementRef
-    ) { }
+
+    ) {
+
+        this.idProject = parseInt(this.route.snapshot.paramMap.get('idProject'));
+    }
 
     /**
      * al iniciar el componente consulta por la resolucion de pantalla y se subscribe al socket
@@ -77,9 +79,20 @@ export class DashboardComponent implements OnInit {
                     this.tasks[index] = newTask;
                 });
             });
-        this.real = this.elRef.nativeElement.querySelector('.progress-bar');
-        this.planif = this.elRef.nativeElement.querySelector('.w3-container');
+       
+        await this.getTask();
 
+    }
+
+    async getTask() {
+        this.allTaskDelayed = [];
+        this.tasksDelayedEnd = [];
+        this.tasks = [];
+        this.tasksFinished = [];
+        this.tasksInProgress = [];
+        this.perReal = '';
+        this.perPlanif = '';
+        await this.getAllTasks(this.idProject);
     }
 
     /**
@@ -89,7 +102,6 @@ export class DashboardComponent implements OnInit {
        * lo que realiza es llamar a servicio que muestra las tareas
        */
     ngOnChanges(changes: SimpleChanges) {
-        this.idProject = Number(localStorage.getItem('currentProyect'));
         this.allTaskDelayed = [];
         this.tasksDelayedEnd = [];
         this.tasks = [];
@@ -97,31 +109,30 @@ export class DashboardComponent implements OnInit {
         this.tasksInProgress = [];
         this.perReal = '';
         this.perPlanif = '';
-        this.getAllTasks(this.idProject);    
+        this.getAllTasks(this.idProject);
 
     }
     //funcion de prueba (CONI)
-    /*mostrar() {
-        console.log('mostre tabla');
-        return this.tabla = true;
-    }*/
-    mostrarTabla(lista: Task[]) {
-        console.log('mostre tabla')
-        this.tabla = true;
-        if (lista === this.allTaskDelayed) {
-            this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
-            this.contenido = this.allTaskDelayed;
-        } else if (lista === this.tasksInProgress) {
-            this.tituloTabla = 'DETALLE TAREAS EN CURSO';
-            this.contenido = this.tasksInProgress;
-        }
+    mostrar() {
+        this.router.navigate(['taskDash']);
+
+        
     }
+    // mostrarTabla(lista: Task[]) {
+    //     console.log('mostre tabla')
+
+    //     if (lista === this.allTaskDelayed) {
+    //         this.tituloTabla = 'DETALLE TAREAS ATRASADAS';
+    //         this.contenido = this.allTaskDelayed;
+    //     } else if (lista === this.tasksInProgress) {
+    //         this.tituloTabla = 'DETALLE TAREAS EN CURSO';
+    //         this.contenido = this.tasksInProgress;
+    //     }
+    
 
     //funcion volver 
-    atras() {
-        console.log("volvi a los botones");
-        this.botones = true;
-        this.tabla = false;
+    flechaVolver() {
+        this.router.navigate(['dashboards'])
     }
     /**
      * solamente llama al servicio que obtiene todas las tareas 
@@ -134,6 +145,7 @@ export class DashboardComponent implements OnInit {
                 resp: Task[]) => {
                 tasks = resp ? resp : [];
                 this.tasks = tasks;
+                console.log('tareas', this.tasks);
             });
     }
     /**
@@ -149,7 +161,7 @@ export class DashboardComponent implements OnInit {
                 this.tasksFinished = tasks;
                 let porcenta = Math.round((this.tasksFinished.length * 100) / this.tasks.length) + "%";
                 this.perReal = porcenta;
-                this.render.setStyle(this.real, 'width', this.perReal);
+                
 
 
             });
@@ -178,17 +190,17 @@ export class DashboardComponent implements OnInit {
                         this.tasksDelayedEnd.push(task);
                     }
                 }
-            });    
-          
+            });
+
         // x fin
         this.taskService.getTasks(idProject, TASK_STATE.DELAYED_BY_FINISH)
             // resp is of type
             .subscribe((resp: Task[]) => {
                 this.allTaskDelayed.push(...resp);
                 this.tasksDelayedEnd.push(...resp);
-            })    
+            })
 
-        let cont = this.tasksDelayedEnd.length + this.tasksFinished.length;  
+        let cont = this.tasksDelayedEnd.length + this.tasksFinished.length;
         this.perPlanif = Math.round((cont * 100) / this.tasks.length) + "%";
 
     }
@@ -230,5 +242,5 @@ export class DashboardComponent implements OnInit {
     //     this.porcentajePla = "" + Math.round(((cont)*100) / (this.tasks.length)) + "%";
     //     return this.porcentajePla;
     // }
-    
+
 } 

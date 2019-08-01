@@ -1,3 +1,26 @@
-#verMas {
-    float: right;
+#fondo {
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    background-image:linear-gradient(to right, #a100ff, #460073);  
+
+}
+.card-deck{
+    width: 250px;
+    height: 50px;
+    margin: auto;
+}
+.card-header{
+    background: white;
+    border-radius: 0px;
+}
+.card-body {
+    background: white;
+    border-radius:0px;
+}
+.btn.btn-light{
+    background: white;
+    border: white;
+    border-radius: 0px;
 }
